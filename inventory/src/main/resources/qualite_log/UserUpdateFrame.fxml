@@ -39,17 +39,23 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/13" xmlns:fx="http://javafx.com/fxml/1" fx:controller="qualite_log.UserUpdateFrame">
+<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="qualite_log.UserUpdateFrame">
    <children>
-      <Label fx:id="updateLabel" layoutX="124.0" layoutY="44.0" text="Modification d'un utilisateur">
+      <Label fx:id="updateLabel" layoutX="124.0" layoutY="26.0" text="Modification d'un utilisateur">
          <font>
             <Font name="System Bold" size="26.0" />
          </font>
       </Label>
-      <TextField fx:id="nomTextField" layoutX="355.0" layoutY="150.0" promptText="Nom" />
-      <TextField fx:id="prenomTextField" layoutX="95.0" layoutY="224.0" promptText="Prenom" />
-      <TextField fx:id="mailTextField" layoutX="95.0" layoutY="150.0" promptText="Mail" />
-      <ComboBox fx:id="roleComboBox" layoutX="354.0" layoutY="224.0" prefWidth="150.0" promptText="Rôle" />
-      <Button fx:id="updateButton" layoutX="268.0" layoutY="344.0" mnemonicParsing="false" text="Modifier" />
+      <TextField fx:id="nomTextField" layoutX="359.0" layoutY="181.0" promptText="Nom" />
+      <TextField fx:id="prenomTextField" layoutX="99.0" layoutY="255.0" promptText="Prénom" />
+      <TextField fx:id="mailTextField" layoutX="99.0" layoutY="181.0" promptText="Mail" />
+      <ComboBox fx:id="roleComboBox" layoutX="358.0" layoutY="255.0" prefWidth="150.0" promptText="Rôle" />
+      <Button fx:id="updateButton" layoutX="269.0" layoutY="311.0" mnemonicParsing="false" text="Modifier" />
+      <Label layoutX="95.0" layoutY="157.0" text="Nouveau mail de l'utilisateur :" />
+      <Label layoutX="85.0" layoutY="231.0" text="Nouveau prénom de l'utilisateur :" />
+      <Label layoutX="354.0" layoutY="157.0" text="Nouveau nom de l'utilisateur :" />
+      <Label layoutX="356.0" layoutY="231.0" text="Nouveau rôle de l'utilisateur :" />
+      <Label layoutX="236.0" layoutY="79.0" text="Mail de l'utilisateur :" />
+      <ComboBox fx:id="mailComboBox" layoutX="214.0" layoutY="103.0" prefWidth="150.0" promptText="Mail" />
    </children>
 </AnchorPane>

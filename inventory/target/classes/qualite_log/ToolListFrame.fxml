@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollBar?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="qualite_log.ToolListFrame">
+   <children>
+      <Label fx:id="listLabel" layoutX="132.0" layoutY="26.0" text="Consultation du matériel">
+         <font>
+            <Font name="System Bold" size="26.0" />
+         </font>
+      </Label>
+      <TableView fx:id="tableView" layoutX="17.0" layoutY="99.0" prefHeight="286.0" prefWidth="546.0">
+        <columns>
+          <TableColumn fx:id="nomColumn" prefWidth="167.99993896484375" text="Nom" />
+            <TableColumn fx:id="versionColumn" prefWidth="86.4000244140625" text="Version" />
+            <TableColumn fx:id="referenceColumn" prefWidth="170.39996337890625" text="Référence" />
+            <TableColumn fx:id="typeColumn" prefWidth="120.79998779296875" text="Type" />
+        </columns>
+      </TableView>
+      <ScrollBar fx:id="scrollBar" layoutX="581.6" orientation="VERTICAL" prefHeight="400.0" prefWidth="18.0" />
+   </children>
+</AnchorPane>

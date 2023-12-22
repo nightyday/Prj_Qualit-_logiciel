@@ -2,7 +2,12 @@ package qualite_log;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -45,6 +50,19 @@ public class ConnexionFrame {
         assert textFielMatricule != null : "fx:id=\"textFielMatricule\" was not injected: check your FXML file 'ConnexionFrame.fxml'.";
         assert vBox != null : "fx:id=\"vBox\" was not injected: check your FXML file 'ConnexionFrame.fxml'.";
 
+        button.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent t) {
+                try {
+                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/qualite_log/MenuAdminFrame.fxml"));
+                    Parent root = (Parent) fxmlLoader.load();
+                    vBox.getChildren().clear();
+                    vBox.getChildren().add(root);
+                }
+                catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
 }

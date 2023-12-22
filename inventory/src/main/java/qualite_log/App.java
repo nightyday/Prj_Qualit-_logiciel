@@ -15,7 +15,7 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/qualite_log/MenuAdminFrame.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/qualite_log/ConnexionFrame.fxml"));
             Parent root = (Parent) fxmlLoader.load();
             Scene scene = new Scene(root);
 

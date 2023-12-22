@@ -1,7 +1,5 @@
 package qualite_log;
 
-import qualite_log.MenuAdminFrame;
-
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -28,6 +26,9 @@ public class UserUpdateFrame {
     private AnchorPane anchorPane;
 
     @FXML
+    private ComboBox<?> mailComboBox;
+
+    @FXML
     private TextField mailTextField;
 
     @FXML
@@ -48,12 +49,26 @@ public class UserUpdateFrame {
     @FXML
     void initialize() {
         assert anchorPane != null : "fx:id=\"anchorPane\" was not injected: check your FXML file 'UserUpdateFrame.fxml'.";
+        assert mailComboBox != null : "fx:id=\"mailComboBox\" was not injected: check your FXML file 'UserUpdateFrame.fxml'.";
         assert mailTextField != null : "fx:id=\"mailTextField\" was not injected: check your FXML file 'UserUpdateFrame.fxml'.";
         assert nomTextField != null : "fx:id=\"nomTextField\" was not injected: check your FXML file 'UserUpdateFrame.fxml'.";
         assert prenomTextField != null : "fx:id=\"prenomTextField\" was not injected: check your FXML file 'UserUpdateFrame.fxml'.";
         assert roleComboBox != null : "fx:id=\"roleComboBox\" was not injected: check your FXML file 'UserUpdateFrame.fxml'.";
         assert updateButton != null : "fx:id=\"updateButton\" was not injected: check your FXML file 'UserUpdateFrame.fxml'.";
         assert updateLabel != null : "fx:id=\"updateLabel\" was not injected: check your FXML file 'UserUpdateFrame.fxml'.";
-    }
 
+        updateButton.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent t) {
+                try {
+                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/qualite_log/UserListFrame.fxml"));
+                    Parent root = (Parent) fxmlLoader.load();
+                    anchorPane.getChildren().clear();
+                    anchorPane.getChildren().add(root);
+                }
+                catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
 }

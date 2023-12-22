@@ -37,11 +37,11 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox fx:id="menuVBox" prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="qualite_log.MenuAdminFrame">
+<VBox fx:id="menuVBox" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="qualite_log.MenuAdminFrame">
   <children>
     <MenuBar fx:id="menuAdminMenuBar" VBox.vgrow="NEVER">
       <menus>
-        <Menu mnemonicParsing="false" text="Matériel">
+        <Menu mnemonicParsing="false" text="Matériels">
           <items>
             <MenuItem fx:id="toolListMenuItem" mnemonicParsing="false" text="Consulter les matériels" />
             <MenuItem fx:id="toolCreateMenuItem" mnemonicParsing="false" text="Créer un matériel" />
@@ -49,7 +49,7 @@
             <MenuItem fx:id="toolDeleteMenuItem" mnemonicParsing="false" text="Supprimer un matériel" />
           </items>
         </Menu>
-        <Menu mnemonicParsing="false" text="Type Matériel">
+        <Menu mnemonicParsing="false" text="Types Matériel">
           <items>
             <MenuItem fx:id="toolTypeListMenuItem" mnemonicParsing="false" text="Consulter les types de matériel" />
             <MenuItem fx:id="toolTypeCreateMenuItem" mnemonicParsing="false" text="Créer un type de matériel" />

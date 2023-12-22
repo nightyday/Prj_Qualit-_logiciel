@@ -91,6 +91,104 @@ public class MenuAdminFrame {
 
             menuVBox.getChildren().add(root);
 
+            toolTypeCreateMenuItem.setOnAction(new EventHandler<ActionEvent>() {
+                public void handle(ActionEvent t) {
+                    try {
+                        menuVBox.getChildren().remove(root);
+                        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/qualite_log/ToolTypeCreateFrame.fxml"));
+                        root = (Parent) fxmlLoader.load();
+                        menuVBox.getChildren().add(root);
+                    }
+                    catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+
+            toolTypeDeleteMenuItem.setOnAction(new EventHandler<ActionEvent>() {
+                public void handle(ActionEvent t) {
+                    try {
+                        menuVBox.getChildren().remove(root);
+                        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/qualite_log/ToolTypeDeleteFrame.fxml"));
+                        root = (Parent) fxmlLoader.load();
+                        menuVBox.getChildren().add(root);
+                    }
+                    catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+
+            toolTypeListMenuItem.setOnAction(new EventHandler<ActionEvent>() {
+                public void handle(ActionEvent t) {
+                    try {
+                        menuVBox.getChildren().remove(root);
+                        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/qualite_log/ToolTypeListFrame.fxml"));
+                        root = (Parent) fxmlLoader.load();
+                        menuVBox.getChildren().add(root);
+                    }
+                    catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+
+            toolCreateMenuItem.setOnAction(new EventHandler<ActionEvent>() {
+                public void handle(ActionEvent t) {
+                    try {
+                        menuVBox.getChildren().remove(root);
+                        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/qualite_log/ToolCreateFrame.fxml"));
+                        root = (Parent) fxmlLoader.load();
+                        menuVBox.getChildren().add(root);
+                    }
+                    catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+
+            toolDeleteMenuItem.setOnAction(new EventHandler<ActionEvent>() {
+                public void handle(ActionEvent t) {
+                    try {
+                        menuVBox.getChildren().remove(root);
+                        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/qualite_log/ToolDeleteFrame.fxml"));
+                        root = (Parent) fxmlLoader.load();
+                        menuVBox.getChildren().add(root);
+                    }
+                    catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+
+            toolListMenuItem.setOnAction(new EventHandler<ActionEvent>() {
+                public void handle(ActionEvent t) {
+                    try {
+                        menuVBox.getChildren().remove(root);
+                        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/qualite_log/ToolListFrame.fxml"));
+                        root = (Parent) fxmlLoader.load();
+                        menuVBox.getChildren().add(root);
+                    }
+                    catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+
+            toolUpdateMenuItem.setOnAction(new EventHandler<ActionEvent>() {
+                public void handle(ActionEvent t) {
+                    try {
+                        menuVBox.getChildren().remove(root);
+                        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/qualite_log/ToolUpdateFrame.fxml"));
+                        root = (Parent) fxmlLoader.load();
+                        menuVBox.getChildren().add(root);
+                    }
+                    catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+
             userCreateMenuItem.setOnAction(new EventHandler<ActionEvent>() {
                 public void handle(ActionEvent t) {
                     try {
@@ -151,6 +249,7 @@ public class MenuAdminFrame {
                 public void handle(ActionEvent t) {
                     try {
                         menuVBox.getChildren().remove(root);
+                        menuVBox.getChildren().remove(menuAdminMenuBar);
                         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/qualite_log/ConnexionFrame.fxml"));
                         root = (Parent) fxmlLoader.load();
                         menuVBox.getChildren().add(root);
@@ -170,4 +269,7 @@ public class MenuAdminFrame {
         return menuVBox;
     }
 
+    public Parent getRoot() {
+        return root;
+    }
 }
