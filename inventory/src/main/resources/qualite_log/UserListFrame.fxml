@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollBar?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/13" xmlns:fx="http://javafx.com/fxml/1" fx:controller="qualite_log.UserListFrame">
+   <children>
+      <Label fx:id="listLabel" layoutX="132.0" layoutY="44.0" text="Consultation des utilisateur">
+         <font>
+            <Font name="System Bold" size="26.0" />
+         </font>
+      </Label>
+      <TableView fx:id="tableView" layoutX="14.0" layoutY="99.0" prefHeight="286.0" prefWidth="554.0">
+        <columns>
+          <TableColumn fx:id="nomColumn" prefWidth="136.79999351501465" text="Nom" />
+            <TableColumn fx:id="prenomColumn" prefWidth="140.79998779296875" text="Prénom" />
+            <TableColumn fx:id="mailColumn" prefWidth="188.79998779296875" text="Mail" />
+            <TableColumn fx:id="roleColumn" prefWidth="89.60000610351562" text="Rôle" />
+        </columns>
+      </TableView>
+      <ScrollBar layoutX="591.0" orientation="VERTICAL" prefHeight="400.0" prefWidth="18.0" />
+   </children>
+</AnchorPane>
