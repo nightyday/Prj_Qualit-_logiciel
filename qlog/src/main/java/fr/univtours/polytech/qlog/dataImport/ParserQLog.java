@@ -1,6 +1,5 @@
 package fr.univtours.polytech.qlog.dataImport;
 
-public class Parser {
-    
+public class ParserQLog extends Parser {
 
 };
