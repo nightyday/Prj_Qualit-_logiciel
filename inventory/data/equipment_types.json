@@ -1,8 +1,10 @@
 [ {
-  "label" : null,
-  "reference" : "XXX",
+  "id" : 1,
+  "label" : "laptop",
+  "reference" : "LAP",
   "equipments" : [ {
-    "reference" : "XXXXX",
-    "version" : null
+    "id" : 1,
+    "reference" : "Q68PH",
+    "version" : "ASUS-17THK"
   } ]
 } ]

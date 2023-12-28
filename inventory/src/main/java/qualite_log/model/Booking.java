@@ -2,10 +2,18 @@ package qualite_log.model;
 
 import java.time.LocalDate;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+@JsonIgnoreProperties({"person", "equipment"})
 public class Booking {
+    private static Long nextId = 1L;
+    private Long id;
+
     @JsonProperty("person")
     @JsonManagedReference
     Person person;
@@ -33,6 +41,18 @@ public class Booking {
         this.equipment = equipment;
     }
 
+    public Long NextgetId() {
+        return nextId;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    private void setId() {
+        id = nextId++;
+    }
+
     public LocalDate getStartingDate() {
         return startingDate;
     }
@@ -49,12 +69,18 @@ public class Booking {
         this.endingDate = endingDate;
     }
 
+    public Booking() {
+        setId();
+    }
+
     public Booking(Person person, Equipment equipment) {
+        setId();
         this.person = person;
         this.equipment = equipment;
     }
 
     public Booking(Person person, Equipment equipment, LocalDate startingDate, LocalDate endingDate) {
+        setId();
         this.person = person;
         this.equipment = equipment;
         this.startingDate = startingDate;

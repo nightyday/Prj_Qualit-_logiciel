@@ -5,6 +5,7 @@ import java.io.File;
 import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import qualite_log.model.Administrator;
 import qualite_log.model.Booking;
@@ -16,10 +17,9 @@ import qualite_log.model.User;
 
 
 public class DataWriter {
-    Data data;
-
-    public void extract() {
+    public static void extract(Data data) {
         ObjectMapper mapper = new ObjectMapper();
+        mapper.registerModule(new JavaTimeModule());
         ObjectWriter writer = mapper.writer(new DefaultPrettyPrinter());
 
         try {        
@@ -29,7 +29,7 @@ public class DataWriter {
 
             writer.writeValue(new File(path + "administrators.json"), data.getAdministrators());
 
-            writer.writeValue(new File(path + "equipments.json"), data.getEquipments());
+            //writer.writeValue(new File(path + "equipments.json"), data.getEquipments());
 
             writer.writeValue(new File(path + "equipment_types.json"), data.getEquipmentTypes());
 
@@ -39,12 +39,8 @@ public class DataWriter {
         }
     }
 
-    public DataWriter(Data data) {
-        this.data = data;
-    }
-
     public DataWriter() {
-        data = new Data();
+        Data data = new Data();
 
         Administrator admin = new Administrator("michel", "dubois", "michel.dubois@univ-tours.fr");
         data.addAdministrator(admin);
@@ -53,23 +49,5 @@ public class DataWriter {
         Equipment equip = new Equipment(equipT);
         data.addUsers(new User("jhon", "doe", "jhon.doe@etu.univ-tours.fr"));
         data.addBookings(new Booking(admin, equip));        
-    }
-
-    public void print() {
-        for(Administrator a : data.getAdministrators()) {
-            System.out.println(a);
-        }
-        for(User u : data.getUsers()) {
-            System.out.println(u);
-        }
-        for(Equipment e : data.getEquipments()) {
-            System.out.println(e);
-        }
-        for(EquipmentType e : data.getEquipmentTypes()) {
-            System.out.println(e);
-        }
-        for(Booking  b : data.getBookings()) {
-            System.out.println(b);
-        }
     }
 }

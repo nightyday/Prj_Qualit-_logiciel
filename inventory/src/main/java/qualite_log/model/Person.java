@@ -4,8 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+@JsonIgnoreProperties("bookings")
 public class Person {
+    private static Long nextId = 1L;
+    private Long id;
+    
     @JsonBackReference
     List<Booking> bookings;
 
@@ -24,6 +32,18 @@ public class Person {
 
     public void addBookings(Booking booking) {
         bookings.add(booking);
+    }
+
+    public Long NextgetId() {
+        return nextId;
+    }
+    
+    public Long getId() {
+        return id;
+    }
+
+    private void setId() {
+        id = nextId++;
     }
 
     public String getLastName() {
@@ -59,10 +79,12 @@ public class Person {
     }
 
     public Person() {
+        setId();
         bookings = new ArrayList<>();
     }
 
     public Person(String lastName, String firstName, boolean isAdministrator, String email) {
+        setId();
         this.lastName = lastName;
         this.firstName = firstName;
         this.isAdministrator = isAdministrator;
