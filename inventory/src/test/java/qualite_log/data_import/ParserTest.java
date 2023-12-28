@@ -6,10 +6,10 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
-@SuiteClasses({ Parser.class, ParserQLog.class })
+@SuiteClasses({ DataReader.class, DataWriter.class })
 public class ParserTest {
-    private ParserQLog testedParser;
-    private ParserQLog testedParserQLog; 
+    private DataWriter testedParser;
+    private DataWriter testedParserQLog; 
 
     @Test
     public void test1() {

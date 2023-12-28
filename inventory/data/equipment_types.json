@@ -1,0 +1,8 @@
+[ {
+  "label" : null,
+  "reference" : "XXX",
+  "equipments" : [ {
+    "reference" : "XXXXX",
+    "version" : null
+  } ]
+} ]

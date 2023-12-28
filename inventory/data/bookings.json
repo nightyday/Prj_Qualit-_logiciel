@@ -1,0 +1,14 @@
+[ {
+  "startingDate" : null,
+  "endingDate" : null,
+  "person" : {
+    "lastName" : "michel",
+    "firstName" : "dubois",
+    "email" : "michel.dubois@univ-tours.fr",
+    "administrator" : true
+  },
+  "equipment" : {
+    "reference" : "XXXXX",
+    "version" : null
+  }
+} ]

@@ -1,6 +1,6 @@
 package qualite_log.data_import;
 
-public class Parser {
+public class DataReader {
     
 
 };
