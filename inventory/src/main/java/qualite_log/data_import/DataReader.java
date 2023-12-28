@@ -10,6 +10,7 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import qualite_log.model.Administrator;
 import qualite_log.model.Booking;
 import qualite_log.model.Data;
+import qualite_log.model.Equipment;
 import qualite_log.model.EquipmentType;
 import qualite_log.model.User;
 
@@ -23,15 +24,27 @@ public class DataReader {
             ObjectMapper mapper = new ObjectMapper();
             mapper.registerModule(new JavaTimeModule());
 
-            List<User> users = Arrays.asList(mapper.readValue(new File(path + "users.json"), User[].class));
-            List<Administrator> administrators = Arrays.asList(mapper.readValue(new File(path + "administrators.json"), Administrator[].class));
+            List<EquipmentType> equipmentTypes = Arrays
+                    .asList(mapper.readValue(new File(path + "equipment_types.json"), EquipmentType[].class));
+            System.out.println("et init" );
+
+            List<Equipment> equipments = Arrays
+                    .asList(mapper.readValue(new File(path + "equipments.json"), Equipment[].class));
+            System.out.println("equip init");
+            
             List<Booking> bookings = Arrays.asList(mapper.readValue(new File(path + "bookings.json"), Booking[].class));
-            List<EquipmentType> equipmentTypes = Arrays.asList(mapper.readValue(new File(path + "equipment_types.json"), EquipmentType[].class));
-     
+            System.out.println("book init");
+
+            List<User> users = Arrays.asList(mapper.readValue(new File(path + "users.json"), User[].class));
+            System.out.println("user init");
+            List<Administrator> administrators = Arrays
+                    .asList(mapper.readValue(new File(path + "administrators.json"), Administrator[].class));
+            System.out.println("admin init");
+
+            data.setEquipmentTypes(equipmentTypes);
+            data.setBookings(bookings);
             data.setUsers(users);
             data.setAdministrators(administrators);
-            data.setBookings(bookings);
-            data.setEquipmentTypes(equipmentTypes);
 
             return data;
         } catch (Exception e) {

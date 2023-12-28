@@ -3,13 +3,13 @@ package qualite_log.model;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "idPerson")
 public class Administrator extends Person {
     public Administrator() {
         super();
     }
 
     public Administrator(String lastName, String firstName, String email) {
-        super(lastName, firstName, true, email);
+        super(lastName, firstName, "administrator", email);
     }
 }

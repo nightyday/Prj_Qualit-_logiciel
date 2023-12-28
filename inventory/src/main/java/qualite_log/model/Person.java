@@ -1,49 +1,30 @@
 package qualite_log.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-@JsonIgnoreProperties("bookings")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "idPerson")
 public class Person {
     private static Long nextId = 1L;
-    private Long id;
+    private Long idPerson;
     
-    @JsonBackReference
-    List<Booking> bookings;
 
-    String lastName;
-    String firstName;
-    boolean isAdministrator;
-    String email; 
+    private String lastName;
+    private String firstName;
+    private String type;
+    private String email; 
 
-    public List<Booking> getBookings() {
-        return bookings;
-    }
-
-    public void setBookings(List<Booking> bookings) {
-        this.bookings = bookings;
-    }
-
-    public void addBookings(Booking booking) {
-        bookings.add(booking);
-    }
 
     public Long NextgetId() {
         return nextId;
     }
     
-    public Long getId() {
-        return id;
+    public Long getIdPerson() {
+        return idPerson;
     }
 
-    private void setId() {
-        id = nextId++;
+    private void setIdPerson() {
+        idPerson = nextId++;
     }
 
     public String getLastName() {
@@ -62,12 +43,12 @@ public class Person {
         this.firstName = firstName;
     }
 
-    public boolean isAdministrator() {
-        return isAdministrator;
+    public String getType() {
+        return type;
     }
 
-    public void setAdministrator(boolean isAdministrator) {
-        this.isAdministrator = isAdministrator;
+    public void setType(String type) {
+        this.type = type;
     }
 
     public String getEmail() {
@@ -79,17 +60,15 @@ public class Person {
     }
 
     public Person() {
-        setId();
-        bookings = new ArrayList<>();
+        setIdPerson();
     }
 
-    public Person(String lastName, String firstName, boolean isAdministrator, String email) {
-        setId();
+    public Person(String lastName, String firstName, String type, String email) {
+        setIdPerson();
         this.lastName = lastName;
         this.firstName = firstName;
-        this.isAdministrator = isAdministrator;
+        this.type = type;
         this.email = email;
-        bookings = new ArrayList<>();
     }
     
     public String toString() {

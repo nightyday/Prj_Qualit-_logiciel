@@ -2,23 +2,23 @@ package qualite_log.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "idEquipmentType")
 public class EquipmentType {
     private static Long nextId = 1L;
-    private Long id;
+    private Long idEquipmentType;
 
-    @JsonProperty("equipments")
     @JsonManagedReference
-    List<Equipment> equipments;
+    private List<Equipment> equipments;
 
-    String label;
-    String reference;
+    private String label;
+    private String reference;
 
     public List<Equipment> getEquipments() {
         return equipments;
@@ -36,12 +36,12 @@ public class EquipmentType {
         return nextId;
     }
 
-    public Long getId() {
-        return id;
+    public Long getIdEquipmentType() {
+        return idEquipmentType;
     }
 
-    private void setId() {
-        id = nextId++;
+    private void setIdEquipmentType() {
+        idEquipmentType = nextId++;
     }
 
     public String getLabel() {
@@ -61,13 +61,13 @@ public class EquipmentType {
     }
 
     public EquipmentType() {
-        setId();
+        setIdEquipmentType();
         equipments = new ArrayList<>();
         this.reference = "XXX";
     }
 
     public EquipmentType(String label, String reference) {
-        setId();
+        setIdEquipmentType();
         this.label = label;
         this.reference = reference;
         equipments = new ArrayList<>();

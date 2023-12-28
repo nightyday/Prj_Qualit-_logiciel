@@ -1,7 +1,7 @@
 [ {
-  "id" : 2,
+  "idPerson" : 2,
   "lastName" : "jhon",
   "firstName" : "doe",
-  "email" : "jhon.doe@etu.univ-tours.fr",
-  "administrator" : false
+  "type" : "user",
+  "email" : "jhon.doe@etu.univ-tours.fr"
 } ]

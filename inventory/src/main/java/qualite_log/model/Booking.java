@@ -2,35 +2,29 @@ package qualite_log.model;
 
 import java.time.LocalDate;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-@JsonIgnoreProperties({"person", "equipment"})
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "idBooking")
 public class Booking {
     private static Long nextId = 1L;
-    private Long id;
+    private Long idBooking;
 
-    @JsonProperty("person")
-    @JsonManagedReference
-    Person person;
+    @JsonBackReference
+    User emprunter;
 
-    @JsonProperty("equipment")
-    @JsonManagedReference
     Equipment equipment;
 
     LocalDate startingDate;
     LocalDate endingDate;
 
-    public Person getPerson() {
-        return person;
+    public User getEmprunter() {
+        return emprunter;
     }
 
-    public void setPerson(Person person) {
-        this.person = person;
+    public void setEmprunter(User emprunter) {
+        this.emprunter = emprunter;
     }
 
     public Equipment getEquipment() {
@@ -45,12 +39,12 @@ public class Booking {
         return nextId;
     }
 
-    public Long getId() {
-        return id;
+    public Long getIdBooking() {
+        return idBooking;
     }
 
-    private void setId() {
-        id = nextId++;
+    private void setIdBooking() {
+        idBooking = nextId++;
     }
 
     public LocalDate getStartingDate() {
@@ -70,24 +64,24 @@ public class Booking {
     }
 
     public Booking() {
-        setId();
+        setIdBooking();
     }
 
-    public Booking(Person person, Equipment equipment) {
-        setId();
-        this.person = person;
+    public Booking(User emprunter, Equipment equipment) {
+        setIdBooking();
+        this.emprunter = emprunter;
         this.equipment = equipment;
     }
 
-    public Booking(Person person, Equipment equipment, LocalDate startingDate, LocalDate endingDate) {
-        setId();
-        this.person = person;
+    public Booking(User emprunter, Equipment equipment, LocalDate startingDate, LocalDate endingDate) {
+        setIdBooking();
+        this.emprunter = emprunter;
         this.equipment = equipment;
         this.startingDate = startingDate;
         this.endingDate = endingDate;
     }
 
     public String toString() {
-        return person.toString() + " : " + equipment.toString();
+        return emprunter.toString() + " : " + equipment.toString();
     }
 }

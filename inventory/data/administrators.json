@@ -1,7 +1,7 @@
 [ {
-  "id" : 1,
+  "idPerson" : 1,
   "lastName" : "michel",
   "firstName" : "dubois",
-  "email" : "michel.dubois@univ-tours.fr",
-  "administrator" : true
+  "type" : "administrator",
+  "email" : "michel.dubois@univ-tours.fr"
 } ]

@@ -20,12 +20,17 @@ public class Main {
         EquipmentType equipT = new EquipmentType("laptop", "LAP");
         data.addEquipmentTypes(equipT);
         Equipment equip = new Equipment("Q68PH", "ASUS-17THK", equipT);
-        data.addUsers(new User("jhon", "doe", "jhon.doe@etu.univ-tours.fr"));
-        data.addBookings(new Booking(admin, equip, LocalDate.of(2024, 01, 10),  LocalDate.of(2024, 01, 15))); 
+        equipT.addEquipments(equip);
+        User user = new User("jhon", "doe", "jhon.doe@etu.univ-tours.fr");
+        data.addUsers(user);
+        data.addBookings(new Booking(user, equip, LocalDate.of(2024, 01, 10),  LocalDate.of(2024, 01, 15))); 
 
         print(data);
 
         DataWriter.extract(data);
+        
+        System.out.println("\nEcriture reussie\n===========================================================================\n");
+        
         Data data2 = DataReader.insert();
 
         print(data2);

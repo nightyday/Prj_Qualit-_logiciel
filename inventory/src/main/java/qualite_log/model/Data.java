@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Data {
-    List<Administrator> administrators;
-    List<User> users;
-    List<EquipmentType> equipmentTypes;
-    List<Booking> bookings;
+    private List<Administrator> administrators;
+    private List<User> users;
+    private List<EquipmentType> equipmentTypes;
+    private List<Booking> bookings;
 
     public List<Administrator> getAdministrators() {
         return administrators;

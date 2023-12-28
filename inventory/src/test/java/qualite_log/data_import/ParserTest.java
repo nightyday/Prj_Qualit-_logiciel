@@ -1,5 +1,7 @@
 package qualite_log.data_import;
 
+import java.time.LocalDate;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
@@ -24,9 +26,9 @@ public class ParserTest {
         EquipmentType equipT = new EquipmentType();
         data.addEquipmentTypes(equipT);
         Equipment equip = new Equipment(equipT);
-        data.addUsers(new User("jhon", "doe", "jhon.doe@etu.univ-tours.fr"));
-        data.addBookings(new Booking(admin, equip)); 
-
+        User user = new User("jhon", "doe", "jhon.doe@etu.univ-tours.fr");
+        data.addUsers(user);
+        data.addBookings(new Booking(user, equip, LocalDate.of(2024, 01, 10),  LocalDate.of(2024, 01, 15))); 
         print(data);
 
         DataWriter.extract(data);
