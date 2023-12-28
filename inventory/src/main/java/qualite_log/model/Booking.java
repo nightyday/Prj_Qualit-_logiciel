@@ -12,19 +12,19 @@ public class Booking {
     private Long idBooking;
 
     @JsonBackReference
-    User emprunter;
+    User user;
 
     Equipment equipment;
 
     LocalDate startingDate;
     LocalDate endingDate;
 
-    public User getEmprunter() {
-        return emprunter;
+    public User getUser() {
+        return user;
     }
 
-    public void setEmprunter(User emprunter) {
-        this.emprunter = emprunter;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Equipment getEquipment() {
@@ -67,21 +67,21 @@ public class Booking {
         setIdBooking();
     }
 
-    public Booking(User emprunter, Equipment equipment) {
+    public Booking(User user, Equipment equipment) {
         setIdBooking();
-        this.emprunter = emprunter;
+        this.user = user;
         this.equipment = equipment;
     }
 
-    public Booking(User emprunter, Equipment equipment, LocalDate startingDate, LocalDate endingDate) {
+    public Booking(User user, Equipment equipment, LocalDate startingDate, LocalDate endingDate) {
         setIdBooking();
-        this.emprunter = emprunter;
+        this.user = user;
         this.equipment = equipment;
         this.startingDate = startingDate;
         this.endingDate = endingDate;
     }
 
     public String toString() {
-        return emprunter.toString() + " : " + equipment.toString();
+        return user.toString() + " : " + equipment.toString();
     }
 }

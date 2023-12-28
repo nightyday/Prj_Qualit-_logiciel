@@ -1,6 +1,10 @@
 package qualite_log.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "idPerson")
@@ -8,6 +12,8 @@ public class Person {
     private static Long nextId = 1L;
     private Long idPerson;
     
+    @JsonManagedReference
+    private List<Booking> bookings;
 
     private String lastName;
     private String firstName;
@@ -25,6 +31,18 @@ public class Person {
 
     private void setIdPerson() {
         idPerson = nextId++;
+    }
+
+    public List<Booking> getBookings() {
+        return bookings;
+    }
+
+    public void setBookings(List<Booking> bookings) {
+        this.bookings = bookings;
+    }
+
+    public void addBookings(Booking booking) {
+        bookings.add(booking);
     }
 
     public String getLastName() {
@@ -61,6 +79,7 @@ public class Person {
 
     public Person() {
         setIdPerson();
+        bookings = new ArrayList<>();
     }
 
     public Person(String lastName, String firstName, String type, String email) {
@@ -69,6 +88,7 @@ public class Person {
         this.firstName = firstName;
         this.type = type;
         this.email = email;
+        bookings = new ArrayList<>();
     }
     
     public String toString() {

@@ -1,5 +1,6 @@
 [ {
   "idPerson" : 1,
+  "bookings" : [ ],
   "lastName" : "michel",
   "firstName" : "dubois",
   "type" : "administrator",

@@ -32,6 +32,7 @@ public class DataReader {
                     .asList(mapper.readValue(new File(path + "equipments.json"), Equipment[].class));
             System.out.println("equip init");
             
+
             List<Booking> bookings = Arrays.asList(mapper.readValue(new File(path + "bookings.json"), Booking[].class));
             System.out.println("book init");
 
@@ -40,12 +41,30 @@ public class DataReader {
             List<Administrator> administrators = Arrays
                     .asList(mapper.readValue(new File(path + "administrators.json"), Administrator[].class));
             System.out.println("admin init");
-
+            
             data.setEquipmentTypes(equipmentTypes);
             data.setBookings(bookings);
             data.setUsers(users);
             data.setAdministrators(administrators);
 
+
+            for(Administrator a : data.getAdministrators()) {
+                System.out.println(a);
+            }
+            for(Equipment e : data.getEquipments()) {
+                System.out.println(e);
+            }
+            for(EquipmentType e : data.getEquipmentTypes()) {
+                System.out.println(e);
+            }
+            for(User u : data.getUsers()) {
+                System.out.println(u);
+            }
+            for(Booking  b : data.getBookings()) {
+                System.out.println(b);
+            }
+
+            
             return data;
         } catch (Exception e) {
             e.printStackTrace();
