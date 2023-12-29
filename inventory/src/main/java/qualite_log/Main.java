@@ -28,8 +28,6 @@ public class Main {
         data.addBookings(new Booking(user, equip, LocalDate.of(2024, 01, 10),  LocalDate.of(2024, 01, 15))); 
         data.addBookings(new Booking(user, equip, LocalDate.of(2024, 01, 10),  LocalDate.of(2024, 01, 15))); 
 
-
-
         DataWriter.extract(data);
         Data data2 = DataReader.insert();
 

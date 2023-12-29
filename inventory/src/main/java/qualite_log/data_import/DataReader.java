@@ -14,6 +14,7 @@ import qualite_log.model.EquipmentType;
 import qualite_log.model.User;
 
     
+
 public class DataReader {
     /*
      * Méthode gérant la désérialisation de l'ensemble des données, puis leur stockage dans un objet Data
@@ -24,66 +25,18 @@ public class DataReader {
         Data data = new Data();
 
         try {
-            String path = "/home/arthur/Documents/Polytech-Tours/S7/Qualité Logiciel/Prj_Qualit-_logiciel/inventory/data/";
+            String currentDirectory = System.getProperty("user.dir");
+            String path = currentDirectory + "/inventory/data/";
 
             ObjectMapper mapper = new ObjectMapper();
 
-            List<EquipmentType> equipmentTypes = Arrays
-                    .asList(mapper.readValue(new File(path + "equipment_types.json"), EquipmentType[].class));
-            List<User> users = Arrays.asList(mapper.readValue(new File(path + "users.json"), User[].class));
-            List<Administrator> administrators = Arrays
-                    .asList(mapper.readValue(new File(path + "administrators.json"), Administrator[].class));            
-            List<Equipment> equipments = Arrays
-                    .asList(mapper.readValue(new File(path + "equipments.json"), Equipment[].class));
-            List<Booking> bookings = Arrays.asList(mapper.readValue(new File(path + "bookings.json"), Booking[].class));
+            data = insertEquipmentTypes(path, mapper, data);
+            data = insertUsers(path, mapper, data);
+            data = insertAdministrators(path, mapper, data);
+            data = insertBookings(path, mapper, data);
 
-            /* Gestion des réferences entre les objets Equipment et leur EquipmentType */
-            for(Equipment equipment : equipments) {
-                Integer id_equipmentType = equipment.getId_type();
-                for(EquipmentType type : equipmentTypes) {
-                    if(type.getId() == id_equipmentType) {
-                        equipment.setType(type);
-                    }
-                }
-            }
+            insertEquipments(path, mapper, data);
 
-            /* Gestion des réferences entre les objets Booking et leur Person
-             * et les réferences avec leur objet Equipment
-             */
-            for(Booking booking : bookings) {
-                /* Si l'objet Person est du type Admnistrator */
-                if(booking.getId_user() == -1) {
-                    Integer id_person = booking.getId_administrator();
-                    for(Administrator administrator : administrators) {
-                        if(administrator.getId() == id_person) {
-                            booking.setPerson(administrator);
-                        }
-                    }
-                }
-                /* Sinon, l'objet Person est du type User */ 
-                else {
-                    Integer id_person = booking.getId_user();
-                    for(User user : users) {
-                        if(user.getId() == id_person) {
-                            booking.setPerson(user);
-                        }
-                    }
-                }
-
-                Integer id_equipment = booking.getId_equipment();
-                for(Equipment equipment : equipments) {
-                    if(equipment.getId() == id_equipment) {
-                        booking.setEquipment(equipment);
-                    }
-                }
-            }
-
-            /* Sauvegarde des données dans Data */
-            data.setEquipmentTypes(equipmentTypes);
-            data.setBookings(bookings);
-            data.setUsers(users);
-            data.setAdministrators(administrators);
-            
             return data;
         } catch (Exception e) {
             e.printStackTrace();
@@ -91,5 +44,137 @@ public class DataReader {
         }
     }
 
-    
-};
+    /*
+     * Gère la mise à jour des objets User dans data
+     * 
+     * @param path
+     * @param mapper
+     * @param data
+     * 
+     * @return data
+     */
+    private static Data insertUsers(String path, ObjectMapper mapper, Data data) throws Exception {
+        data.setUsers(Arrays.asList(mapper.readValue(new File(path + "users.json"), User[].class)));
+
+        return data;
+    }
+
+    /*
+     * Gère la mise à jour des objets Administrator dans data
+     * 
+     * @param path
+     * @param mapper
+     * @param data
+     * 
+     * @return data
+     */
+    private static Data insertAdministrators(String path, ObjectMapper mapper, Data data) throws Exception {
+        data.setAdministrators(Arrays.asList(mapper.readValue(new File(path + "administrators.json"), Administrator[].class)));
+
+        return data;
+    }
+
+    /*
+     * Gère la mise à jour des objets Equipment dans data
+     * 
+     * @param path
+     * @param mapper
+     * @param data
+     * 
+     * @return equipments
+     */
+    private static List<Equipment> insertEquipments(String path, ObjectMapper mapper, Data data) throws Exception {
+        List<Equipment> equipments = Arrays.asList(mapper.readValue(new File(path + "equipments.json"), Equipment[].class));
+        managedEquipmentsReferences(equipments, data.getEquipmentTypes()); // On gère les réferences des objets Equipment
+
+        return equipments;
+    }
+
+    /*
+     * Gère la mise à jour des objets EquipmentType dans data
+     * 
+     * @param path
+     * @param mapper
+     * @param data
+     * 
+     * @return data
+     */
+    private static Data insertEquipmentTypes(String path, ObjectMapper mapper, Data data) throws Exception {
+        data.setEquipmentTypes(Arrays.asList(mapper.readValue(new File(path + "equipment_types.json"), EquipmentType[].class)));
+
+        return data;
+    }
+
+    /*
+     * Gère la mise à jour des objets Booking dans data
+     * 
+     * @param path
+     * @param mapper
+     * @param data
+     * 
+     * @return data
+     */
+    private static Data insertBookings(String path, ObjectMapper mapper, Data data) throws Exception {
+        List<Booking> bookings = Arrays.asList(mapper.readValue(new File(path + "bookings.json"), Booking[].class));
+
+        managedBookingsReferences(bookings, data.getAdministrators(), data.getUsers(), data.getEquipments()); // On gère les réferences
+        data.setBookings(bookings);
+
+        return data;
+    }
+
+    /* Gestion des réferences entre les objets Equipment et leur EquipmentType 
+     * 
+     * @param equipments
+     * @param equipmentTypes
+    */
+    private static void managedEquipmentsReferences(List<Equipment> equipments, List<EquipmentType> equipmentTypes) throws Exception {   
+
+        for (Equipment equipment : equipments) {
+            Integer id_equipmentType = equipment.getId_type();
+            for (EquipmentType type : equipmentTypes) {
+                if (type.getId() == id_equipmentType) {
+                    equipment.setType(type);
+                }
+            }
+        }
+    }
+
+    /* Gestion des réferences entre les objets Booking et leur Person et les réferences avec leur objet Equipment 
+     * 
+     * @param bookings
+     * @param administrators
+     * @param users
+     * @param equipments
+    */
+    private static void managedBookingsReferences(List<Booking> bookings, List<Administrator> administrators, List<User> users, List<Equipment> equipments) throws Exception {
+        
+        for (Booking booking : bookings) {
+            /* Si l'objet Person est du type Admnistrator */
+            if (booking.getId_user() == -1) {
+                Integer id_person = booking.getId_administrator();
+                for (Administrator administrator : administrators) {
+                    if (administrator.getId() == id_person) {
+                        booking.setPerson(administrator);
+                    }
+                }
+            } 
+            /* Sinon, l'objet Person est du type User */ 
+            else {
+                Integer id_person = booking.getId_user();
+                for (User user : users) {
+                    if (user.getId() == id_person) {
+                        booking.setPerson(user);
+                    }
+                }
+            }
+
+            Integer id_equipment = booking.getId_equipment();
+            for (Equipment equipment : equipments) {
+                if (equipment.getId() == id_equipment) {
+                    booking.setEquipment(equipment);
+                }
+            }
+        }
+    }
+}
