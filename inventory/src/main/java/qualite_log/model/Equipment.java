@@ -55,28 +55,15 @@ public class Equipment {
         this.version = version;
     }
 
-    public Equipment(Integer id, Integer id_type) {
-        this.id = id;
-        nextId = id + 1;
-
-        this.id_type = id_type;
-    }
-
-    public Equipment() {
-        setId();
-        reference = "XXXXX";
+    /* Constructeur à ne pas utiliser */
+    public Equipment() throws Exception{
+        throw new Exception("Erreur : Un équipement doit être crée en spécifiant un type d'équipement");
     }
 
     public Equipment(EquipmentType type) {
         setId();
         reference = "XXXXX";
         setType(type);
-    }
-
-    public Equipment(String reference, String version) {
-        setId();
-        this.reference = reference;
-        this.version = version;
     }
 
     public Equipment(String reference, String version, EquipmentType type) {
@@ -90,7 +77,15 @@ public class Equipment {
         return type.toString() + "-" + reference;
     }
 
+    /* Attributs et méthodes utiles à la déserialisation */
     int id_type = -1;
+
+    /* Constructeur spécific à la désérialisation, ne peut utiliser autre part (risque d'incohérence des ids) */
+    public Equipment(Integer id, Integer id_type) {
+        this.id = id;
+
+        this.id_type = id_type;
+    }
 
     public int getId_type() {
         return id_type;

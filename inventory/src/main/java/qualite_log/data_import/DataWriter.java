@@ -5,16 +5,17 @@ import java.io.File;
 import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import qualite_log.model.Data;
 
-
-
 public class DataWriter {
+    /*
+     * Méthode gérant la sérialisation de l'ensemble des données
+     * 
+     * @param data
+    */
     public static void extract(Data data) {
         ObjectMapper mapper = new ObjectMapper();
-        mapper.registerModule(new JavaTimeModule());
         ObjectWriter writer = mapper.writer(new DefaultPrettyPrinter());
 
         try {        

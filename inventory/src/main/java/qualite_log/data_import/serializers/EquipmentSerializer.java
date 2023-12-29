@@ -8,6 +8,7 @@ import com.fasterxml.jackson.databind.SerializerProvider;
 
 import qualite_log.model.Equipment;
 
+/* Surcharge permettant une sérialisation correcte des données Equipment */
 public class EquipmentSerializer extends JsonSerializer<Equipment> {
      public EquipmentSerializer() {
         super();
@@ -19,7 +20,7 @@ public class EquipmentSerializer extends JsonSerializer<Equipment> {
         jgen.writeNumberField("id", equipment.getId());
         jgen.writeStringField("reference", equipment.getReference());
         jgen.writeStringField("version", equipment.getVersion());
-        jgen.writeNumberField("id_type", equipment.getType().getId());
+        jgen.writeNumberField("id_type", equipment.getType().getId()); // Sauvegarde de l'Id de l'EquipmentType
         jgen.writeEndObject();
     }
 }

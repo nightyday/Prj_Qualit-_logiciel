@@ -20,7 +20,7 @@ import qualite_log.model.User;
 @SuiteClasses({ DataReader.class, DataWriter.class })
 public class ParserTest {
     @Test
-    public void test1() {
+    public void correspondanceAfterWriteAndRead() {
         Data data = new Data();
 
         Administrator admin = new Administrator("michel", "dubois", "michel.dubois@univ-tours.fr");

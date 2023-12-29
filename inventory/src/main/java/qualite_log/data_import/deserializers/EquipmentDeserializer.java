@@ -11,6 +11,7 @@ import com.fasterxml.jackson.databind.node.IntNode;
 
 import qualite_log.model.Equipment;
 
+/* Surcharge permettant une désérialisation correcte des données Equipment */
 public class EquipmentDeserializer extends StdDeserializer<Equipment> {
     
     public EquipmentDeserializer() {
@@ -25,12 +26,14 @@ public class EquipmentDeserializer extends StdDeserializer<Equipment> {
   throws IOException, JsonProcessingException {
         JsonNode node = jp.getCodec().readTree(jp);
 
+        /* Initialisation des champs de Equipment */
         Integer id = node.get("id").asInt();
         String reference = node.get("reference").asText();
         String version = node.get("version").asText();
 
-        int id_type = (Integer) ((IntNode) node.get("id_type")).numberValue();
+        int id_type = (Integer) ((IntNode) node.get("id_type")).numberValue(); // Id qui permettra de lié à l'objet EquipmentType correspondant
 
+        /* Création de l'objet Equipment */
         Equipment equipment = new Equipment(id, id_type);
         equipment.setReference(reference);
         equipment.setVersion(version);

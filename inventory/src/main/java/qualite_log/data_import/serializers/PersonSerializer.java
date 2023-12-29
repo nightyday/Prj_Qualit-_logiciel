@@ -8,6 +8,7 @@ import com.fasterxml.jackson.databind.SerializerProvider;
 
 import qualite_log.model.Person;
 
+/* Surcharge permettant une sérialisation correcte des données Booking */
 public class PersonSerializer extends JsonSerializer<Person> {
     public PersonSerializer() {
         super();
@@ -21,6 +22,9 @@ public class PersonSerializer extends JsonSerializer<Person> {
         jgen.writeStringField("firstName", person.getFirstName());
         jgen.writeStringField("type", person.getType());
         jgen.writeStringField("email", person.getEmail());
+
+        // On ne s'occupe pas des objets Booking liés, il seront géré dans la sérialisation des objets Booking (Circular references)
+
         jgen.writeEndObject();
     }
 }

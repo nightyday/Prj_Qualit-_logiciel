@@ -11,7 +11,7 @@ import qualite_log.data_import.serializers.BookingSerializer;
 @JsonSerialize(using = BookingSerializer.class)
 @JsonDeserialize(using = BookingDeserializer.class)
 public class Booking {
-    private static Integer nextId = 1;
+    public static Integer nextId = 1;
     private Integer id;
 
     Person person;
@@ -66,17 +66,9 @@ public class Booking {
         this.endingDate = endingDate;
     }
 
-    public Booking() {
-        setId();
-    }
-
-    public Booking(Integer id, Integer id_administrator, Integer id_user, Integer id_equipment) {
-        this.id = id;
-        nextId = id + 1;
-
-        this.id_administrator = id_administrator;
-        this.id_user = id_user;
-        this.id_equipment = id_equipment;
+    /* Constructeur à ne pas utiliser */
+    public Booking() throws Exception {
+        throw new Exception("Erreur : Une réservation doit crée en spécifiant un emprunteur et un equipement");
     }
 
     public Booking(Person person, Equipment equipment) {
@@ -97,9 +89,19 @@ public class Booking {
         return person.toString() + " : " + equipment.toString();
     }
 
+    /* Attributs et méthodes utiles à la déserialisation */
     int id_administrator = -1;
     int id_user = -1;
     int id_equipment = -1;
+
+    /* Constructeur spécific à la désérialisation, ne peut utiliser autre part (risque d'incohérence des ids) */
+    public Booking(Integer id, Integer id_administrator, Integer id_user, Integer id_equipment) {
+        this.id = id;
+
+        this.id_administrator = id_administrator;
+        this.id_user = id_user;
+        this.id_equipment = id_equipment;
+    }
 
     public int getId_administrator() {
         return id_administrator;

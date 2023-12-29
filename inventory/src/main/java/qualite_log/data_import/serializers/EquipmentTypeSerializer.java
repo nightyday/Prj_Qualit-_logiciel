@@ -8,6 +8,7 @@ import com.fasterxml.jackson.databind.SerializerProvider;
 
 import qualite_log.model.EquipmentType;
 
+/* Surcharge permettant une sérialisation correcte des données EquipmentType */
 public class EquipmentTypeSerializer extends JsonSerializer<EquipmentType> {
      public EquipmentTypeSerializer() {
         super();
@@ -19,6 +20,9 @@ public class EquipmentTypeSerializer extends JsonSerializer<EquipmentType> {
         jgen.writeNumberField("id", equipmentType.getId());
         jgen.writeStringField("label", equipmentType.getLabel());
         jgen.writeStringField("reference", equipmentType.getReference());
+
+        // On ne s'occupe pas des objets Equipment liés, il seront géré dans la sérialisation des objets Equipment (Circular references)
+        
         jgen.writeEndObject();
     }
 }
