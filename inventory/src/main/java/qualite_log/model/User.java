@@ -1,16 +1,11 @@
 package qualite_log.model;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import qualite_log.data_import.serializers.PersonSerializer;
 
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "idPerson")
+//@JsonSerialize(using = PersonSerializer.class)
 public class User extends Person {
-    
-
     public User() {
         super();
     }

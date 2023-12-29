@@ -1,10 +1,5 @@
 [ {
-  "idEquipmentType" : 1,
-  "equipments" : [ {
-    "idEquipment" : 1,
-    "reference" : "Q68PH",
-    "version" : "ASUS-17THK"
-  } ],
+  "id" : 1,
   "label" : "laptop",
   "reference" : "LAP"
 } ]

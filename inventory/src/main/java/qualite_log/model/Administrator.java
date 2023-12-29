@@ -1,9 +1,6 @@
 package qualite_log.model;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "idPerson")
+//@JsonSerialize(using = PersonSerializer.class)
 public class Administrator extends Person {
     public Administrator() {
         super();

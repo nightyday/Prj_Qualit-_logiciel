@@ -1,5 +1,6 @@
 [ {
-  "idEquipment" : 1,
+  "id" : 1,
   "reference" : "Q68PH",
-  "version" : "ASUS-17THK"
+  "version" : "ASUS-17THK",
+  "id_type" : 1
 } ]

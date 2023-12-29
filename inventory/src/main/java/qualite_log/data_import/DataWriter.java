@@ -1,23 +1,13 @@
 package qualite_log.data_import;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
-import qualite_log.model.Administrator;
-import qualite_log.model.Booking;
 import qualite_log.model.Data;
-import qualite_log.model.Equipment;
-import qualite_log.model.EquipmentType;
-import qualite_log.model.Person;
-import qualite_log.model.User;
 
 
 

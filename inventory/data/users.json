@@ -1,6 +1,5 @@
 [ {
-  "idPerson" : 2,
-  "bookings" : [ ],
+  "id" : 2,
   "lastName" : "jhon",
   "firstName" : "doe",
   "type" : "user",

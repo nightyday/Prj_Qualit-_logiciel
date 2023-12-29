@@ -1,10 +1,8 @@
 [ {
-  "idBooking" : 1,
-  "equipment" : {
-    "idEquipment" : 1,
-    "reference" : "Q68PH",
-    "version" : "ASUS-17THK"
-  },
-  "startingDate" : [ 2024, 1, 10 ],
-  "endingDate" : [ 2024, 1, 15 ]
+  "id" : 1,
+  "id_person" : 2,
+  "type_person" : "user",
+  "id_equipment" : 1,
+  "startingDate" : "2024-01-10",
+  "endingDate" : "2024-01-15"
 } ]

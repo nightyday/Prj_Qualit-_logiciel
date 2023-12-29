@@ -15,5 +15,7 @@ module qualite_log {
     exports qualite_log.model;
     
     opens qualite_log.model to com.fasterxml.jackson.databind;
+    opens qualite_log.data_import.serializers;
+    opens qualite_log.data_import.deserializers;
 }
 

@@ -1,5 +1,7 @@
 package qualite_log.data_import;
 
+import static org.junit.Assert.assertEquals;
+
 import java.time.LocalDate;
 
 import org.junit.Test;
@@ -29,12 +31,11 @@ public class ParserTest {
         User user = new User("jhon", "doe", "jhon.doe@etu.univ-tours.fr");
         data.addUsers(user);
         data.addBookings(new Booking(user, equip, LocalDate.of(2024, 01, 10),  LocalDate.of(2024, 01, 15))); 
-        print(data);
 
         DataWriter.extract(data);
         Data data2 = DataReader.insert();
 
-        print(data2);
+        assertEquals(data, data2);
     }
 
     public static void print(Data data) {

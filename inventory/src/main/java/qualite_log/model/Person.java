@@ -3,16 +3,14 @@ package qualite_log.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import qualite_log.data_import.serializers.PersonSerializer;
 
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "idPerson")
+@JsonSerialize(using = PersonSerializer.class)
 public class Person {
-    private static Long nextId = 1L;
-    private Long idPerson;
+    private static Integer nextId = 1;
+    private Integer id;
     
-    @JsonManagedReference
     private List<Booking> bookings;
 
     private String lastName;
@@ -21,16 +19,16 @@ public class Person {
     private String email; 
 
 
-    public Long NextgetId() {
+    public Integer NextgetId() {
         return nextId;
     }
     
-    public Long getIdPerson() {
-        return idPerson;
+    public Integer getId() {
+        return id;
     }
 
-    private void setIdPerson() {
-        idPerson = nextId++;
+    private void setId() {
+        id = nextId++;
     }
 
     public List<Booking> getBookings() {
@@ -78,12 +76,12 @@ public class Person {
     }
 
     public Person() {
-        setIdPerson();
+        setId();
         bookings = new ArrayList<>();
     }
 
     public Person(String lastName, String firstName, String type, String email) {
-        setIdPerson();
+        setId();
         this.lastName = lastName;
         this.firstName = firstName;
         this.type = type;

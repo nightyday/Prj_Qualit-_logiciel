@@ -1,83 +1,98 @@
-    package qualite_log.model;
+package qualite_log.model;
 
-    import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "idEquipment", scope=Equipment.class)
-    public class Equipment {
-        private static Long nextId = 1L;
-        private Long idEquipment;
+import qualite_log.data_import.deserializers.EquipmentDeserializer;
+import qualite_log.data_import.serializers.EquipmentSerializer;
 
-        @JsonBackReference
-        private EquipmentType type;
+@JsonSerialize(using = EquipmentSerializer.class)
+@JsonDeserialize(using = EquipmentDeserializer.class)
+public class Equipment {
+    private static Integer nextId = 1;
+    private Integer id;
 
-        private String reference;
-        private String version;
+    private EquipmentType type;
 
-        public EquipmentType getType() {
-            return type;
-        }
+    private String reference;
+    private String version;
 
-        public void setType(EquipmentType type) {
-            this.type = type;
-
-            //type.addEquipments(this);
-        }
-
-        public Long NextgetId() {
-            return nextId;
-        }
-
-        public Long getIdEquipment() {
-            return idEquipment;
-        }
-
-        private void setIdEquipment() {
-            idEquipment = nextId++;
-        }
-
-        public String getReference() {
-            return reference;
-        }
-
-        public void setReference(String reference) {
-            this.reference = reference;
-        }
-
-        public String getVersion() {
-            return version;
-        }
-
-        public void setVersion(String version) {
-            this.version = version;
-        }
-
-        public Equipment() {
-            setIdEquipment();
-            reference = "XXXXX";
-        }
-
-        public Equipment(EquipmentType type) {
-            setIdEquipment();
-            reference = "XXXXX";
-            setType(type);
-        }
-
-        public Equipment(String reference, String version) {
-            setIdEquipment();
-            this.reference = reference;
-            this.version = version;
-        }
-
-        public Equipment(String reference, String version, EquipmentType type) {
-            setIdEquipment();
-            this.reference = reference;
-            this.version = version;
-            setType(type);
-        }
-        
-        public String toString() {
-            return type.toString() + "-" + reference;
-        }
+    public EquipmentType getType() {
+        return type;
     }
+
+    public void setType(EquipmentType type) {
+        this.type = type;
+
+        type.addEquipments(this);
+    }
+
+    public Integer NextgetId() {
+        return nextId;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    private void setId() {
+        id = nextId++;
+    }
+
+    public String getReference() {
+        return reference;
+    }
+
+    public void setReference(String reference) {
+        this.reference = reference;
+    }
+
+    public String getVersion() {
+        return version;
+    }
+
+    public void setVersion(String version) {
+        this.version = version;
+    }
+
+    public Equipment(Integer id, Integer id_type) {
+        this.id = id;
+        nextId = id + 1;
+
+        this.id_type = id_type;
+    }
+
+    public Equipment() {
+        setId();
+        reference = "XXXXX";
+    }
+
+    public Equipment(EquipmentType type) {
+        setId();
+        reference = "XXXXX";
+        setType(type);
+    }
+
+    public Equipment(String reference, String version) {
+        setId();
+        this.reference = reference;
+        this.version = version;
+    }
+
+    public Equipment(String reference, String version, EquipmentType type) {
+        setId();
+        this.reference = reference;
+        this.version = version;
+        setType(type);
+    }
+    
+    public String toString() {
+        return type.toString() + "-" + reference;
+    }
+
+    int id_type = -1;
+
+    public int getId_type() {
+        return id_type;
+    }    
+}

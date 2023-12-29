@@ -2,29 +2,32 @@ package qualite_log.model;
 
 import java.time.LocalDate;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "idBooking")
+import qualite_log.data_import.deserializers.BookingDeserializer;
+import qualite_log.data_import.serializers.BookingSerializer;
+
+@JsonSerialize(using = BookingSerializer.class)
+@JsonDeserialize(using = BookingDeserializer.class)
 public class Booking {
-    private static Long nextId = 1L;
-    private Long idBooking;
+    private static Integer nextId = 1;
+    private Integer id;
 
-    @JsonBackReference
-    User user;
+    Person person;
 
     Equipment equipment;
 
     LocalDate startingDate;
     LocalDate endingDate;
 
-    public User getUser() {
-        return user;
+    public Person getPerson() {
+        return person;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setPerson(Person person) {
+        this.person = person;
+        person.addBookings(this);
     }
 
     public Equipment getEquipment() {
@@ -35,16 +38,16 @@ public class Booking {
         this.equipment = equipment;
     }
 
-    public Long NextgetId() {
+    public Integer NextgetId() {
         return nextId;
     }
 
-    public Long getIdBooking() {
-        return idBooking;
+    public Integer getId() {
+        return id;
     }
 
-    private void setIdBooking() {
-        idBooking = nextId++;
+    private void setId() {
+        id = nextId++;
     }
 
     public LocalDate getStartingDate() {
@@ -64,24 +67,49 @@ public class Booking {
     }
 
     public Booking() {
-        setIdBooking();
+        setId();
     }
 
-    public Booking(User user, Equipment equipment) {
-        setIdBooking();
-        this.user = user;
+    public Booking(Integer id, Integer id_administrator, Integer id_user, Integer id_equipment) {
+        this.id = id;
+        nextId = id + 1;
+
+        this.id_administrator = id_administrator;
+        this.id_user = id_user;
+        this.id_equipment = id_equipment;
+    }
+
+    public Booking(Person person, Equipment equipment) {
+        setId();
+        setPerson(person);
         this.equipment = equipment;
     }
 
-    public Booking(User user, Equipment equipment, LocalDate startingDate, LocalDate endingDate) {
-        setIdBooking();
-        this.user = user;
+    public Booking(Person person, Equipment equipment, LocalDate startingDate, LocalDate endingDate) {
+        setId();
+        setPerson(person);
         this.equipment = equipment;
         this.startingDate = startingDate;
         this.endingDate = endingDate;
     }
 
     public String toString() {
-        return user.toString() + " : " + equipment.toString();
+        return person.toString() + " : " + equipment.toString();
+    }
+
+    int id_administrator = -1;
+    int id_user = -1;
+    int id_equipment = -1;
+
+    public int getId_administrator() {
+        return id_administrator;
+    }
+
+    public int getId_user() {
+        return id_user;
+    }
+
+    public int getId_equipment() {
+        return id_equipment;
     }
 }

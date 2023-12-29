@@ -3,16 +3,14 @@ package qualite_log.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import qualite_log.data_import.serializers.EquipmentTypeSerializer;
 
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "idEquipmentType")
+@JsonSerialize(using = EquipmentTypeSerializer.class)
 public class EquipmentType {
-    private static Long nextId = 1L;
-    private Long idEquipmentType;
+    private static Integer nextId = 1;
+    private Integer id;
 
-    @JsonManagedReference
     private List<Equipment> equipments;
 
     private String label;
@@ -30,16 +28,16 @@ public class EquipmentType {
         equipments.add(equipment);
     }
 
-    public Long NextgetId() {
+    public Integer NextgetId() {
         return nextId;
     }
 
-    public Long getIdEquipmentType() {
-        return idEquipmentType;
+    public Integer getId() {
+        return id;
     }
 
-    private void setIdEquipmentType() {
-        idEquipmentType = nextId++;
+    private void setId() {
+        id = nextId++;
     }
 
     public String getLabel() {
@@ -59,13 +57,13 @@ public class EquipmentType {
     }
 
     public EquipmentType() {
-        setIdEquipmentType();
+        setId();
         equipments = new ArrayList<>();
         this.reference = "XXX";
     }
 
     public EquipmentType(String label, String reference) {
-        setIdEquipmentType();
+        setId();
         this.label = label;
         this.reference = reference;
         equipments = new ArrayList<>();
