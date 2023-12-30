@@ -16,8 +16,9 @@ import qualite_log.model.Equipment;
 import qualite_log.model.EquipmentType;
 import qualite_log.model.User;
 
-// @RunWith(Suite.class)
-// @SuiteClasses({ DataReader.class, DataWriter.class })
+/*
+ * Les tests n'ont pas l'air de fonctionner, j'ai l'impression que les read and write ne fonctionnent pas dans des méthodes de tests
+ */
 public class DataImportTest {
     Data dataPreImport;
     Data dataPostImport;

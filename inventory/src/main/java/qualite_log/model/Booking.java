@@ -72,9 +72,13 @@ public class Booking {
         this.endingDate = endingDate;
     }
 
-    /* Constructeur à ne pas utiliser */
-    public Booking() throws Exception {
-        throw new Exception("Erreur : Une réservation doit crée en spécifiant un emprunteur et un equipement");
+    /* 
+     * Constructeur à ne pas utiliser
+     * 
+     * @throws NullPointerException
+     */
+    public Booking() throws NullPointerException {
+        throw new NullPointerException("Erreur : Une réservation doit crée en spécifiant un emprunteur et un equipement");
     }
 
     public Booking(Person emprunter, Equipment equipment) {
@@ -96,6 +100,8 @@ public class Booking {
     public String toString() {
         return emprunter.toString() + " : " + equipment.toString();
     }
+
+    ///// OUTILS A LA DESERIALISATION ////////////////////////////////////////////////////////////////////////////////////////////////////
 
     /* Attributs et méthodes utiles à la déserialisation */
     int id_administrator = -1;

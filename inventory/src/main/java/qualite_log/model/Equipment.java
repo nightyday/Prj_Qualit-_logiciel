@@ -55,9 +55,13 @@ public class Equipment {
         this.version = version;
     }
 
-    /* Constructeur à ne pas utiliser */
-    public Equipment() throws Exception{
-        throw new Exception("Erreur : Un équipement doit être crée en spécifiant un type d'équipement");
+    /* 
+     * Constructeur à ne pas utiliser
+     * 
+     * @throws NullPointerException
+     */
+    public Equipment() throws NullPointerException{
+        throw new NullPointerException("Erreur : Un équipement doit être crée en spécifiant un type d'équipement");
     }
 
     public Equipment(EquipmentType type) {
@@ -78,6 +82,8 @@ public class Equipment {
     public String toString() {
         return type.toString() + "-" + reference;
     }
+
+    ///// OUTILS A LA DESERIALISATION ////////////////////////////////////////////////////////////////////////////////////////////////////
 
     /* Attributs et méthodes utiles à la déserialisation */
     int id_type = -1;
