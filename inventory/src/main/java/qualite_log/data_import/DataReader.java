@@ -11,6 +11,7 @@ import qualite_log.model.Booking;
 import qualite_log.model.Data;
 import qualite_log.model.Equipment;
 import qualite_log.model.EquipmentType;
+import qualite_log.model.Person;
 import qualite_log.model.User;
 
     
@@ -33,9 +34,9 @@ public class DataReader {
             data = insertEquipmentTypes(path, mapper, data);
             data = insertUsers(path, mapper, data);
             data = insertAdministrators(path, mapper, data);
-            data = insertBookings(path, mapper, data);
 
             insertEquipments(path, mapper, data);
+            data = insertBookings(path, mapper, data);
 
             return data;
         } catch (Exception e) {
@@ -129,15 +130,30 @@ public class DataReader {
      * @param equipmentTypes
     */
     private static void managedEquipmentsReferences(List<Equipment> equipments, List<EquipmentType> equipmentTypes) throws Exception {   
+        try {
+            for (Equipment equipment : equipments) {
+                EquipmentType type_toSet = null;
 
-        for (Equipment equipment : equipments) {
-            Integer id_equipmentType = equipment.getId_type();
-            for (EquipmentType type : equipmentTypes) {
-                if (type.getId() == id_equipmentType) {
-                    equipment.setType(type);
+                Integer id_equipmentType = equipment.getId_type();
+                for (EquipmentType type : equipmentTypes) {
+                    if (type.getId() == id_equipmentType) {
+                        type_toSet = type;
+                    }
                 }
+
+                /* Si aucun EquipmentType n'est trouvé */
+                if (type_toSet == null) {
+                    throw new NullPointerException("L'id du type d'equipement defini dans l'equipement d'id " + equipment.getId() 
+                    + " ne correspond à aucune EquipmentType existant.");
+                }
+
+                equipment.defineReferences(type_toSet);
             }
+        } catch(NullPointerException e) {
+            System.err.println(e.getMessage());
+            e.printStackTrace();
         }
+        
     }
 
     /* Gestion des réferences entre les objets Booking et leur Person et les réferences avec leur objet Equipment 
@@ -149,32 +165,53 @@ public class DataReader {
     */
     private static void managedBookingsReferences(List<Booking> bookings, List<Administrator> administrators, List<User> users, List<Equipment> equipments) throws Exception {
         
-        for (Booking booking : bookings) {
-            /* Si l'objet Person est du type Admnistrator */
-            if (booking.getId_user() == -1) {
-                Integer id_person = booking.getId_administrator();
-                for (Administrator administrator : administrators) {
-                    if (administrator.getId() == id_person) {
-                        booking.setPerson(administrator);
-                    }
-                }
-            } 
-            /* Sinon, l'objet Person est du type User */ 
-            else {
-                Integer id_person = booking.getId_user();
-                for (User user : users) {
-                    if (user.getId() == id_person) {
-                        booking.setPerson(user);
-                    }
-                }
-            }
+        try {
+            for (Booking booking : bookings) {
+                Person emprunter_toSet = null;
+                Equipment equipment_toSet = null;
 
-            Integer id_equipment = booking.getId_equipment();
-            for (Equipment equipment : equipments) {
-                if (equipment.getId() == id_equipment) {
-                    booking.setEquipment(equipment);
+                /* Si l'objet Person est du type Admnistrator */
+                if (booking.getId_user() == -1) {
+                    Integer id_person = booking.getId_administrator();
+                    for (Administrator administrator : administrators) {
+                        if (administrator.getId() == id_person) {
+                            emprunter_toSet = administrator;
+                        }
+                    }
+                } 
+                /* Sinon, l'objet Person est du type User */ 
+                else {
+                    Integer id_person = booking.getId_user();
+                    for (User user : users) {
+                        if (user.getId() == id_person) {
+                            emprunter_toSet = user;
+                        }
+                    }
                 }
+
+                Integer id_equipment = booking.getId_equipment();
+                for (Equipment equipment : equipments) {
+                    if (equipment.getId() == id_equipment) {
+                        equipment_toSet = equipment;
+                    }
+                }
+
+                /* Si aucune Person n'est trouvé */
+                if (emprunter_toSet == null) {
+                    throw new NullPointerException("L'id de l'emprunteur defini dans la réservation d'id " + booking.getId() 
+                    + " ne correspond à aucune Person existante.");
+                }
+                /* Si aucun Equipment n'est trouvé */
+                if (equipment_toSet == null) {
+                    throw new NullPointerException("L'id de l'equipement defini dans la réservation d'id " + booking.getId() 
+                    + " ne correspond à aucune Equipment existant.");
+                }
+
+                booking.defineReferences(emprunter_toSet, equipment_toSet);
             }
+        } catch(NullPointerException e) {
+            System.err.println(e.getMessage());
+            e.printStackTrace();
         }
     }
 }

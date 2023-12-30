@@ -22,8 +22,8 @@ public class Equipment {
     }
 
     public void setType(EquipmentType type) {
+        this.type.getEquipments().remove(this);
         this.type = type;
-
         type.addEquipments(this);
     }
 
@@ -63,14 +63,16 @@ public class Equipment {
     public Equipment(EquipmentType type) {
         setId();
         reference = "XXXXX";
-        setType(type);
+        this.type = type;
+        type.addEquipments(this);
     }
 
     public Equipment(String reference, String version, EquipmentType type) {
         setId();
         this.reference = reference;
         this.version = version;
-        setType(type);
+        this.type = type;
+        type.addEquipments(this);
     }
     
     public String toString() {
@@ -80,7 +82,12 @@ public class Equipment {
     /* Attributs et méthodes utiles à la déserialisation */
     int id_type = -1;
 
-    /* Constructeur spécific à la désérialisation, ne peut utiliser autre part (risque d'incohérence des ids) */
+    /* 
+     * Constructeur spécific à la désérialisation, ne peut utiliser autre part (risque d'incohérence des ids) 
+     * 
+     * @param id
+     * @param id_type
+    */
     public Equipment(Integer id, Integer id_type) {
         this.id = id;
 
@@ -90,4 +97,15 @@ public class Equipment {
     public int getId_type() {
         return id_type;
     }    
+
+    /*
+     * Méthode servant à la définition de type dans le cas d'une création par le constructeur de désérialisation
+     * 
+     * @param emprunter
+     * @param equipment
+     */
+    public void defineReferences(EquipmentType type) {
+        this.type = type;
+        type.addEquipments(this);
+    }
 }

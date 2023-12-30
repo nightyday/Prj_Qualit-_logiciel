@@ -18,8 +18,8 @@ public class BookingSerializer extends JsonSerializer<Booking> {
     public void serialize(Booking booking, JsonGenerator jgen, SerializerProvider provider) throws IOException {
         jgen.writeStartObject();
         jgen.writeNumberField("id", booking.getId());
-        jgen.writeNumberField("id_person", booking.getPerson().getId()); // Sauvegarde de l'Id de l'emprunteur
-        jgen.writeStringField("type_person", booking.getPerson().getType()); // Sauvegarde du type de Person correspondant à l'emprunteur
+        jgen.writeNumberField("id_person", booking.getEmprunter().getId()); // Sauvegarde de l'Id de l'emprunteur
+        jgen.writeStringField("type_person", booking.getEmprunter().getType()); // Sauvegarde du type de Person correspondant à l'emprunteur
         jgen.writeNumberField("id_equipment", booking.getEquipment().getId()); // Sauvegarde de l'Id de l'Equipment
         jgen.writeStringField("startingDate", booking.getStartingDate().toString());
         jgen.writeStringField("endingDate", booking.getEndingDate().toString());

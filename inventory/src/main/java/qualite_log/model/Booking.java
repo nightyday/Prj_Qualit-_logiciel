@@ -14,20 +14,26 @@ public class Booking {
     public static Integer nextId = 1;
     private Integer id;
 
-    Person person;
+    Person emprunter;
 
     Equipment equipment;
 
     LocalDate startingDate;
     LocalDate endingDate;
 
-    public Person getPerson() {
-        return person;
+    public Person getEmprunter() {
+        return emprunter;
     }
 
-    public void setPerson(Person person) {
-        this.person = person;
-        person.addBookings(this);
+    /*
+     * Accesseur en écriture de l'attribut emprunter, gère aussi les changements sur l'emprunteur
+     * 
+     * @param emprunter
+     */
+    public void setEmprunter(Person emprunter) {
+        this.emprunter.getBookings().remove(this);
+        this.emprunter = emprunter;
+        emprunter.addBookings(this);
     }
 
     public Equipment getEquipment() {
@@ -71,22 +77,24 @@ public class Booking {
         throw new Exception("Erreur : Une réservation doit crée en spécifiant un emprunteur et un equipement");
     }
 
-    public Booking(Person person, Equipment equipment) {
+    public Booking(Person emprunter, Equipment equipment) {
         setId();
-        setPerson(person);
+        this.emprunter = emprunter;
+        emprunter.addBookings(this);
         this.equipment = equipment;
     }
 
-    public Booking(Person person, Equipment equipment, LocalDate startingDate, LocalDate endingDate) {
+    public Booking(Person emprunter, Equipment equipment, LocalDate startingDate, LocalDate endingDate) {
         setId();
-        setPerson(person);
+        this.emprunter = emprunter;
+        emprunter.addBookings(this);
         this.equipment = equipment;
         this.startingDate = startingDate;
         this.endingDate = endingDate;
     }
 
     public String toString() {
-        return person.toString() + " : " + equipment.toString();
+        return emprunter.toString() + " : " + equipment.toString();
     }
 
     /* Attributs et méthodes utiles à la déserialisation */
@@ -94,7 +102,14 @@ public class Booking {
     int id_user = -1;
     int id_equipment = -1;
 
-    /* Constructeur spécific à la désérialisation, ne peut utiliser autre part (risque d'incohérence des ids) */
+    /* 
+     * Constructeur spécific à la désérialisation, ne peut utiliser autre part (risque d'incohérence des ids) 
+     * 
+     * @param id
+     * @param id_administrator
+     * @param id_user
+     * @param is_equipment
+    */
     public Booking(Integer id, Integer id_administrator, Integer id_user, Integer id_equipment) {
         this.id = id;
 
@@ -113,5 +128,17 @@ public class Booking {
 
     public int getId_equipment() {
         return id_equipment;
+    }
+
+    /*
+     * Méthode servant à la définition de emprunter et equipment dans le cas d'une création par le constructeur de désérialisation
+     * 
+     * @param emprunter
+     * @param equipment
+     */
+    public void defineReferences(Person emprunter, Equipment equipement) {
+        this.emprunter = emprunter;
+        emprunter.addBookings(this);
+        this.equipment = equipement;
     }
 }
