@@ -73,4 +73,35 @@ public class Data {
         equipmentTypes = new ArrayList<>();
         bookings = new ArrayList<>();
     }
+
+    public String toString() {
+        String str = "";
+
+        str = str + "==========================================\n=== Users : \n";
+        for(User user : users) {
+            str = str + user.toString() + "\n";
+        }
+
+        str = str + "==========================================\n=== Administrators : \n";
+        for(Administrator admin : administrators) {
+            str = str + admin.toString() + "\n";
+        }
+
+        str = str + "==========================================\n=== EquipmentTypes : \n";
+        for(EquipmentType type : equipmentTypes) {
+            str = str + type.toString() + "\n";
+        }
+
+        str = str + "==========================================\n=== Equipments : \n";
+        for(Equipment equipment : getEquipments()) {
+            str = str + equipment.toString() + "\n";
+        }
+
+        str = str + "==========================================\n=== Booking : \n";
+        for(Booking booking : bookings) {
+            str = str + booking.toString() + "\n";
+        }
+
+        return str;
+    }
 }

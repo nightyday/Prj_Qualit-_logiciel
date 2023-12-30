@@ -10,7 +10,6 @@ module qualite_log {
     requires com.fasterxml.jackson.annotation;
     requires com.fasterxml.jackson.datatype.jsr310;
 
-
     //opens com.fasterxml.jackson.datatype.jsr310;
     exports qualite_log.model;
     
