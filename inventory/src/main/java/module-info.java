@@ -5,6 +5,11 @@ module qualite_log {
     opens qualite_log to javafx.fxml;
     exports qualite_log;
 
+    opens qualite_log.view to javafx.fxml;
+    exports qualite_log.view;
+
+
+
     // Modules pour Jackson (json)
     requires com.fasterxml.jackson.databind;
     requires com.fasterxml.jackson.core;

@@ -39,7 +39,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="qualite_log.UserCreateFrame">
+<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="qualite_log.view.UserCreateFrame">
    <children>
       <TextField fx:id="nomTextField" layoutX="98.0" layoutY="137.0" promptText="Nom" />
       <TextField fx:id="prenomTextField" layoutX="353.0" layoutY="137.0" promptText="Prénom" />

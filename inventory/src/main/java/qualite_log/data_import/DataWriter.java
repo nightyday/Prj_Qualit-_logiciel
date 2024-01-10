@@ -18,7 +18,7 @@ public class DataWriter {
     private static String getPath(String fileName) {
         String currentDirectory = System.getProperty("user.dir");
 
-        return currentDirectory + "/inventory/data/" + fileName;
+        return currentDirectory + "/data/" + fileName;
     }
 
     /*

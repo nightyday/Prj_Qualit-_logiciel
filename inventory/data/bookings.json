@@ -1,8 +1,8 @@
 [ {
-  "id" : 1,
-  "id_person" : 2,
+  "id" : 2,
+  "id_person" : 6,
   "type_person" : "user",
-  "id_equipment" : 1,
+  "id_equipment" : 2,
   "startingDate" : "2024-01-10",
   "endingDate" : "2024-01-15"
 } ]
