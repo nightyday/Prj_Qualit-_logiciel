@@ -40,7 +40,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="vBox" prefHeight="425.6" prefWidth="600.0" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="qualite_log.ConnexionFrame">
+<VBox fx:id="vBox" prefHeight="425.6" prefWidth="600.0" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="qualite_log.view.ConnexionFrame">
   <children>
     <AnchorPane fx:id="anchorPanel" maxHeight="-1.0" maxWidth="-1.0" prefHeight="424.0" prefWidth="600.0" VBox.vgrow="ALWAYS">
          <children>

@@ -18,8 +18,11 @@ public class Person {
     private String type;
     private String email; 
 
+    public static void init() {
+        nextId++;
+    }
 
-    public Integer NextgetId() {
+    public Integer getNextId() {
         return nextId;
     }
     
@@ -28,7 +31,8 @@ public class Person {
     }
 
     private void setId() {
-        id = nextId++;
+        init();
+        id = nextId + 1;
     }
 
     public List<Booking> getBookings() {
