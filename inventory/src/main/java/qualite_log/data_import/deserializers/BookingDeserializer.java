@@ -36,14 +36,14 @@ public class BookingDeserializer extends StdDeserializer<Booking> {
 
         int id_person = (Integer) ((IntNode) node.get("id_person")).numberValue();// Id qui permettra de lié à l'objet Person correspondant
         String type_person = node.get("type_person").asText();// Champs qui permettra de déterminer le type de l'objet Person
-        int id_equipment = (Integer) ((IntNode) node.get("id_equipment")).numberValue();// Id qui permettra de lié à l'objet Equipment correspondant
+        String reference_equipment = node.get("reference_equipment").asText();// Reference qui permettra de lié à l'objet Equipment correspondant
 
         Booking booking;
         /* Création de l'objet Booking */
         if(type_person.equals("administrator")) {
-            booking = new Booking(id, id_person, -1, id_equipment); // Si l'objet person lié est un Administrator, l'id_person est enregistré dans le champs id_administrator
+            booking = new Booking(id, id_person, -1, reference_equipment); // Si l'objet person lié est un Administrator, l'id_person est enregistré dans le champs id_administrator
         } else {
-            booking = new Booking(id, -1, id_person, id_equipment); // Sinon, l'objet person lié est un User, l'id_person est donc enregistré dans le champs id_user        
+            booking = new Booking(id, -1, id_person, reference_equipment); // Sinon, l'objet person lié est un User, l'id_person est donc enregistré dans le champs id_user        
         }
         
         booking.setStartingDate(startingDate);

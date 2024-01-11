@@ -9,12 +9,11 @@ import qualite_log.data_import.serializers.EquipmentSerializer;
 @JsonSerialize(using = EquipmentSerializer.class)
 @JsonDeserialize(using = EquipmentDeserializer.class)
 public class Equipment {
-    private static Integer nextId = 1;
-    private Integer id;
+    private String reference;
 
     private EquipmentType type;
 
-    private String reference;
+    private String nom;
     private String version;
 
     public EquipmentType getType() {
@@ -27,24 +26,21 @@ public class Equipment {
         type.addEquipments(this);
     }
 
-    public Integer NextgetId() {
-        return nextId;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    private void setId() {
-        id = nextId++;
-    }
-
     public String getReference() {
         return reference;
     }
 
     public void setReference(String reference) {
         this.reference = reference;
+    }
+
+    
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
     }
 
     public String getVersion() {
@@ -64,18 +60,22 @@ public class Equipment {
         throw new NullPointerException("Erreur : Un équipement doit être crée en spécifiant un type d'équipement");
     }
 
-    public Equipment(EquipmentType type) {
-        setId();
-        reference = "XXXXX";
+    public Equipment(String reference, EquipmentType type) {
+        this.reference = reference;
+
         this.type = type;
+        
         type.addEquipments(this);
     }
 
-    public Equipment(String reference, String version, EquipmentType type) {
-        setId();
+    public Equipment(String reference, String nom, String version, EquipmentType type) {
         this.reference = reference;
-        this.version = version;
+
         this.type = type;
+
+        this.nom = nom;
+        this.version = version;
+
         type.addEquipments(this);
     }
     
@@ -94,8 +94,8 @@ public class Equipment {
      * @param id
      * @param id_type
     */
-    public Equipment(Integer id, Integer id_type) {
-        this.id = id;
+    public Equipment(String reference, Integer id_type) {
+        this.reference = reference;
 
         this.id_type = id_type;
     }

@@ -106,7 +106,7 @@ public class Booking {
     /* Attributs et méthodes utiles à la déserialisation */
     int id_administrator = -1;
     int id_user = -1;
-    int id_equipment = -1;
+    String reference = "XXX-XXX";
 
     /* 
      * Constructeur spécific à la désérialisation, ne peut utiliser autre part (risque d'incohérence des ids) 
@@ -116,12 +116,12 @@ public class Booking {
      * @param id_user
      * @param is_equipment
     */
-    public Booking(Integer id, Integer id_administrator, Integer id_user, Integer id_equipment) {
+    public Booking(Integer id, Integer id_administrator, Integer id_user, String reference) {
         this.id = id;
 
         this.id_administrator = id_administrator;
         this.id_user = id_user;
-        this.id_equipment = id_equipment;
+        this.reference = reference;
     }
 
     public int getId_administrator() {
@@ -132,8 +132,8 @@ public class Booking {
         return id_user;
     }
 
-    public int getId_equipment() {
-        return id_equipment;
+    public String getReference_equipment() {
+        return reference;
     }
 
     /*

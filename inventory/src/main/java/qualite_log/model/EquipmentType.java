@@ -13,8 +13,7 @@ public class EquipmentType {
 
     private List<Equipment> equipments;
 
-    private String label;
-    private String reference;
+    private String type;
 
     public List<Equipment> getEquipments() {
         return equipments;
@@ -40,36 +39,26 @@ public class EquipmentType {
         id = nextId++;
     }
 
-    public String getLabel() {
-        return label;
+    public String getType() {
+        return type;
     }
 
-    public void setLabel(String label) {
-        this.label = label;
-    }
-
-    public String getReference() {
-        return reference;
-    }
-
-    public void setReference(String reference) {
-        this.reference = reference;
+    public void setType(String type) {
+        this.type = type;
     }
 
     public EquipmentType() {
         setId();
         equipments = new ArrayList<>();
-        this.reference = "XXX";
     }
 
-    public EquipmentType(String label, String reference) {
+    public EquipmentType(String type) {
         setId();
-        this.label = label;
-        this.reference = reference;
+        this.type = type;
         equipments = new ArrayList<>();
     }
 
     public String toString() {
-        return reference;
+        return type;
     }
 }

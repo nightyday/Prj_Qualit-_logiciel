@@ -29,7 +29,7 @@ public class DataReader {
     private static String getPath(String fileName) {
         String currentDirectory = System.getProperty("user.dir");
 
-        return currentDirectory + "/data/" + fileName;
+        return currentDirectory + "/inventory/data/" + fileName;
     }
     
     /*
@@ -209,7 +209,7 @@ public class DataReader {
 
             /* Si aucun EquipmentType n'est trouvé */
             if (type_toSet == null) {
-                throw new NullPointerException("L'id du type d'equipement defini dans l'equipement d'id " + equipment.getId() 
+                throw new NullPointerException("L'id du type d'equipement defini dans l'equipement d'id " + equipment.getReference() 
                 + " ne correspond à aucune EquipmentType existant.");
             }
 
@@ -250,9 +250,9 @@ public class DataReader {
                 }
             }
 
-            Integer id_equipment = booking.getId_equipment();
+            String reference_equipment = booking.getReference_equipment();
             for (Equipment equipment : equipments) {
-                if (equipment.getId() == id_equipment) {
+                if (equipment.getReference().equals(reference_equipment)) {
                     equipment_toSet = equipment;
                 }
             }

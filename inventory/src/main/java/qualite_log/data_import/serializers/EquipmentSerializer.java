@@ -17,8 +17,8 @@ public class EquipmentSerializer extends JsonSerializer<Equipment> {
     @Override
     public void serialize(Equipment equipment, JsonGenerator jgen, SerializerProvider provider) throws IOException {
         jgen.writeStartObject();
-        jgen.writeNumberField("id", equipment.getId());
         jgen.writeStringField("reference", equipment.getReference());
+        jgen.writeStringField("nom", equipment.getNom());
         jgen.writeStringField("version", equipment.getVersion());
         jgen.writeNumberField("id_type", equipment.getType().getId()); // Sauvegarde de l'Id de l'EquipmentType
         jgen.writeEndObject();

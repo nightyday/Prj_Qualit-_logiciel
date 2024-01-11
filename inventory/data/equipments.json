@@ -1,6 +1,6 @@
 [ {
-  "id" : 2,
-  "reference" : "QAIJP",
-  "version" : "Asus Tuf - QAIJP",
-  "id_type" : 3
+  "reference" : "LAP-176",
+  "nom" : "Asus Tuf",
+  "version" : "QAIJP",
+  "id_type" : 1
 } ]
