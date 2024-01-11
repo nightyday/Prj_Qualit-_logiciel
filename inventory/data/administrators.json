@@ -1,7 +1,13 @@
 [ {
-  "id" : 1,
+  "id" : 7,
   "lastName" : "michel",
   "firstName" : "dubois",
   "type" : "administrator",
   "email" : "michel.dubois@univ-tours.fr"
+}, {
+  "id" : 8,
+  "lastName" : "bob",
+  "firstName" : "alice",
+  "type" : "administrator",
+  "email" : "bob.alice@univ-tours.fr"
 } ]

@@ -20,4 +20,3 @@ module qualite_log {
 
     exports qualite_log.model;
 }
-
