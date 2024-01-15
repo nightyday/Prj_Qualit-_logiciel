@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Data {
+    private static Data instance;
+
     private List<Administrator> administrators;
     private List<User> users;
     private List<EquipmentType> equipmentTypes;
@@ -67,11 +69,24 @@ public class Data {
         return equipments;
     }
 
-    public Data() {
+    private Data() {
         administrators = new ArrayList<>();
         users = new ArrayList<>();
         equipmentTypes = new ArrayList<>();
         bookings = new ArrayList<>();
+    }
+
+    /**
+     * Méthode à utiliser comme constructeur (pattern singleton)
+     * 
+     * @return instance
+     */
+    public static Data getInstance() {
+        if(instance == null) {
+            instance = new Data();
+        }
+
+        return instance;
     }
 
     public String toString() {

@@ -51,14 +51,10 @@ public class Equipment {
         this.version = version;
     }
 
-    /* 
+    /**
      * Constructeur à ne pas utiliser
-     * 
-     * @throws NullPointerException
      */
-    public Equipment() throws NullPointerException{
-        throw new NullPointerException("Erreur : Un équipement doit être crée en spécifiant un type d'équipement");
-    }
+    private Equipment() {}
 
     public Equipment(String reference, EquipmentType type) {
         this.reference = reference;
