@@ -10,14 +10,6 @@ public class Data {
     private List<EquipmentType> equipmentTypes;
     private List<Booking> bookings;
 
-    public static Data getInstance() {
-        if (instance == null) {
-            instance = new Data();
-            return instance;
-        }
-        return instance;
-    }
-
     public List<Administrator> getAdministrators() {
         return administrators;
     }
