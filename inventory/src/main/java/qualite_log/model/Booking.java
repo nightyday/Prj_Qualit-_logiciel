@@ -5,6 +5,8 @@ import java.time.LocalDate;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import qualite_log.data_import.deserializers.BookingDeserializer;
 import qualite_log.data_import.serializers.BookingSerializer;
 
@@ -25,6 +27,12 @@ public class Booking {
         return emprunter;
     }
 
+    public StringProperty getEmail() {
+        StringProperty email = new SimpleStringProperty();
+        email.setValue(emprunter.getEmail());
+        return email;
+    }
+
     /*
      * Accesseur en écriture de l'attribut emprunter, gère aussi les changements sur l'emprunteur
      * 
@@ -38,6 +46,12 @@ public class Booking {
 
     public Equipment getEquipment() {
         return equipment;
+    }
+
+    public StringProperty getReference() {
+        StringProperty referenceEquipment = new SimpleStringProperty();
+        referenceEquipment.setValue(equipment.getReference());
+        return referenceEquipment;
     }
 
     public void setEquipment(Equipment equipment) {

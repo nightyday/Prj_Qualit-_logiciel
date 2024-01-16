@@ -1,6 +1,8 @@
 package qualite_log.view;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
@@ -12,6 +14,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import qualite_log.model.Data;
+import qualite_log.model.Equipment;
+import qualite_log.model.EquipmentType;
 
 public class ToolDeleteFrame {
 
@@ -31,7 +36,7 @@ public class ToolDeleteFrame {
     private Label deleteLabel;
 
     @FXML
-    private ComboBox<?> referenceComboBox;
+    private ComboBox<String> referenceComboBox;
 
     @FXML
     void initialize() {
@@ -40,16 +45,32 @@ public class ToolDeleteFrame {
         assert deleteLabel != null : "fx:id=\"deleteLabel\" was not injected: check your FXML file 'ToolDeleteFrame.fxml'.";
         assert referenceComboBox != null : "fx:id=\"referenceComboBox\" was not injected: check your FXML file 'ToolDeleteFrame.fxml'.";
 
+        // Add elements in the comboBoxs
+        List<Equipment> equipments = Data.getInstance().getEquipments();
+        List<String> referenceData = new ArrayList<>();
+        int i;
+        for (i = 0; i < equipments.size(); i++) {
+            referenceData.add(equipments.get(i).getReference());
+        }
+        referenceComboBox.getItems().addAll(referenceData);
+
         deleteButton.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent t) {
-                try {
-                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/qualite_log/ToolListFrame.fxml"));
-                    Parent root = (Parent) fxmlLoader.load();
-                    anchorPane.getChildren().clear();
-                    anchorPane.getChildren().add(root);
+                if (referenceComboBox.getValue() != null) {
+                    Equipment equipmentSelected = equipments.get(referenceData.indexOf(referenceComboBox.getValue()));
+                    equipmentSelected.getType().getEquipments().remove(equipmentSelected);
+                    try {
+                        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/qualite_log/ToolListFrame.fxml"));
+                        Parent root = (Parent) fxmlLoader.load();
+                        anchorPane.getChildren().clear();
+                        anchorPane.getChildren().add(root);
+                    }
+                    catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
-                catch (Exception e) {
-                    e.printStackTrace();
+                else {
+                    System.out.println("Error");
                 }
             }
         });

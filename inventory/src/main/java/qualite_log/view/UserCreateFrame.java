@@ -1,6 +1,7 @@
 package qualite_log.view;
 
 import java.net.URL;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
@@ -13,6 +14,9 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import qualite_log.model.Administrator;
+import qualite_log.model.Data;
+import qualite_log.model.User;
 
 public class UserCreateFrame {
 
@@ -41,7 +45,7 @@ public class UserCreateFrame {
     private TextField prenomTextField;
 
     @FXML
-    private ComboBox<?> roleComboBox;
+    private ComboBox<String> roleComboBox;
 
     @FXML
     void initialize() {
@@ -53,8 +57,17 @@ public class UserCreateFrame {
         assert prenomTextField != null : "fx:id=\"prenomTextField\" was not injected: check your FXML file 'UserCreateFrame.fxml'.";
         assert roleComboBox != null : "fx:id=\"roleComboBox\" was not injected: check your FXML file 'UserCreateFrame.fxml'.";
 
+        // Add elements in the comboBoxs
+        roleComboBox.getItems().addAll(Arrays.asList("administrateur", "utilisateur"));
+
         createButton.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent t) {
+                if (roleComboBox.getValue().equals("administrateur")) {
+                            Data.getInstance().getAdministrators().add(new Administrator(nomTextField.getText(), prenomTextField.getText(), mailTextField.getText()));
+                }
+                else {
+                    Data.getInstance().getUsers().add(new User(nomTextField.getText(), prenomTextField.getText(), mailTextField.getText()));
+                }
                 try {
                     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/qualite_log/UserListFrame.fxml"));
                     Parent root = (Parent) fxmlLoader.load();

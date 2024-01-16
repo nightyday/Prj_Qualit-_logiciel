@@ -12,6 +12,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import qualite_log.model.Data;
+import qualite_log.model.EquipmentType;
 
 public class ToolTypeCreateFrame {
 
@@ -42,6 +44,8 @@ public class ToolTypeCreateFrame {
 
         createButton.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent t) {
+                Data.getInstance().getEquipmentTypes().add(new EquipmentType(typeTextField.getText()));
+
                 try {
                     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/qualite_log/ToolTypeListFrame.fxml"));
                     Parent root = (Parent) fxmlLoader.load();

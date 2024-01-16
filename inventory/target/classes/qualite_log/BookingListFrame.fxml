@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="qualite_log.view.BookingListFrame">
+   <children>
+      <Label fx:id="listLabel" layoutX="126.0" layoutY="26.0" text="Consultation des emprunts">
+         <font>
+            <Font name="System Bold" size="26.0" />
+         </font>
+      </Label>
+      <TableView fx:id="tableView" layoutX="14.0" layoutY="99.0" prefHeight="286.0" prefWidth="554.0">
+        <columns>
+            <TableColumn fx:id="mailColumn" prefWidth="188.79998779296875" text="Mail" />
+            <TableColumn fx:id="referenceColumn" prefWidth="92.800048828125" text="Référence" />
+          <TableColumn fx:id="startingDateColumn" prefWidth="135.20001220703125" text="Date d'emprunt" />
+            <TableColumn fx:id="endingDateColumn" prefWidth="140.0" text="Date de rendu" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>

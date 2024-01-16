@@ -2,12 +2,18 @@ package qualite_log.view;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollBar;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import qualite_log.model.Data;
+import qualite_log.model.Equipment;
 
 public class ToolListFrame {
 
@@ -30,10 +36,7 @@ public class ToolListFrame {
     private TableColumn<?, ?> referenceColumn;
 
     @FXML
-    private ScrollBar scrollBar;
-
-    @FXML
-    private TableView<?> tableView;
+    private TableView<Equipment> tableView;
 
     @FXML
     private TableColumn<?, ?> typeColumn;
@@ -47,11 +50,17 @@ public class ToolListFrame {
         assert listLabel != null : "fx:id=\"listLabel\" was not injected: check your FXML file 'ToolListFrame.fxml'.";
         assert nomColumn != null : "fx:id=\"nomColumn\" was not injected: check your FXML file 'ToolListFrame.fxml'.";
         assert referenceColumn != null : "fx:id=\"referenceColumn\" was not injected: check your FXML file 'ToolListFrame.fxml'.";
-        assert scrollBar != null : "fx:id=\"scrollBar\" was not injected: check your FXML file 'ToolListFrame.fxml'.";
         assert tableView != null : "fx:id=\"tableView\" was not injected: check your FXML file 'ToolListFrame.fxml'.";
         assert typeColumn != null : "fx:id=\"typeColumn\" was not injected: check your FXML file 'ToolListFrame.fxml'.";
         assert versionColumn != null : "fx:id=\"versionColumn\" was not injected: check your FXML file 'ToolListFrame.fxml'.";
 
+        ObservableList<Equipment> data = FXCollections.observableArrayList(Data.getInstance().getEquipments());
+        nomColumn.setCellValueFactory(new PropertyValueFactory<>("nom"));
+        referenceColumn.setCellValueFactory(new PropertyValueFactory<>("reference"));
+        versionColumn.setCellValueFactory(new PropertyValueFactory<>("version"));
+        typeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
+        tableView.setItems(data);
+        tableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
     }
 
 }

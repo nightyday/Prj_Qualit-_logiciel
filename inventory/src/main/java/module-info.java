@@ -1,4 +1,6 @@
 module qualite_log {
+    requires javafx.base;
+    requires transitive javafx.graphics;
     requires javafx.controls;
     requires javafx.fxml;
 

@@ -4,10 +4,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Data {
+    private static Data instance;
     private List<Administrator> administrators;
     private List<User> users;
     private List<EquipmentType> equipmentTypes;
     private List<Booking> bookings;
+
+    public static Data getInstance() {
+        if (instance == null) {
+            instance = new Data();
+            return instance;
+        }
+        return instance;
+    }
 
     public List<Administrator> getAdministrators() {
         return administrators;

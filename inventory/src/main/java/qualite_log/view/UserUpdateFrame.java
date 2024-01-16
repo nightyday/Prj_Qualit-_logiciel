@@ -1,6 +1,8 @@
 package qualite_log.view;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
@@ -13,6 +15,10 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import qualite_log.model.Administrator;
+import qualite_log.model.Data;
+import qualite_log.model.Person;
+import qualite_log.model.User;
 
 public class UserUpdateFrame {
 
@@ -26,7 +32,7 @@ public class UserUpdateFrame {
     private AnchorPane anchorPane;
 
     @FXML
-    private ComboBox<?> mailComboBox;
+    private ComboBox<String> mailComboBox;
 
     @FXML
     private TextField mailTextField;
@@ -38,7 +44,7 @@ public class UserUpdateFrame {
     private TextField prenomTextField;
 
     @FXML
-    private ComboBox<?> roleComboBox;
+    private ComboBox<String> roleComboBox;
 
     @FXML
     private Button updateButton;
@@ -56,17 +62,67 @@ public class UserUpdateFrame {
         assert roleComboBox != null : "fx:id=\"roleComboBox\" was not injected: check your FXML file 'UserUpdateFrame.fxml'.";
         assert updateButton != null : "fx:id=\"updateButton\" was not injected: check your FXML file 'UserUpdateFrame.fxml'.";
         assert updateLabel != null : "fx:id=\"updateLabel\" was not injected: check your FXML file 'UserUpdateFrame.fxml'.";
+        
+        // Add elements in the comboBoxs
+        List<Person> persons = new ArrayList<>();
+        persons.addAll(Data.getInstance().getUsers());
+        persons.addAll(Data.getInstance().getAdministrators());
+        List<String> emailData = new ArrayList<>();
+        int i;
+        for (i = 0; i < persons.size(); i++) {
+            emailData.add(persons.get(i).getEmail());
+        }
+        mailComboBox.getItems().addAll(emailData);
+
+        roleComboBox.getItems().addAll("administrateur", "utilisateur");
+
+        // Fill informations when the user is choose
+        EventHandler<ActionEvent> event = new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent e)
+            {
+                Person personSelected = persons.get(emailData.indexOf(mailComboBox.getValue()));
+                mailTextField.setText(personSelected.getEmail());
+                nomTextField.setText(personSelected.getLastName());
+                prenomTextField.setText(personSelected.getFirstName());
+                roleComboBox.setValue(personSelected.getType());
+            }
+        };
+        mailComboBox.setOnAction(event);
 
         updateButton.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent t) {
-                try {
-                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/qualite_log/UserListFrame.fxml"));
-                    Parent root = (Parent) fxmlLoader.load();
-                    anchorPane.getChildren().clear();
-                    anchorPane.getChildren().add(root);
+                if (mailComboBox.getValue() != null) {
+                    Person personSelected = persons.get(emailData.indexOf(mailComboBox.getValue()));
+                    if (personSelected.getType().equals("administrateur")) {
+                        Data.getInstance().getAdministrators().remove(personSelected);
+                        if (roleComboBox.getValue().equals("administrateur")) {
+                            Data.getInstance().getAdministrators().add(new Administrator(nomTextField.getText(), prenomTextField.getText(), mailTextField.getText()));
+                        }
+                        else {
+                            Data.getInstance().getUsers().add(new User(nomTextField.getText(), prenomTextField.getText(), mailTextField.getText()));
+                        }
+                    }
+                    if (personSelected.getType().equals("user")) {
+                        Data.getInstance().getUsers().remove(personSelected);
+                        if (roleComboBox.getValue().equals("administrateur")) {
+                            Data.getInstance().getAdministrators().add(new Administrator(nomTextField.getText(), prenomTextField.getText(), mailTextField.getText()));
+                        }
+                        else {
+                            Data.getInstance().getUsers().add(new User(nomTextField.getText(), prenomTextField.getText(), mailTextField.getText()));
+                        }
+                    }
+                    try {
+                        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/qualite_log/UserListFrame.fxml"));
+                        Parent root = (Parent) fxmlLoader.load();
+                        anchorPane.getChildren().clear();
+                        anchorPane.getChildren().add(root);
+                    }
+                    catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
-                catch (Exception e) {
-                    e.printStackTrace();
+                else {
+                    System.out.println("Error");
                 }
             }
         });

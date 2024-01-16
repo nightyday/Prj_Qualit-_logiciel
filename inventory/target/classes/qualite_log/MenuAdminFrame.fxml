@@ -64,6 +64,13 @@
                   <MenuItem fx:id="userDeleteMenuItem" mnemonicParsing="false" text="Supprimer un utilisateur" />
                </items>
             </Menu>
+            <Menu mnemonicParsing="false" text="Emprunts">
+               <items>
+                  <MenuItem fx:id="bookingListMenuItem" mnemonicParsing="false" text="Consulter les emprunts" />
+                  <MenuItem fx:id="bookingCreateMenuItem" mnemonicParsing="false" text="Emprunter un matériel" />
+                  <MenuItem fx:id="bookingDeleteMenuItem" mnemonicParsing="false" text="Rendre un matériel" />
+               </items>
+            </Menu>
             <Menu mnemonicParsing="false" text="Déconnexion">
                <items>
                   <MenuItem fx:id="deconnexionMenuItem" mnemonicParsing="false" text="Se déconnecter" />

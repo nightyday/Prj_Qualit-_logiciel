@@ -10,7 +10,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
 public class MenuAdminFrame {
@@ -22,7 +21,13 @@ public class MenuAdminFrame {
     private URL location;
 
     @FXML
-    private AnchorPane anchorPane;
+    private MenuItem bookingCreateMenuItem;
+
+    @FXML
+    private MenuItem bookingDeleteMenuItem;
+
+    @FXML
+    private MenuItem bookingListMenuItem;
 
     @FXML
     private MenuItem deconnexionMenuItem;
@@ -70,6 +75,9 @@ public class MenuAdminFrame {
 
     @FXML
     void initialize() {
+        assert bookingCreateMenuItem != null : "fx:id=\"bookingCreateMenuItem\" was not injected: check your FXML file 'MenuAdminFrame.fxml'.";
+        assert bookingDeleteMenuItem != null : "fx:id=\"bookingDeleteMenuItem\" was not injected: check your FXML file 'MenuAdminFrame.fxml'.";
+        assert bookingListMenuItem != null : "fx:id=\"bookingListMenuItem\" was not injected: check your FXML file 'MenuAdminFrame.fxml'.";
         assert deconnexionMenuItem != null : "fx:id=\"deconnexionMenuItem\" was not injected: check your FXML file 'MenuAdminFrame.fxml'.";
         assert menuAdminMenuBar != null : "fx:id=\"menuAdminMenuBar\" was not injected: check your FXML file 'MenuAdminFrame.fxml'.";
         assert menuVBox != null : "fx:id=\"menuVBox\" was not injected: check your FXML file 'MenuAdminFrame.fxml'.";
@@ -86,7 +94,7 @@ public class MenuAdminFrame {
         assert userUpdateMenuItem != null : "fx:id=\"userUpdateMenuItem\" was not injected: check your FXML file 'MenuAdminFrame.fxml'.";
 
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/qualite_log/UserListFrame.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/qualite_log/ToolListFrame.fxml"));
             root = (Parent) fxmlLoader.load();
 
             menuVBox.getChildren().add(root);
@@ -236,6 +244,48 @@ public class MenuAdminFrame {
                     try {
                         menuVBox.getChildren().remove(root);
                         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/qualite_log/UserUpdateFrame.fxml"));
+                        root = (Parent) fxmlLoader.load();
+                        menuVBox.getChildren().add(root);
+                    }
+                    catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+
+            bookingListMenuItem.setOnAction(new EventHandler<ActionEvent>() {
+                public void handle(ActionEvent t) {
+                    try {
+                        menuVBox.getChildren().remove(root);
+                        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/qualite_log/BookingListFrame.fxml"));
+                        root = (Parent) fxmlLoader.load();
+                        menuVBox.getChildren().add(root);
+                    }
+                    catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+
+            bookingCreateMenuItem.setOnAction(new EventHandler<ActionEvent>() {
+                public void handle(ActionEvent t) {
+                    try {
+                        menuVBox.getChildren().remove(root);
+                        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/qualite_log/BookingCreateFrame.fxml"));
+                        root = (Parent) fxmlLoader.load();
+                        menuVBox.getChildren().add(root);
+                    }
+                    catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+
+            bookingDeleteMenuItem.setOnAction(new EventHandler<ActionEvent>() {
+                public void handle(ActionEvent t) {
+                    try {
+                        menuVBox.getChildren().remove(root);
+                        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/qualite_log/BookingDeleteFrame.fxml"));
                         root = (Parent) fxmlLoader.load();
                         menuVBox.getChildren().add(root);
                     }
