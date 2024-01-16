@@ -86,14 +86,10 @@ public class Booking {
         this.endingDate = endingDate;
     }
 
-    /* 
+    /**
      * Constructeur à ne pas utiliser
-     * 
-     * @throws NullPointerException
      */
-    public Booking() throws NullPointerException {
-        throw new NullPointerException("Erreur : Une réservation doit crée en spécifiant un emprunteur et un equipement");
-    }
+    private Booking() {}
 
     public Booking(Person emprunter, Equipment equipment) {
         setId();

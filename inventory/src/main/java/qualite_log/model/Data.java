@@ -41,11 +41,11 @@ public class Data {
     public void addUsers(User user) {
        users.add(user);
     }
-    
+
     public List<EquipmentType> getEquipmentTypes() {
         return equipmentTypes;
     }
-    
+
     public void setEquipmentTypes(List<EquipmentType> equipmentTypes) {
         this.equipmentTypes = equipmentTypes;
     }
@@ -53,11 +53,11 @@ public class Data {
     public void addEquipmentTypes(EquipmentType equipmentType) {
         equipmentTypes.add(equipmentType);
     }
-    
+
     public List<Booking> getBookings() {
         return bookings;
     }
-    
+
     public void setBookings(List<Booking> bookings) {
         this.bookings = bookings;
     }
@@ -65,10 +65,10 @@ public class Data {
     public void addBookings(Booking booking) {
         bookings.add(booking);
     }
-    
+
     public List<Equipment> getEquipments() {
         List<Equipment> equipments = new ArrayList<>();
-        
+
         for(EquipmentType equipmentType : equipmentTypes) {
             equipments.addAll(equipmentType.getEquipments());
         }
@@ -76,11 +76,24 @@ public class Data {
         return equipments;
     }
 
-    public Data() {
+    private Data() {
         administrators = new ArrayList<>();
         users = new ArrayList<>();
         equipmentTypes = new ArrayList<>();
         bookings = new ArrayList<>();
+    }
+
+    /**
+     * Méthode à utiliser comme constructeur (pattern singleton)
+     *
+     * @return instance
+     */
+    public static Data getInstance() {
+        if(instance == null) {
+            instance = new Data();
+        }
+
+        return instance;
     }
 
     public String toString() {

@@ -38,7 +38,7 @@ public class DataReader {
      * @return data
     */
     public static Data insert() {
-        Data data = new Data();
+        Data data = Data.getInstance();
 
         data = insertEquipmentTypes(data);
         data = insertUsers(data);
