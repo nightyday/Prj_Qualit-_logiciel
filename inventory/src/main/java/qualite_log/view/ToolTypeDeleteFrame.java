@@ -15,7 +15,6 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import qualite_log.model.Data;
-import qualite_log.model.Equipment;
 import qualite_log.model.EquipmentType;
 
 public class ToolTypeDeleteFrame {
@@ -56,7 +55,7 @@ public class ToolTypeDeleteFrame {
 
         deleteButton.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent t) {
-                if (typeComboBox.getValue() != null) {
+                try {
                     EquipmentType equipmentTypeSelected = equipmentTypes.get(typeData.indexOf(typeComboBox.getValue()));
                     Data.getInstance().getEquipmentTypes().remove(equipmentTypeSelected);
                     
@@ -70,7 +69,7 @@ public class ToolTypeDeleteFrame {
                         e.printStackTrace();
                     }
                 }
-                else {
+                catch (Exception e) {
                     System.out.println("Error");
                 }
             }

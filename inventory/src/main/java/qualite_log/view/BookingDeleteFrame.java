@@ -16,7 +16,6 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import qualite_log.model.Booking;
 import qualite_log.model.Data;
-import qualite_log.model.Equipment;
 
 public class BookingDeleteFrame {
 
@@ -46,28 +45,19 @@ public class BookingDeleteFrame {
         assert referenceComboBox != null : "fx:id=\"referenceComboBox\" was not injected: check your FXML file 'BookingDeleteFrame.fxml'.";
     
         // Add elements in the comboBoxs
-        List<Equipment> equipment = Data.getInstance().getEquipments();
+        List<Booking> bookings = Data.getInstance().getBookings();
         List<String> referenceData = new ArrayList<>();
         int i;
-        for (i = 0; i < equipment.size(); i++) {
-            referenceData.add(equipment.get(i).getReference());
+        for (i = 0; i < bookings.size(); i++) {
+            referenceData.add(bookings.get(i).getEquipment().getReference());
         }
         referenceComboBox.getItems().addAll(referenceData);
 
         deleteButton.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent t) {
-                int index = -1;
-                List<Booking> bookings = Data.getInstance().getBookings();
-                for (int i = 0; i < bookings.size(); i++) {
-                    if (bookings.get(i).getEquipment().getReference() == referenceComboBox.getValue()) {
-                        index = i;
-                        i = bookings.size();
-                    }
-                }
-
-                if (index >= 0) {
-                    Data.getInstance().getBookings().remove(index);
-                    
+                try {
+                    Booking bookingSelected = bookings.get(referenceData.indexOf(referenceComboBox.getValue()));
+                    Data.getInstance().getBookings().remove(bookingSelected);
                     try {
                         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/qualite_log/BookingListFrame.fxml"));
                         Parent root = (Parent) fxmlLoader.load();
@@ -78,7 +68,7 @@ public class BookingDeleteFrame {
                         e.printStackTrace();
                     }
                 }
-                else {
+                catch (Exception e) {
                     System.out.println("Error");
                 }
             }

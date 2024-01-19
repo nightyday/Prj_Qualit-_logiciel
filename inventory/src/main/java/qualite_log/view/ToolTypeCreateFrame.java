@@ -2,6 +2,7 @@ package qualite_log.view;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.regex.Pattern;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -44,16 +45,26 @@ public class ToolTypeCreateFrame {
 
         createButton.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent t) {
-                Data.getInstance().getEquipmentTypes().add(new EquipmentType(typeTextField.getText()));
-
                 try {
-                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/qualite_log/ToolTypeListFrame.fxml"));
-                    Parent root = (Parent) fxmlLoader.load();
-                    anchorPane.getChildren().clear();
-                    anchorPane.getChildren().add(root);
+                    if (Pattern.matches("^[a-zA-Z0-9]{1,30}$", typeTextField.getText())) {
+                        Data.getInstance().getEquipmentTypes().add(new EquipmentType(typeTextField.getText()));
+
+                        try {
+                            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/qualite_log/ToolTypeListFrame.fxml"));
+                            Parent root = (Parent) fxmlLoader.load();
+                            anchorPane.getChildren().clear();
+                            anchorPane.getChildren().add(root);
+                        }
+                        catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    else {
+                        System.out.println("Error pattern");
+                    }
                 }
                 catch (Exception e) {
-                    e.printStackTrace();
+                    System.out.println("Error");
                 }
             }
         });

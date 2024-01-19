@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.regex.Pattern;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -93,22 +94,28 @@ public class ToolUpdateFrame {
 
         updateButton.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent t) {
-                if (referenceComboBox.getValue() != null) {
-                    Equipment equipmentSelected = equipments.get(referenceData.indexOf(referenceComboBox.getValue()));
-                    equipmentSelected.getType().getEquipments().remove(equipmentSelected);
-                    Data.getInstance().getEquipments().add(new Equipment(referenceTextField.getText(), nomTextField.getText(), versionTextField.getText(), equipmentSelected.getType()));
+                try {
+                    // Patterns
+                    if (Pattern.matches("^(AN|AP|XX)[A-Z0-9]\\d{3}$", referenceTextField.getText()) && Pattern.matches("^[a-zA-Z0-9]{1,30}$", nomTextField.getText()) && Pattern.matches("^[a-zA-Z0-9]{1,15}$", versionTextField.getText())) {
+                        Equipment equipmentSelected = equipments.get(referenceData.indexOf(referenceComboBox.getValue()));
+                        equipmentSelected.getType().getEquipments().remove(equipmentSelected);
+                        Data.getInstance().getEquipments().add(new Equipment(referenceTextField.getText(), nomTextField.getText(), versionTextField.getText(), equipmentSelected.getType()));
                 
-                    try {
-                        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/qualite_log/ToolListFrame.fxml"));
-                        Parent root = (Parent) fxmlLoader.load();
-                        anchorPane.getChildren().clear();
-                        anchorPane.getChildren().add(root);
+                        try {
+                            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/qualite_log/ToolListFrame.fxml"));
+                            Parent root = (Parent) fxmlLoader.load();
+                            anchorPane.getChildren().clear();
+                            anchorPane.getChildren().add(root);
+                        }
+                        catch (Exception e) {
+                            e.printStackTrace();
+                        }
                     }
-                    catch (Exception e) {
-                        e.printStackTrace();
+                    else {
+                        System.out.println("Error pattern");
                     }
                 }
-                else {
+                catch (Exception e) {
                     System.out.println("Error");
                 }
             }

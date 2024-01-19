@@ -14,10 +14,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
-import qualite_log.model.Administrator;
 import qualite_log.model.Data;
 import qualite_log.model.Person;
-import qualite_log.model.User;
 
 public class UserDeleteFrame {
 
@@ -59,7 +57,7 @@ public class UserDeleteFrame {
 
         deleteButton.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent t) {
-                if (mailComboBox.getValue() != null) {
+                try {
                     Person personSelected = persons.get(emailData.indexOf(mailComboBox.getValue()));
                     if (personSelected.getType().equals("administrateur")) {
                         Data.getInstance().getAdministrators().remove(personSelected);
@@ -77,7 +75,7 @@ public class UserDeleteFrame {
                         e.printStackTrace();
                     }
                 }
-                else {
+                catch (Exception e) {
                     System.out.println("Error");
                 }
             }
