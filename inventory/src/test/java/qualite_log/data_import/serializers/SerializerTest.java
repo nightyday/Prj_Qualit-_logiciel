@@ -30,8 +30,6 @@ public class SerializerTest {
     Equipment equip;
     Booking book;
 
-
-
     @Before
     public void initData() {
         data = Data.getInstance();
