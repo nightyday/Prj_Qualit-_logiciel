@@ -10,7 +10,7 @@ import qualite_log.model.Booking;
 
 /* Surcharge permettant une sérialisation correcte des données Booking */
 public class BookingSerializer extends JsonSerializer<Booking> {
-     public BookingSerializer() {
+    public BookingSerializer() {
         super();
     }
 

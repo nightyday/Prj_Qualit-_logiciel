@@ -16,11 +16,7 @@ public class Person {
     private String lastName;
     private String firstName;
     private String type;
-    private String email; 
-
-    public static void init() {
-        nextId++;
-    }
+    private String email;
 
     public Integer getNextId() {
         return nextId;
@@ -31,8 +27,7 @@ public class Person {
     }
 
     private void setId() {
-        init();
-        id = nextId + 1;
+        id = nextId++;
     }
 
     public List<Booking> getBookings() {

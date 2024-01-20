@@ -1,6 +1,6 @@
 [ {
   "id" : 1,
-  "id_person" : 4,
+  "id_person" : 2,
   "type_person" : "user",
   "reference_equipment" : "LAP-176",
   "startingDate" : "2024-01-10",

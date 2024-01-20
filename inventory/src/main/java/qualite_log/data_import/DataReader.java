@@ -3,9 +3,12 @@ package qualite_log.data_import;
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.fasterxml.jackson.core.exc.StreamReadException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DatabindException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -16,6 +19,7 @@ import qualite_log.model.Equipment;
 import qualite_log.model.EquipmentType;
 import qualite_log.model.Person;
 import qualite_log.model.User;
+import qualite_log.tool.Encryption;
 
     
 
@@ -270,5 +274,27 @@ public class DataReader {
 
             booking.defineReferences(emprunter_toSet, equipment_toSet);
         }
+    }
+
+    public static String getPassword(Person person) {
+        ObjectMapper mapper = new ObjectMapper();
+
+        try {
+            Map<Integer, String> passwordMap = new HashMap<>();
+            File passwordsFile = new File(getPath("passwords.json"));
+
+            if (passwordsFile.exists()) {
+                passwordMap = mapper.readValue(passwordsFile, new TypeReference<Map<Integer, String>>() {});
+            }
+
+            String password = passwordMap.get(person.getId());
+
+            return Encryption.decrypt(password);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 }

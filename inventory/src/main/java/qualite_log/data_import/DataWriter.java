@@ -1,12 +1,19 @@
 package qualite_log.data_import;
 
 import java.io.File;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
+import com.fasterxml.jackson.databind.SerializationFeature;
 
 import qualite_log.model.Data;
+import qualite_log.model.Person;
+import qualite_log.tool.Encryption;
 
 public class DataWriter {
     /*
@@ -95,5 +102,27 @@ public class DataWriter {
     */
     public static void extractBookings(Data data) {
         extractAndWrite("bookings.json", data.getBookings());
+    }
+
+   public static void extractPassword(Person person, String password) {
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.enable(SerializationFeature.INDENT_OUTPUT);
+
+        try {
+            Map<Integer, String> existingMap = new HashMap<>();
+
+            File passwordsFile = new File(getPath("passwords.json"));
+            if (passwordsFile.exists()) {
+                existingMap = mapper.readValue(passwordsFile, new TypeReference<Map<Integer, String>>() {});
+            }
+
+            existingMap.put(person.getId(), Encryption.crypt(password));
+
+            ObjectWriter writer = mapper.writer(new DefaultPrettyPrinter());
+            writer.writeValue(passwordsFile, existingMap);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
