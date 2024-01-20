@@ -13,7 +13,7 @@ public class Equipment {
 
     private EquipmentType type;
 
-    private String nom;
+    private String name;
     private String version;
 
     public EquipmentType getType() {
@@ -34,13 +34,12 @@ public class Equipment {
         this.reference = reference;
     }
 
-    
-    public String getNom() {
-        return nom;
+    public String getName() {
+        return name;
     }
 
-    public void setNom(String nom) {
-        this.nom = nom;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getVersion() {
@@ -64,12 +63,12 @@ public class Equipment {
         type.addEquipments(this);
     }
 
-    public Equipment(String reference, String nom, String version, EquipmentType type) {
+    public Equipment(String reference, String name, String version, EquipmentType type) {
         this.reference = reference;
 
         this.type = type;
 
-        this.nom = nom;
+        this.name = name;
         this.version = version;
 
         type.addEquipments(this);

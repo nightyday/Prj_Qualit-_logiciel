@@ -28,14 +28,14 @@ public class EquipmentDeserializer extends StdDeserializer<Equipment> {
 
         /* Initialisation des champs de Equipment */
         String reference = node.get("reference").asText();
-        String nom = node.get("nom").asText();
+        String name = node.get("name").asText();
         String version = node.get("version").asText();
 
         int id_type = (Integer) ((IntNode) node.get("id_type")).numberValue(); // Id qui permettra de lié à l'objet EquipmentType correspondant
 
         /* Création de l'objet Equipment */
         Equipment equipment = new Equipment(reference, id_type);
-        equipment.setNom(nom);
+        equipment.setName(name);
         equipment.setVersion(version);
 
         return equipment;
