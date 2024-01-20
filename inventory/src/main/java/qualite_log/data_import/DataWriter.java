@@ -2,7 +2,6 @@ package qualite_log.data_import;
 
 import java.io.File;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -16,6 +15,14 @@ import qualite_log.model.Person;
 import qualite_log.tool.Encryption;
 
 public class DataWriter {
+    /*
+     * Constructeur pour résoudre la recomendation suivante : 
+     * 
+     * Add a private constructor to hide the implicit public one.
+     * 
+    */
+    private DataWriter() {}
+    
     /*
      * Méthode permettant de récupérer le chemin vers un fichier json du dossier data
      * 

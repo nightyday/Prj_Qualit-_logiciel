@@ -26,8 +26,13 @@ public class Person {
         return id;
     }
 
+    private static void nextId() {
+        nextId ++;
+    }
+
     private void setId() {
-        id = nextId++;
+        id = nextId;
+        nextId();
     }
 
     public List<Booking> getBookings() {

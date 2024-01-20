@@ -81,7 +81,7 @@ public class Equipment {
     ///// OUTILS A LA DESERIALISATION ////////////////////////////////////////////////////////////////////////////////////////////////////
 
     /* Attributs et méthodes utiles à la déserialisation */
-    int id_type = -1;
+    int idType = -1;
 
     /* 
      * Constructeur spécific à la désérialisation, ne peut utiliser autre part (risque d'incohérence des ids) 
@@ -89,14 +89,14 @@ public class Equipment {
      * @param id
      * @param id_type
     */
-    public Equipment(String reference, Integer id_type) {
+    public Equipment(String reference, Integer idType) {
         this.reference = reference;
 
-        this.id_type = id_type;
+        this.idType = idType;
     }
 
-    public int getId_type() {
-        return id_type;
+    public int getIdType() {
+        return idType;
     }    
 
     /*

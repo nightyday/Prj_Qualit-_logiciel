@@ -3,6 +3,8 @@ package qualite_log.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import qualite_log.data_import.DataReader;
+
 public class Data {
     private static Data instance;
     private List<Administrator> administrators;
@@ -69,10 +71,7 @@ public class Data {
     }
 
     private Data() {
-        administrators = new ArrayList<>();
-        users = new ArrayList<>();
-        equipmentTypes = new ArrayList<>();
-        bookings = new ArrayList<>();
+        instance = DataReader.insert();
     }
 
     /**
@@ -89,33 +88,33 @@ public class Data {
     }
 
     public String toString() {
-        String str = "";
+        StringBuilder str = new StringBuilder();
 
-        str = str + "==========================================\n=== Users : \n";
+        str.append("==========================================\n=== Users : \n");
         for(User user : users) {
-            str = str + user.toString() + "\n";
+            str.append(user.toString() + "\n");
         }
 
-        str = str + "==========================================\n=== Administrators : \n";
+        str.append("==========================================\n=== Administrators : \n");
         for(Administrator admin : administrators) {
-            str = str + admin.toString() + "\n";
+            str.append(admin.toString() + "\n");
         }
 
-        str = str + "==========================================\n=== EquipmentTypes : \n";
+        str.append("==========================================\n=== EquipmentTypes : \n");
         for(EquipmentType type : equipmentTypes) {
-            str = str + type.toString() + "\n";
+            str.append(type.toString() + "\n");
         }
 
-        str = str + "==========================================\n=== Equipments : \n";
+        str.append("==========================================\n=== Equipments : \n");
         for(Equipment equipment : getEquipments()) {
-            str = str + equipment.toString() + "\n";
+            str.append(equipment.toString() + "\n");
         }
 
-        str = str + "==========================================\n=== Booking : \n";
+        str.append("==========================================\n=== Booking : \n");
         for(Booking booking : bookings) {
-            str = str + booking.toString() + "\n";
+            str.append(booking.toString() + "\n");
         }
 
-        return str;
+        return new String(str);
     }
 }
