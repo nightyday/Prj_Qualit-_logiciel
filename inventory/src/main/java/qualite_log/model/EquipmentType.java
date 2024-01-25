@@ -27,16 +27,21 @@ public class EquipmentType {
         equipments.add(equipment);
     }
 
-    public Integer NextgetId() {
+    public Integer nextgetId() {
         return nextId;
     }
 
     public Integer getId() {
         return id;
     }
+    
+    private static void nextId() {
+        nextId ++;
+    }
 
     private void setId() {
-        id = nextId++;
+        id = nextId;
+        nextId();
     }
 
     public String getType() {

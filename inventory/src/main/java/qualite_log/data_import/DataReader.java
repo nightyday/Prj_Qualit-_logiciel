@@ -3,9 +3,12 @@ package qualite_log.data_import;
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.fasterxml.jackson.core.exc.StreamReadException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DatabindException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -16,10 +19,19 @@ import qualite_log.model.Equipment;
 import qualite_log.model.EquipmentType;
 import qualite_log.model.Person;
 import qualite_log.model.User;
+import qualite_log.tool.Encryption;
 
     
 
 public class DataReader {
+    /*
+     * Constructeur pour résoudre la recomendation suivante : 
+     * 
+     * Add a private constructor to hide the implicit public one.
+     * 
+    */
+    private DataReader() {}
+
     /*
      * Méthode permettant de récupérer le chemin vers un fichier json du dossier data
      * 
@@ -107,24 +119,13 @@ public class DataReader {
      * @return equipments
      */
     public static List<Equipment> insertEquipments(Data data) {
-
         try {
             ObjectMapper mapper = new ObjectMapper();
             List<Equipment> equipments = Arrays.asList(mapper.readValue(new File(getPath("equipments.json")), Equipment[].class));
             managedEquipmentsReferences(equipments, data.getEquipmentTypes()); // On gère les réferences des objets Equipment
 
             return equipments;
-         } catch (StreamReadException e) {
-            e.printStackTrace();
-
-        } catch (DatabindException e) {
-            e.printStackTrace();
-
-        } catch(NullPointerException e) {
-            System.err.println(e.getMessage());
-            e.printStackTrace();
-            
-        } catch (IOException e) {
+         } catch (NullPointerException | IOException e) {
             e.printStackTrace();
         } 
 
@@ -142,12 +143,6 @@ public class DataReader {
         try {
             ObjectMapper mapper = new ObjectMapper();
             data.setEquipmentTypes(Arrays.asList(mapper.readValue(new File(getPath("equipment_types.json")), EquipmentType[].class)));
-
-        } catch (StreamReadException e) {
-            e.printStackTrace();
-
-        } catch (DatabindException e) {
-            e.printStackTrace();
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -171,17 +166,7 @@ public class DataReader {
             managedBookingsReferences(bookings, data.getAdministrators(), data.getUsers(), data.getEquipments()); // On gère les réferences
             data.setBookings(bookings);
 
-        } catch (StreamReadException e) {
-            e.printStackTrace();
-
-        } catch (DatabindException e) {
-            e.printStackTrace();
-
-        } catch(NullPointerException e) {
-            System.err.println(e.getMessage());
-            e.printStackTrace();
-            
-        } catch (IOException e) {
+        } catch (NullPointerException | IOException e) {
             e.printStackTrace();
             
         } 
@@ -198,22 +183,22 @@ public class DataReader {
     private static void managedEquipmentsReferences(List<Equipment> equipments, List<EquipmentType> equipmentTypes) throws NullPointerException {   
         
         for (Equipment equipment : equipments) {
-            EquipmentType type_toSet = null;
+            EquipmentType typeToSet = null;
 
-            Integer id_equipmentType = equipment.getId_type();
+            Integer idEquipmentType = equipment.getIdType();
             for (EquipmentType type : equipmentTypes) {
-                if (type.getId() == id_equipmentType) {
-                    type_toSet = type;
+                if (type.getId() == idEquipmentType) {
+                    typeToSet = type;
                 }
             }
 
             /* Si aucun EquipmentType n'est trouvé */
-            if (type_toSet == null) {
+            if (typeToSet == null) {
                 throw new NullPointerException("L'id du type d'equipement defini dans l'equipement d'id " + equipment.getReference() 
                 + " ne correspond à aucune EquipmentType existant.");
             }
 
-            equipment.defineReferences(type_toSet);
+            equipment.defineReferences(typeToSet);
         }
     }
 
@@ -228,47 +213,69 @@ public class DataReader {
     private static void managedBookingsReferences(List<Booking> bookings, List<Administrator> administrators, List<User> users, List<Equipment> equipments) throws NullPointerException {
         
         for (Booking booking : bookings) {
-            Person emprunter_toSet = null;
-            Equipment equipment_toSet = null;
+            Person emprunterToSet = null;
+            Equipment equipmentToSet = null;
 
             /* Si l'objet Person est du type Admnistrator */
-            if (booking.getId_user() == -1) {
-                Integer id_person = booking.getId_administrator();
+            if (booking.getIdUser() == -1) {
+                Integer idPerson = booking.getIdAdministrator();
                 for (Administrator administrator : administrators) {
-                    if (administrator.getId() == id_person) {
-                        emprunter_toSet = administrator;
+                    if (administrator.getId() == idPerson) {
+                        emprunterToSet = administrator;
                     }
                 }
             } 
             /* Sinon, l'objet Person est du type User */ 
             else {
-                Integer id_person = booking.getId_user();
+                Integer idPerson = booking.getIdUser();
                 for (User user : users) {
-                    if (user.getId() == id_person) {
-                        emprunter_toSet = user;
+                    if (user.getId() == idPerson) {
+                        emprunterToSet = user;
                     }
                 }
             }
 
-            String reference_equipment = booking.getReference_equipment();
+            String referenceEquipment = booking.getReferenceEquipment();
             for (Equipment equipment : equipments) {
-                if (equipment.getReference().equals(reference_equipment)) {
-                    equipment_toSet = equipment;
+                if (equipment.getReference().equals(referenceEquipment)) {
+                    equipmentToSet = equipment;
                 }
             }
 
             /* Si aucune Person n'est trouvé */
-            if (emprunter_toSet == null) {
+            if (emprunterToSet == null) {
                 throw new NullPointerException("L'id de l'emprunteur defini dans la réservation d'id " + booking.getId() 
                 + " ne correspond à aucune Person existante.");
             }
             /* Si aucun Equipment n'est trouvé */
-            if (equipment_toSet == null) {
+            if (equipmentToSet == null) {
                 throw new NullPointerException("L'id de l'equipement defini dans la réservation d'id " + booking.getId() 
                 + " ne correspond à aucune Equipment existant.");
             }
 
-            booking.defineReferences(emprunter_toSet, equipment_toSet);
+            booking.defineReferences(emprunterToSet, equipmentToSet);
         }
+    }
+
+    public static String getPassword(Person person) {
+        ObjectMapper mapper = new ObjectMapper();
+
+        try {
+            Map<Integer, String> passwordMap = new HashMap<>();
+            File passwordsFile = new File(getPath("passwords.json"));
+
+            if (passwordsFile.exists()) {
+                passwordMap = mapper.readValue(passwordsFile, new TypeReference<Map<Integer, String>>() {});
+            }
+
+            String password = passwordMap.get(person.getId());
+
+            return Encryption.decrypt(password);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 }

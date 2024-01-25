@@ -13,7 +13,7 @@ import qualite_log.data_import.serializers.BookingSerializer;
 @JsonSerialize(using = BookingSerializer.class)
 @JsonDeserialize(using = BookingDeserializer.class)
 public class Booking {
-    public static Integer nextId = 1;
+    private static Integer nextId = 1;
     private Integer id;
 
     Person emprunter;
@@ -58,16 +58,17 @@ public class Booking {
         this.equipment = equipment;
     }
 
-    public Integer NextgetId() {
-        return nextId;
-    }
-
     public Integer getId() {
         return id;
     }
 
+    private static void nextId() {
+        nextId ++;
+    }
+
     private void setId() {
-        id = nextId++;
+        id = nextId;
+        nextId();
     }
 
     public LocalDate getStartingDate() {
@@ -114,36 +115,36 @@ public class Booking {
     ///// OUTILS A LA DESERIALISATION ////////////////////////////////////////////////////////////////////////////////////////////////////
 
     /* Attributs et méthodes utiles à la déserialisation */
-    int id_administrator = -1;
-    int id_user = -1;
-    String reference = "XXX-XXX";
+    private int idAdministrator = -1;
+    private int idUser = -1;
+    private String referenceEquipment = "XXX-XXX";
 
     /* 
      * Constructeur spécific à la désérialisation, ne peut utiliser autre part (risque d'incohérence des ids) 
      * 
      * @param id
-     * @param id_administrator
-     * @param id_user
-     * @param is_equipment
+     * @param idAdministrator
+     * @param idUser
+     * @param reference
     */
-    public Booking(Integer id, Integer id_administrator, Integer id_user, String reference) {
+    public Booking(Integer id, Integer idAdministrator, Integer idUser, String referenceEquipment) {
         this.id = id;
 
-        this.id_administrator = id_administrator;
-        this.id_user = id_user;
-        this.reference = reference;
+        this.idAdministrator = idAdministrator;
+        this.idUser = idUser;
+        this.referenceEquipment = referenceEquipment;
     }
 
-    public int getId_administrator() {
-        return id_administrator;
+    public int getIdAdministrator() {
+        return idAdministrator;
     }
 
-    public int getId_user() {
-        return id_user;
+    public int getIdUser() {
+        return idUser;
     }
 
-    public String getReference_equipment() {
-        return reference;
+    public String getReferenceEquipment() {
+        return referenceEquipment;
     }
 
     /*

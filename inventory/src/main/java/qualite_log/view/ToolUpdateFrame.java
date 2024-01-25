@@ -92,7 +92,7 @@ public class ToolUpdateFrame {
             {
                 Equipment equipmentSelected = equipments.get(referenceData.indexOf(referenceComboBox.getValue()));
                 referenceTextField.setText(equipmentSelected.getReference());
-                nomTextField.setText(equipmentSelected.getNom());
+                nomTextField.setText(equipmentSelected.getName());
                 versionTextField.setText(equipmentSelected.getVersion());
                 typeComboBox.setValue(equipmentSelected.getType().getType());
             }
