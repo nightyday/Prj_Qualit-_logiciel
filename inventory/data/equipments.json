@@ -1,6 +1,21 @@
 [ {
-  "reference" : "LAP-176",
-  "name" : "Asus Tuf",
-  "version" : "QAIJP",
+  "reference" : "AN001",
+  "name" : "A32",
+  "version" : "1.2",
   "id_type" : 1
+}, {
+  "reference" : "AN002",
+  "name" : "A33",
+  "version" : "1.2",
+  "id_type" : 1
+}, {
+  "reference" : "AN004",
+  "name" : "P45",
+  "version" : "1.2",
+  "id_type" : 2
+}, {
+  "reference" : "AN003",
+  "name" : "R17",
+  "version" : "1.2",
+  "id_type" : 3
 } ]

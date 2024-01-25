@@ -71,7 +71,7 @@ public class Data {
     }
 
     private Data() {
-        instance = DataReader.insert();
+        //instance = DataReader.insert();
     }
 
     /**

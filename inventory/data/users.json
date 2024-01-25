@@ -1,7 +1,25 @@
 [ {
-  "id" : 2,
-  "lastName" : "jhon",
-  "firstName" : "doe",
+  "id" : 1,
+  "lastName" : "Martin",
+  "firstName" : "Claire",
   "type" : "user",
-  "email" : "jhon.doe@etu.univ-tours.fr"
+  "email" : "claire.martin@email.com"
+}, {
+  "id" : 2,
+  "lastName" : "Dubois",
+  "firstName" : "Julien",
+  "type" : "user",
+  "email" : "julien.dubois@email.com"
+}, {
+  "id" : 3,
+  "lastName" : "Garcia",
+  "firstName" : "Ana",
+  "type" : "user",
+  "email" : "ana.garcia@email.com"
+}, {
+  "id" : 4,
+  "lastName" : "Johnson",
+  "firstName" : "Brian",
+  "type" : "user",
+  "email" : "brian.johnson@email.com"
 } ]
