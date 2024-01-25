@@ -11,6 +11,8 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -63,9 +65,14 @@ public class ToolUpdateFrame {
         assert updateLabel != null : "fx:id=\"updateLabel\" was not injected: check your FXML file 'ToolUpdateFrame.fxml'.";
         assert versionTextField != null : "fx:id=\"versionTextField\" was not injected: check your FXML file 'ToolUpdateFrame.fxml'.";
 
-        // Add elements in the comboBoxs
         List<Equipment> equipments = Data.getInstance().getEquipments();
         List<String> referenceData = new ArrayList<>();
+        fillInformations(equipments, referenceData);
+        buttonAction(equipments, referenceData);
+    }
+
+    public void fillInformations(List<Equipment> equipments, List<String> referenceData) {
+        // Add elements in the comboBoxs
         int i;
         for (i = 0; i < equipments.size(); i++) {
             referenceData.add(equipments.get(i).getReference());
@@ -91,35 +98,55 @@ public class ToolUpdateFrame {
             }
         };
         referenceComboBox.setOnAction(event);
+    }
 
+    public void buttonAction(List<Equipment> equipments, List<String> referenceData) {
         updateButton.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent t) {
-                try {
-                    // Patterns
-                    if (Pattern.matches("^(AN|AP|XX)[A-Z0-9]\\d{3}$", referenceTextField.getText()) && Pattern.matches("^[a-zA-Z0-9]{1,30}$", nomTextField.getText()) && Pattern.matches("^[a-zA-Z0-9]{1,15}$", versionTextField.getText())) {
+                // Patterns
+                if (Pattern.matches("^(AN|AP|XX)[A-Z0-9]\\d{3}$", referenceTextField.getText()) && Pattern.matches("^[a-zA-Z0-9]{1,30}$", nomTextField.getText()) && Pattern.matches("^[a-zA-Z0-9]{1,15}$", versionTextField.getText())) {
+                    try {
                         Equipment equipmentSelected = equipments.get(referenceData.indexOf(referenceComboBox.getValue()));
                         equipmentSelected.getType().getEquipments().remove(equipmentSelected);
                         Data.getInstance().getEquipments().add(new Equipment(referenceTextField.getText(), nomTextField.getText(), versionTextField.getText(), equipmentSelected.getType()));
-                
+                    }
+                    catch (Exception e) {
                         try {
-                            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/qualite_log/ToolListFrame.fxml"));
-                            Parent root = (Parent) fxmlLoader.load();
-                            anchorPane.getChildren().clear();
-                            anchorPane.getChildren().add(root);
+                            Alert alert = new Alert(AlertType.WARNING);
+            
+                            alert.setTitle("Erreur");
+                            alert.setHeaderText(null);
+                            alert.setContentText("Désolé, l’action n’a pas pu être effectuée. Veuillez réessayer.");
+                            alert.showAndWait();
                         }
-                        catch (Exception e) {
-                            e.printStackTrace();
+                        catch (Exception error) {
+                            error.printStackTrace();
                         }
                     }
-                    else {
-                        System.out.println("Error pattern");
+                    try {
+                        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/qualite_log/ToolListFrame.fxml"));
+                        Parent root = (Parent) fxmlLoader.load();
+                        anchorPane.getChildren().clear();
+                        anchorPane.getChildren().add(root);
+                    }
+                    catch (Exception e) {
+                        e.printStackTrace();
                     }
                 }
-                catch (Exception e) {
-                    System.out.println("Error");
+                else {
+                    try {
+                        Alert alert = new Alert(AlertType.WARNING);
+
+                        alert.setTitle("Erreur");
+                        alert.setHeaderText(null);
+                        alert.setContentText("Format de la saisie non conforme.");
+                        alert.showAndWait();
+                    }
+                    catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         });
     }
-
 }

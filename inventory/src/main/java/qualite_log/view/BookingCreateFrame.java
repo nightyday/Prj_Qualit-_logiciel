@@ -10,6 +10,8 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -58,9 +60,24 @@ public class BookingCreateFrame {
         createButton.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent t) {
                 if (referenceComboBox != null) {
-                    Equipment equipmentSelected = equipments.get(referenceData.indexOf(referenceComboBox.getValue()));
-                    Person person = new Person(Data.getInstance().getUsers().get(0).getLastName(), Data.getInstance().getUsers().get(0).getFirstName(), "user", Data.getInstance().getUsers().get(0).getEmail());
-                    Data.getInstance().getBookings().add(new Booking(person, equipmentSelected));
+                    try {
+                        Equipment equipmentSelected = equipments.get(referenceData.indexOf(referenceComboBox.getValue()));
+                        Person person = new Person(Data.getInstance().getUsers().get(0).getLastName(), Data.getInstance().getUsers().get(0).getFirstName(), "user", Data.getInstance().getUsers().get(0).getEmail());
+                        Data.getInstance().getBookings().add(new Booking(person, equipmentSelected));
+                    }
+                    catch (Exception e) {
+                        try {
+                            Alert alert = new Alert(AlertType.WARNING);
+            
+                            alert.setTitle("Erreur");
+                            alert.setHeaderText(null);
+                            alert.setContentText("Désolé, l’action n’a pas pu être effectuée. Veuillez réessayer.");
+                            alert.showAndWait();
+                        }
+                        catch (Exception error) {
+                            error.printStackTrace();
+                        }
+                    }
                     try {
                         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/qualite_log/BookingListFrame.fxml"));
                         Parent root = (Parent) fxmlLoader.load();
@@ -72,7 +89,17 @@ public class BookingCreateFrame {
                     }
                 }
                 else {
-                    System.out.println("Error");
+                    try {
+                        Alert alert = new Alert(AlertType.WARNING);
+
+                        alert.setTitle("Erreur");
+                        alert.setHeaderText(null);
+                        alert.setContentText("Format de la saisie non conforme.");
+                        alert.showAndWait();
+                    }
+                    catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         });

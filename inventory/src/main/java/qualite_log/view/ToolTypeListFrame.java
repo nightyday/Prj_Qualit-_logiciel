@@ -6,6 +6,8 @@ import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Label;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
@@ -42,10 +44,25 @@ public class ToolTypeListFrame {
         assert tableView != null : "fx:id=\"tableView\" was not injected: check your FXML file 'ToolTypeListFrame.fxml'.";
         assert typeColumn != null : "fx:id=\"typeColumn\" was not injected: check your FXML file 'ToolTypeListFrame.fxml'.";
 
-        ObservableList<EquipmentType> data = FXCollections.observableArrayList(Data.getInstance().getEquipmentTypes());
-        typeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
-        tableView.setItems(data);
-        tableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        try {
+            ObservableList<EquipmentType> data = FXCollections.observableArrayList(Data.getInstance().getEquipmentTypes());
+            typeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
+            tableView.setItems(data);
+            tableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        }
+        catch (Exception e) {
+            try {
+                Alert alert = new Alert(AlertType.WARNING);
+
+                alert.setTitle("Erreur");
+                alert.setHeaderText(null);
+                alert.setContentText("Désolé, l’action n’a pas pu être effectuée. Veuillez réessayer.");
+                alert.showAndWait();
+            }
+            catch (Exception error) {
+                error.printStackTrace();
+            }
+        }
     }
 
 }

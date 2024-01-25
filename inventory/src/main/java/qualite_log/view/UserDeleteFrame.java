@@ -10,6 +10,8 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -65,18 +67,28 @@ public class UserDeleteFrame {
                     if (personSelected.getType().equals("user")) {
                         Data.getInstance().getUsers().remove(personSelected);
                     }
-                    try {
-                        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/qualite_log/UserListFrame.fxml"));
-                        Parent root = (Parent) fxmlLoader.load();
-                        anchorPane.getChildren().clear();
-                        anchorPane.getChildren().add(root);
-                    }
-                    catch (Exception e) {
-                        e.printStackTrace();
-                    }
                 }
                 catch (Exception e) {
-                    System.out.println("Error");
+                    try {
+                        Alert alert = new Alert(AlertType.WARNING);
+
+                        alert.setTitle("Erreur");
+                        alert.setHeaderText(null);
+                        alert.setContentText("Impossible de supprimer ce compte car celui-ci est actuellement utilisé.");
+                        alert.showAndWait();
+                    }
+                    catch (Exception error) {
+                        error.printStackTrace();
+                    }
+                }
+                try {
+                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/qualite_log/UserListFrame.fxml"));
+                    Parent root = (Parent) fxmlLoader.load();
+                    anchorPane.getChildren().clear();
+                    anchorPane.getChildren().add(root);
+                }
+                catch (Exception e) {
+                    e.printStackTrace();
                 }
             }
         });
