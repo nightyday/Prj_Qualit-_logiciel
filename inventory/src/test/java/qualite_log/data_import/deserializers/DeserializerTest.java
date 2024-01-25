@@ -14,7 +14,6 @@ import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import qualite_log.model.Booking;
-import qualite_log.model.Data;
 import qualite_log.model.Equipment;
 import qualite_log.model.EquipmentType;
 
@@ -28,7 +27,7 @@ public class DeserializerTest {
     }
 
     @Test
-    public void EquipmentTypeDeserializer() {
+    public void equipmentDeserializerTest() {
         EquipmentDeserializer deserializer = new EquipmentDeserializer();
     
         try {
@@ -48,7 +47,7 @@ public class DeserializerTest {
     }
 
     @Test
-    public void BookingDeserializer() {
+    public void bookingDeserializerTest() {
         BookingDeserializer deserializer = new BookingDeserializer();
     
         try {
