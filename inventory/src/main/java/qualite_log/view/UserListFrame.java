@@ -10,7 +10,6 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.Label;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -31,9 +30,6 @@ public class UserListFrame {
     private AnchorPane anchorPane;
 
     @FXML
-    private Label listLabel;
-
-    @FXML
     private TableColumn<?, ?> mailColumn;
 
     @FXML
@@ -51,7 +47,6 @@ public class UserListFrame {
     @FXML
     void initialize() {
         assert anchorPane != null : "fx:id=\"anchorPane\" was not injected: check your FXML file 'UserListFrame.fxml'.";
-        assert listLabel != null : "fx:id=\"listLabel\" was not injected: check your FXML file 'UserListFrame.fxml'.";
         assert mailColumn != null : "fx:id=\"mailColumn\" was not injected: check your FXML file 'UserListFrame.fxml'.";
         assert nomColumn != null : "fx:id=\"nomColumn\" was not injected: check your FXML file 'UserListFrame.fxml'.";
         assert prenomColumn != null : "fx:id=\"prenomColumn\" was not injected: check your FXML file 'UserListFrame.fxml'.";

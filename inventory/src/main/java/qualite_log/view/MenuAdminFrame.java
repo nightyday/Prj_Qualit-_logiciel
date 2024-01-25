@@ -79,25 +79,7 @@ public class MenuAdminFrame {
 
     @FXML
     void initialize() {
-        assert anchorPane != null : "fx:id=\"anchorPane\" was not injected: check your FXML file 'MenuAdminFrame.fxml'.";
-        assert bookingCreateMenuItem != null : "fx:id=\"bookingCreateMenuItem\" was not injected: check your FXML file 'MenuAdminFrame.fxml'.";
-        assert bookingDeleteMenuItem != null : "fx:id=\"bookingDeleteMenuItem\" was not injected: check your FXML file 'MenuAdminFrame.fxml'.";
-        assert bookingListMenuItem != null : "fx:id=\"bookingListMenuItem\" was not injected: check your FXML file 'MenuAdminFrame.fxml'.";
-        assert deconnexionMenuItem != null : "fx:id=\"deconnexionMenuItem\" was not injected: check your FXML file 'MenuAdminFrame.fxml'.";
-        assert menuAdminMenuBar != null : "fx:id=\"menuAdminMenuBar\" was not injected: check your FXML file 'MenuAdminFrame.fxml'.";
-        assert menuVBox != null : "fx:id=\"menuVBox\" was not injected: check your FXML file 'MenuAdminFrame.fxml'.";
-        assert toolCreateMenuItem != null : "fx:id=\"toolCreateMenuItem\" was not injected: check your FXML file 'MenuAdminFrame.fxml'.";
-        assert toolDeleteMenuItem != null : "fx:id=\"toolDeleteMenuItem\" was not injected: check your FXML file 'MenuAdminFrame.fxml'.";
-        assert toolListMenuItem != null : "fx:id=\"toolListMenuItem\" was not injected: check your FXML file 'MenuAdminFrame.fxml'.";
-        assert toolTypeCreateMenuItem != null : "fx:id=\"toolTypeCreateMenuItem\" was not injected: check your FXML file 'MenuAdminFrame.fxml'.";
-        assert toolTypeDeleteMenuItem != null : "fx:id=\"toolTypeDeleteMenuItem\" was not injected: check your FXML file 'MenuAdminFrame.fxml'.";
-        assert toolTypeListMenuItem != null : "fx:id=\"toolTypeListMenuItem\" was not injected: check your FXML file 'MenuAdminFrame.fxml'.";
-        assert toolUpdateMenuItem != null : "fx:id=\"toolUpdateMenuItem\" was not injected: check your FXML file 'MenuAdminFrame.fxml'.";
-        assert userCreateMenuItem != null : "fx:id=\"userCreateMenuItem\" was not injected: check your FXML file 'MenuAdminFrame.fxml'.";
-        assert userDeleteMenuItem != null : "fx:id=\"userDeleteMenuItem\" was not injected: check your FXML file 'MenuAdminFrame.fxml'.";
-        assert userListMenuItem != null : "fx:id=\"userListMenuItem\" was not injected: check your FXML file 'MenuAdminFrame.fxml'.";
-        assert userUpdateMenuItem != null : "fx:id=\"userUpdateMenuItem\" was not injected: check your FXML file 'MenuAdminFrame.fxml'.";
-
+        
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/qualite_log/ToolListFrame.fxml"));
             root = (Parent) fxmlLoader.load();

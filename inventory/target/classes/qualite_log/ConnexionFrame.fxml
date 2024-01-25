@@ -40,12 +40,12 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="vBox" prefHeight="425.6" prefWidth="600.0" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="qualite_log.view.ConnexionFrame">
+<VBox fx:id="vBox" prefHeight="425.6" prefWidth="600.0" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="qualite_log.controller.ConnexionController">
   <children>
     <AnchorPane fx:id="anchorPanel" maxHeight="-1.0" maxWidth="-1.0" prefHeight="424.0" prefWidth="600.0" VBox.vgrow="ALWAYS">
          <children>
-            <Button fx:id="button" layoutX="256.0" layoutY="297.0" mnemonicParsing="false" text="Se connecter" />
-            <Label fx:id="label" layoutX="233.0" layoutY="103.0" text="Connexion">
+            <Button fx:id="button" layoutX="256.0" layoutY="297.0" mnemonicParsing="false" text="Se connecter" onAction="#handleLoginAction" />
+            <Label layoutX="233.0" layoutY="103.0" text="Connexion">
                <font>
                   <Font name="System Bold" size="26.0" />
                </font>
