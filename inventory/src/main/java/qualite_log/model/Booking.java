@@ -49,9 +49,9 @@ public class Booking {
     }
 
     public StringProperty getReference() {
-        StringProperty referenceEquipment = new SimpleStringProperty();
-        referenceEquipment.setValue(equipment.getReference());
-        return referenceEquipment;
+        StringProperty referenceEquipmentString = new SimpleStringProperty();
+        referenceEquipmentString.setValue(equipment.getReference());
+        return referenceEquipmentString;
     }
 
     public void setEquipment(Equipment equipment) {
@@ -90,7 +90,9 @@ public class Booking {
     /**
      * Constructeur à ne pas utiliser
      */
-    private Booking() {}
+    private Booking() {
+        
+    }
 
     public Booking(Person emprunter, Equipment equipment) {
         setId();
