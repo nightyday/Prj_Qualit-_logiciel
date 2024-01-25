@@ -55,7 +55,7 @@ public class ToolListFrame {
         assert versionColumn != null : "fx:id=\"versionColumn\" was not injected: check your FXML file 'ToolListFrame.fxml'.";
 
         ObservableList<Equipment> data = FXCollections.observableArrayList(Data.getInstance().getEquipments());
-        nomColumn.setCellValueFactory(new PropertyValueFactory<>("nom"));
+        nomColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         referenceColumn.setCellValueFactory(new PropertyValueFactory<>("reference"));
         versionColumn.setCellValueFactory(new PropertyValueFactory<>("version"));
         typeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));

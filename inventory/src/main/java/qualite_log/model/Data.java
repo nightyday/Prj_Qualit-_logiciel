@@ -6,7 +6,7 @@ import java.util.List;
 import qualite_log.data_import.DataReader;
 
 public class Data {
-    private static Data instance;
+    private static Data instance = null;
     private List<Administrator> administrators;
     private List<User> users;
     private List<EquipmentType> equipmentTypes;
@@ -70,8 +70,12 @@ public class Data {
         return equipments;
     }
 
+    private static void updateData() {
+        instance = DataReader.insert();
+    }
+
     private Data() {
-        //instance = DataReader.insert();
+        //updateData();
     }
 
     /**
