@@ -33,8 +33,8 @@ public class App extends Application {
             stage.setScene(scene);
             stage.show();
         }
-        catch (Exception e) {
-            e.printStackTrace();
+        catch (Exception exception) {
+            exception.printStackTrace();
         }
     }
 

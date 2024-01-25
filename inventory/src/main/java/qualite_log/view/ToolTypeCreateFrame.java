@@ -9,6 +9,8 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -37,34 +39,53 @@ public class ToolTypeCreateFrame {
     private TextField typeTextField;
 
     @FXML
-    void initialize() {
+    void initialize() throws IllegalArgumentException {
         assert anchorPane != null : "fx:id=\"anchorPane\" was not injected: check your FXML file 'ToolTypeCreateFrame.fxml'.";
         assert createButton != null : "fx:id=\"createButton\" was not injected: check your FXML file 'ToolTypeCreateFrame.fxml'.";
         assert createLabel != null : "fx:id=\"createLabel\" was not injected: check your FXML file 'ToolTypeCreateFrame.fxml'.";
         assert typeTextField != null : "fx:id=\"typeTextField\" was not injected: check your FXML file 'ToolTypeCreateFrame.fxml'.";
 
         createButton.setOnAction(new EventHandler<ActionEvent>() {
-            public void handle(ActionEvent t) {
-                try {
-                    if (Pattern.matches("^[a-zA-Z0-9]{1,30}$", typeTextField.getText())) {
+            public void handle(ActionEvent t) throws IllegalArgumentException {
+                if (Pattern.matches("^[a-zA-Z0-9]{1,30}$", typeTextField.getText())) {
+                    try {
                         Data.getInstance().getEquipmentTypes().add(new EquipmentType(typeTextField.getText()));
-
+                    }
+                    catch (Exception e) {
                         try {
-                            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/qualite_log/ToolTypeListFrame.fxml"));
-                            Parent root = (Parent) fxmlLoader.load();
-                            anchorPane.getChildren().clear();
-                            anchorPane.getChildren().add(root);
+                            Alert alert = new Alert(AlertType.WARNING);
+            
+                            alert.setTitle("Erreur");
+                            alert.setHeaderText(null);
+                            alert.setContentText("Désolé, l’action n’a pas pu être effectuée. Veuillez réessayer.");
+                            alert.showAndWait();
                         }
-                        catch (Exception e) {
-                            e.printStackTrace();
+                        catch (Exception error) {
+                            error.printStackTrace();
                         }
                     }
-                    else {
-                        System.out.println("Error pattern");
+                    try {
+                        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/qualite_log/ToolTypeListFrame.fxml"));
+                        Parent root = (Parent) fxmlLoader.load();
+                        anchorPane.getChildren().clear();
+                        anchorPane.getChildren().add(root);
+                    }
+                    catch (Exception e) {
+                        e.printStackTrace();
                     }
                 }
-                catch (Exception e) {
-                    System.out.println("Error");
+                else {
+                    try {
+                        Alert alert = new Alert(AlertType.WARNING);
+
+                        alert.setTitle("Erreur");
+                        alert.setHeaderText(null);
+                        alert.setContentText("Format de la saisie non conforme.");
+                        alert.showAndWait();
+                    }
+                    catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         });

@@ -6,6 +6,8 @@ import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Label;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
@@ -54,13 +56,28 @@ public class ToolListFrame {
         assert typeColumn != null : "fx:id=\"typeColumn\" was not injected: check your FXML file 'ToolListFrame.fxml'.";
         assert versionColumn != null : "fx:id=\"versionColumn\" was not injected: check your FXML file 'ToolListFrame.fxml'.";
 
-        ObservableList<Equipment> data = FXCollections.observableArrayList(Data.getInstance().getEquipments());
-        nomColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-        referenceColumn.setCellValueFactory(new PropertyValueFactory<>("reference"));
-        versionColumn.setCellValueFactory(new PropertyValueFactory<>("version"));
-        typeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
-        tableView.setItems(data);
-        tableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        try {
+            ObservableList<Equipment> data = FXCollections.observableArrayList(Data.getInstance().getEquipments());
+            nomColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+            referenceColumn.setCellValueFactory(new PropertyValueFactory<>("reference"));
+            versionColumn.setCellValueFactory(new PropertyValueFactory<>("version"));
+            typeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
+            tableView.setItems(data);
+            tableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        }
+        catch (Exception e) {
+            try {
+                Alert alert = new Alert(AlertType.WARNING);
+
+                alert.setTitle("Erreur");
+                alert.setHeaderText(null);
+                alert.setContentText("Désolé, l’action n’a pas pu être effectuée. Veuillez réessayer.");
+                alert.showAndWait();
+            }
+            catch (Exception error) {
+                error.printStackTrace();
+            }
+        }
     }
 
 }

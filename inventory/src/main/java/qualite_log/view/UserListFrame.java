@@ -8,6 +8,8 @@ import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Label;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
@@ -56,18 +58,32 @@ public class UserListFrame {
         assert roleColumn != null : "fx:id=\"roleColumn\" was not injected: check your FXML file 'UserListFrame.fxml'.";
         assert tableView != null : "fx:id=\"tableView\" was not injected: check your FXML file 'UserListFrame.fxml'.";
 
-        List<Person> persons = new ArrayList<>();
-        persons.addAll(Data.getInstance().getAdministrators());
-        persons.addAll(Data.getInstance().getUsers());
+        try {
+            List<Person> persons = new ArrayList<>();
+            persons.addAll(Data.getInstance().getAdministrators());
+            persons.addAll(Data.getInstance().getUsers());
 
-        ObservableList<Person> data = FXCollections.observableArrayList(persons);
-        nomColumn.setCellValueFactory(new PropertyValueFactory<>("lastName"));
-        prenomColumn.setCellValueFactory(new PropertyValueFactory<>("FirstName"));
-        mailColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
-        roleColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
-        tableView.setItems(data);
+            ObservableList<Person> data = FXCollections.observableArrayList(persons);
+            nomColumn.setCellValueFactory(new PropertyValueFactory<>("lastName"));
+            prenomColumn.setCellValueFactory(new PropertyValueFactory<>("FirstName"));
+            mailColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
+            roleColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
+            tableView.setItems(data);
+            
+            tableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        }
+        catch (Exception e) {
+            try {
+                Alert alert = new Alert(AlertType.WARNING);
 
-        
-        tableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+                alert.setTitle("Erreur");
+                alert.setHeaderText(null);
+                alert.setContentText("Désolé, l’action n’a pas pu être effectuée. Veuillez réessayer.");
+                alert.showAndWait();
+            }
+            catch (Exception error) {
+                error.printStackTrace();
+            }
+        }
     }    
 }
