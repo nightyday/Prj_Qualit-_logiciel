@@ -123,7 +123,7 @@ public class DataWriter {
                 existingMap = mapper.readValue(passwordsFile, new TypeReference<Map<Integer, String>>() {});
             }
 
-            existingMap.put(person.getId(), Encryption.crypt(password));
+            existingMap.put(person.getId(), Encryption.encrypt(password));
 
             ObjectWriter writer = mapper.writer(new DefaultPrettyPrinter());
             writer.writeValue(passwordsFile, existingMap);

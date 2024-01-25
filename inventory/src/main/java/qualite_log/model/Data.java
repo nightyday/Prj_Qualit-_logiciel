@@ -79,8 +79,6 @@ public class Data {
         users = new ArrayList<>();
         equipmentTypes = new ArrayList<>();
         bookings = new ArrayList<>();
-
-        updateData();
     }
 
     /**
@@ -91,6 +89,8 @@ public class Data {
     public static Data getInstance() {
         if(instance == null) {
             instance = new Data();
+
+            updateData();
         }
 
         return instance;
