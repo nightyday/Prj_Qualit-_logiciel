@@ -10,8 +10,8 @@ import javafx.beans.property.StringProperty;
 import qualite_log.data_import.deserializers.BookingDeserializer;
 import qualite_log.data_import.serializers.BookingSerializer;
 
-@JsonSerialize(using = BookingSerializer.class)
-@JsonDeserialize(using = BookingDeserializer.class)
+@JsonSerialize(using = BookingSerializer.class) // Balise pour spécifié la serialisation personnalisée à utiliser
+@JsonDeserialize(using = BookingDeserializer.class) // Balise pour spécifié la déserialisation personnalisée à utiliser
 public class Booking {
     private static Integer nextId = 1;
     private Integer id;
@@ -48,6 +48,11 @@ public class Booking {
         return equipment;
     }
 
+    /*
+     * Accesseur en écriture de l'attribut reference de sorte à obtenir un StringProperty, utile aux vues
+     * 
+     * @param reference
+     */
     public StringProperty getReference() {
         StringProperty referenceEquipmentString = new SimpleStringProperty();
         referenceEquipmentString.setValue(equipment.getReference());
@@ -90,9 +95,7 @@ public class Booking {
     /**
      * Constructeur à ne pas utiliser
      */
-    private Booking() {
-        
-    }
+    private Booking() {}
 
     public Booking(Person emprunter, Equipment equipment) {
         setId();
