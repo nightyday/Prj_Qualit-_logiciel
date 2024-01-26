@@ -97,6 +97,8 @@ public class Booking {
         this.emprunter = emprunter;
         emprunter.addBookings(this);
         this.equipment = equipment;
+        this.startingDate = LocalDate.now();
+        this.endingDate = LocalDate.now().plusMonths(2);
     }
 
     public Booking(Person emprunter, Equipment equipment, LocalDate startingDate, LocalDate endingDate) {

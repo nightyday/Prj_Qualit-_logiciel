@@ -1,5 +1,7 @@
 package qualite_log.model;
 
+import java.util.Objects;
+
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
@@ -53,13 +55,14 @@ public class Equipment {
     /**
      * Constructeur à ne pas utiliser
      */
-    private Equipment() {}
+    private Equipment() {
+    }
 
     public Equipment(String reference, EquipmentType type) {
         this.reference = reference;
 
         this.type = type;
-        
+
         type.addEquipments(this);
     }
 
@@ -73,22 +76,25 @@ public class Equipment {
 
         type.addEquipments(this);
     }
-    
+
     public String toString() {
         return type.toString() + "-" + reference;
     }
 
-    ///// OUTILS A LA DESERIALISATION ////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///// OUTILS A LA DESERIALISATION
+    ///// ////////////////////////////////////////////////////////////////////////////////////////////////////
 
     /* Attributs et méthodes utiles à la déserialisation */
     int idType = -1;
 
-    /* 
-     * Constructeur spécific à la désérialisation, ne peut utiliser autre part (risque d'incohérence des ids) 
+    /*
+     * Constructeur spécific à la désérialisation, ne peut utiliser autre part
+     * (risque d'incohérence des ids)
      * 
      * @param id
+     * 
      * @param id_type
-    */
+     */
     public Equipment(String reference, Integer idType) {
         this.reference = reference;
 
@@ -97,16 +103,37 @@ public class Equipment {
 
     public int getIdType() {
         return idType;
-    }    
+    }
 
     /*
-     * Méthode servant à la définition de type dans le cas d'une création par le constructeur de désérialisation
+     * Méthode servant à la définition de type dans le cas d'une création par le
+     * constructeur de désérialisation
      * 
      * @param emprunter
+     * 
      * @param equipment
      */
     public void defineReferences(EquipmentType type) {
         this.type = type;
         type.addEquipments(this);
     }
+
+    // Surcharge de la méthode equals pour pouvoir comparer deux objets de type
+    // Equipment
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null || getClass() != obj.getClass())
+            return false;
+        Equipment that = (Equipment) obj;
+        return Objects.equals(getReference(), that.getReference());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getReference());
+    }
+
 }

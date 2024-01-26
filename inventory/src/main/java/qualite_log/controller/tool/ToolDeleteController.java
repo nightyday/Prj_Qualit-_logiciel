@@ -17,8 +17,9 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import qualite_log.model.Data;
 import qualite_log.model.Equipment;
+import qualite_log.model.EquipmentType;
 
-public class ToolReturnController {
+public class ToolDeleteController {
 
     @FXML
     private ResourceBundle resources;
@@ -49,19 +50,23 @@ public class ToolReturnController {
         }
         referenceComboBox.getItems().addAll(referenceData);
 
-        returnButton.setOnAction(this::handleReturnAction);
     }
 
     @FXML
-    public void handleReturnAction(ActionEvent event) {
+    public void handleDeleteAction(ActionEvent event) {
         try {
-            Equipment equipmentSelected = equipments.get(referenceComboBox.getItems().indexOf(referenceComboBox.getValue()));
-            // TODO: 
-                //equipmentSelected.setReturnDate(LocalDate.now());
-                
-            // TODO: 
-                //Data.getInstance().updateEquipment(equipmentSelected);
-            switchToToolListView();
+            String selectedReference = referenceComboBox.getValue();
+            for (EquipmentType type : Data.getInstance().getEquipmentTypes()) {
+                Equipment equipmentFound = type.getEquipments().stream()
+                        .filter(e -> e.getReference().equals(selectedReference))
+                        .findFirst()
+                        .orElse(null);
+                if (equipmentFound != null) {
+                    type.getEquipments().remove(equipmentFound);
+                    break; // Stop the loop once the equipment is found and removed
+                }
+            }
+            switchToToolListView(); // Refresh the view
         } catch (Exception e) {
             showAlert("Erreur", "Désolé, l’action n’a pas pu être effectuée. Veuillez réessayer.");
         }
