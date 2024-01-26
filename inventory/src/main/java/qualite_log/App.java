@@ -32,18 +32,20 @@ public class App extends Application {
             stage.setTitle("Inventory");
             stage.setScene(scene);
             stage.show();
-        }
-        catch (Exception exception) {
+        } catch (Exception exception) {
             exception.printStackTrace();
         }
     }
 
     public static void main(String[] args) {
-        Data data = Data.getInstance();
-        
+        Data data = Data.getInstance(); // Permet d'initialiser la 1ere instance de Data (à partir des fichiers .json)
+
         launch(args);
     }
 
+    /*
+     * Méthode permettant l'initialisation de données dans Data et dans les fichiers .json (à utiliser si ces derniers sont vides)
+     */
     private static void configureData() {
         Data data = Data.getInstance();
 
@@ -60,7 +62,7 @@ public class App extends Application {
         data.setAdministrators(admins);
         DataWriter.extractAdministrators(data);
 
-        List<EquipmentType>equipmentTypes = new ArrayList<>();
+        List<EquipmentType> equipmentTypes = new ArrayList<>();
         equipmentTypes.add(new EquipmentType("Téléphone"));
         equipmentTypes.add(new EquipmentType("Ordinateur"));
         equipmentTypes.add(new EquipmentType("Tablette"));
@@ -75,8 +77,10 @@ public class App extends Application {
         DataWriter.extractEquipments(data);
 
         List<Booking> bookings = new ArrayList<>();
-        bookings.add(new Booking(data.getUsers().get(3), data.getEquipments().get(1), LocalDate.of(2023, 12, 9), LocalDate.of(2024, 01, 9)));
-        bookings.add(new Booking(data.getUsers().get(2), data.getEquipments().get(0), LocalDate.of(2023, 12, 9), LocalDate.of(2024, 01, 9)));
+        bookings.add(new Booking(data.getUsers().get(3), data.getEquipments().get(1), LocalDate.of(2023, 12, 9),
+                LocalDate.of(2024, 01, 9)));
+        bookings.add(new Booking(data.getUsers().get(2), data.getEquipments().get(0), LocalDate.of(2023, 12, 9),
+                LocalDate.of(2024, 01, 9)));
         data.setBookings(bookings);
         DataWriter.extractBookings(data);
     }
