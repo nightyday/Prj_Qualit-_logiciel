@@ -9,12 +9,11 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.shape.Rectangle;
 import qualite_log.model.Data;
 import qualite_log.model.EquipmentType;
 
@@ -37,6 +36,12 @@ public class ToolTypeCreateFrame {
 
     @FXML
     private TextField typeTextField;
+    
+    @FXML
+    private Rectangle warningRectangle;
+
+    @FXML
+    private Label warningLabel;
 
     @FXML
     void initialize() throws IllegalArgumentException {
@@ -47,44 +52,29 @@ public class ToolTypeCreateFrame {
 
         createButton.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent t) throws IllegalArgumentException {
-                if (Pattern.matches("^[a-zA-Z0-9]{1,30}$", typeTextField.getText())) {
+                if (!Pattern.matches("^[a-zA-Z0-9\\-]{1,30}$", typeTextField.getText())) {
+                    warningRectangle.setX(typeTextField.getLayoutX() - 1);
+                    warningRectangle.setY(typeTextField.getLayoutY() - 1);
+                    warningRectangle.setWidth(typeTextField.getWidth() + 2);
+                    warningRectangle.setHeight(typeTextField.getHeight() + 2);
+                    warningRectangle.setVisible(true);
+                    
+                    warningLabel.setLayoutX(typeTextField.getLayoutX());
+                    warningLabel.setLayoutY(typeTextField.getLayoutY() + 30);
+                    warningLabel.setVisible(true);
+                }
+                else {
                     try {
                         Data.getInstance().getEquipmentTypes().add(new EquipmentType(typeTextField.getText()));
-                    }
-                    catch (Exception e) {
-                        try {
-                            Alert alert = new Alert(AlertType.WARNING);
-            
-                            alert.setTitle("Erreur");
-                            alert.setHeaderText(null);
-                            alert.setContentText("Désolé, l’action n’a pas pu être effectuée. Veuillez réessayer.");
-                            alert.showAndWait();
-                        }
-                        catch (Exception error) {
-                            error.printStackTrace();
-                        }
-                    }
-                    try {
+
                         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/qualite_log/ToolTypeListFrame.fxml"));
                         Parent root = (Parent) fxmlLoader.load();
                         anchorPane.getChildren().clear();
                         anchorPane.getChildren().add(root);
                     }
                     catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-                else {
-                    try {
-                        Alert alert = new Alert(AlertType.WARNING);
-
-                        alert.setTitle("Erreur");
-                        alert.setHeaderText(null);
-                        alert.setContentText("Format de la saisie non conforme.");
-                        alert.showAndWait();
-                    }
-                    catch (Exception e) {
-                        e.printStackTrace();
+                        WarningFrame warning = new WarningFrame("Erreur", "Désolé, l’action n’a pas pu être effectuée. Veuillez réessayer.");
+                        warning.show();
                     }
                 }
             }

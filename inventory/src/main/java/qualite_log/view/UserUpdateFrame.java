@@ -11,13 +11,14 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.StrokeLineJoin;
 import qualite_log.model.Administrator;
 import qualite_log.model.Data;
 import qualite_log.model.Person;
@@ -59,6 +60,12 @@ public class UserUpdateFrame {
     private Label updateLabel;
 
     @FXML
+    private Label warningLabel;
+
+    @FXML
+    private Rectangle warningRectangle;
+
+    @FXML
     void initialize() {
         assert anchorPane != null : "fx:id=\"anchorPane\" was not injected: check your FXML file 'UserUpdateFrame.fxml'.";
         assert mailComboBox != null : "fx:id=\"mailComboBox\" was not injected: check your FXML file 'UserUpdateFrame.fxml'.";
@@ -68,6 +75,8 @@ public class UserUpdateFrame {
         assert roleComboBox != null : "fx:id=\"roleComboBox\" was not injected: check your FXML file 'UserUpdateFrame.fxml'.";
         assert updateButton != null : "fx:id=\"updateButton\" was not injected: check your FXML file 'UserUpdateFrame.fxml'.";
         assert updateLabel != null : "fx:id=\"updateLabel\" was not injected: check your FXML file 'UserUpdateFrame.fxml'.";
+        assert warningLabel != null : "fx:id=\"warningLabel\" was not injected: check your FXML file 'UserUpdateFrame.fxml'.";
+        assert warningRectangle != null : "fx:id=\"warningRectangle\" was not injected: check your FXML file 'UserUpdateFrame.fxml'.";
         
         // Add elements in the comboBoxs
         List<Person> persons = new ArrayList<>();
@@ -97,7 +106,40 @@ public class UserUpdateFrame {
 
         updateButton.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent t) {
-                if (Pattern.matches("^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$", mailTextField.getText()) && Pattern.matches("^[a-zA-Z0-9]{1,30}$", nomTextField.getText()) && Pattern.matches("^[a-zA-Z0-9]{1,30}$", prenomTextField.getText())) {
+                if (!Pattern.matches("^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$", mailTextField.getText())) {
+                    warningRectangle.setX(mailTextField.getLayoutX() - 1);
+                    warningRectangle.setY(mailTextField.getLayoutY() - 1);
+                    warningRectangle.setWidth(mailTextField.getWidth() + 2);
+                    warningRectangle.setHeight(mailTextField.getHeight() + 2);
+                    warningRectangle.setVisible(true);
+
+                    warningLabel.setLayoutX(mailTextField.getLayoutX());
+                    warningLabel.setLayoutY(mailTextField.getLayoutY() + 30);
+                    warningLabel.setVisible(true);
+                }
+                else if (!Pattern.matches("^[a-zA-Z0-9\\-]{1,30}$", nomTextField.getText())) {
+                    warningRectangle.setX(nomTextField.getLayoutX() - 1);
+                    warningRectangle.setY(nomTextField.getLayoutY() - 1);
+                    warningRectangle.setWidth(nomTextField.getWidth() + 2);
+                    warningRectangle.setHeight(nomTextField.getHeight() + 2);
+                    warningRectangle.setVisible(true);
+                    
+                    warningLabel.setLayoutX(nomTextField.getLayoutX());
+                    warningLabel.setLayoutY(nomTextField.getLayoutY() + 30);
+                    warningLabel.setVisible(true);
+                }
+                else if (!Pattern.matches("^[a-zA-Z0-9\\-]{1,30}$", prenomTextField.getText())) {
+                    warningRectangle.setX(prenomTextField.getLayoutX() - 1);
+                    warningRectangle.setY(prenomTextField.getLayoutY() - 1);
+                    warningRectangle.setWidth(prenomTextField.getWidth() + 2);
+                    warningRectangle.setHeight(prenomTextField.getHeight() + 2);
+                    warningRectangle.setVisible(true);
+                    
+                    warningLabel.setLayoutX(prenomTextField.getLayoutX());
+                    warningLabel.setLayoutY(prenomTextField.getLayoutY() + 30);
+                    warningLabel.setVisible(true);
+                }
+                else {
                     try {
                         Person personSelected = persons.get(emailData.indexOf(mailComboBox.getValue()));
                         if (personSelected.getType().equals(ADMINISTRATEUR)) {
@@ -118,41 +160,15 @@ public class UserUpdateFrame {
                                 Data.getInstance().getUsers().add(new User(nomTextField.getText(), prenomTextField.getText(), mailTextField.getText()));
                             }
                         }
-                    }
-                    catch (Exception e) {
-                        try {
-                            Alert alert = new Alert(AlertType.WARNING);
-            
-                            alert.setTitle("Erreur");
-                            alert.setHeaderText(null);
-                            alert.setContentText("Impossible de modifier les informations de ce compte car celui-ci est actuellement utilisé.");
-                            alert.showAndWait();
-                        }
-                        catch (Exception error) {
-                            error.printStackTrace();
-                        }
-                    }
-                    try {
+
                         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/qualite_log/UserListFrame.fxml"));
                         Parent root = (Parent) fxmlLoader.load();
                         anchorPane.getChildren().clear();
                         anchorPane.getChildren().add(root);
                     }
                     catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-                else {
-                    try {
-                        Alert alert = new Alert(AlertType.WARNING);
-
-                        alert.setTitle("Erreur");
-                        alert.setHeaderText(null);
-                        alert.setContentText("Format de la saisie non conforme.");
-                        alert.showAndWait();
-                    }
-                    catch (Exception e) {
-                        e.printStackTrace();
+                        WarningFrame warning = new WarningFrame("Erreur", "Impossible de modifier ce compte car celui-ci est actuellement utilisé.");
+                        warning.show();
                     }
                 }
             }

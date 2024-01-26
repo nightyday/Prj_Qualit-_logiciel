@@ -83,6 +83,4 @@ public class Encryption {
         byte[] iv = "LTP.DA.Tj2pX$yx?".getBytes();
         return new GCMParameterSpec(128, iv);
     }
-
-    private Encryption() {}
 }

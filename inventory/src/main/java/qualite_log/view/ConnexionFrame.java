@@ -6,14 +6,16 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import qualite_log.model.Administrator;
+import qualite_log.model.User;
+import qualite_log.session.Authentification;
+import qualite_log.session.SessionManager;
 
 public class ConnexionFrame {
 
@@ -49,20 +51,33 @@ public class ConnexionFrame {
         assert passWordField != null : "fx:id=\"passWordField\" was not injected: check your FXML file 'ConnexionFrame.fxml'.";
         assert textFielMatricule != null : "fx:id=\"textFielMatricule\" was not injected: check your FXML file 'ConnexionFrame.fxml'.";
         assert vBox != null : "fx:id=\"vBox\" was not injected: check your FXML file 'ConnexionFrame.fxml'.";
-
+    
         button.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent t) {
-                try {
-                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/qualite_log/MenuAdminFrame.fxml"));
-                    Parent root = (Parent) fxmlLoader.load();
-                    vBox.getChildren().clear();
-                    vBox.getChildren().add(root);
+                String matricule = textFielMatricule.getText();
+                String password = passWordField.getText();
+                Administrator admin = Authentification.authenticateAdmin(matricule, password);
+                User user = Authentification.authenticateUser(matricule, password);
+                if (user != null) {
+                    SessionManager.setCurrentUser(user);
+                    // Chargez l interface User
+                    loadUserMenu();
+                } else if (admin != null) {
+                    SessionManager.setCurrentAdmin(admin);
+                    // Chargez l interface Admin
+                    loadAdminMenu();
+                } else {
+                    label.setText("Matricule ou mot de passe incorrect");
                 }
-                catch (Exception e) {
-                    e.printStackTrace();
-                }
+            }
+
+            private void loadUserMenu() {
+                ////////// Visible invisible./////////////////////
+            }
+
+            private void loadAdminMenu() {
+                ////////// Visible invisible./////////////////////
             }
         });
     }
-
 }

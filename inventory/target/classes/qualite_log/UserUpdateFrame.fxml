@@ -37,10 +37,12 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="qualite_log.view.UserUpdateFrame">
    <children>
+      <Rectangle fx:id="warningRectangle" arcHeight="5.0" arcWidth="5.0" fill="RED" height="200.0" stroke="RED" strokeLineJoin="ROUND" strokeType="INSIDE" visible="false" width="200.0" />
       <Label fx:id="updateLabel" layoutX="124.0" layoutY="26.0" text="Modification d'un utilisateur">
          <font>
             <Font name="System Bold" size="26.0" />
@@ -57,5 +59,6 @@
       <Label layoutX="356.0" layoutY="231.0" text="Nouveau rôle de l'utilisateur :" />
       <Label layoutX="236.0" layoutY="79.0" text="Mail de l'utilisateur :" />
       <ComboBox fx:id="mailComboBox" layoutX="214.0" layoutY="103.0" prefWidth="150.0" promptText="Mail" />
+      <Label fx:id="warningLabel" layoutX="145.0" layoutY="303.0" text="Format de la saisie non conforme." textFill="RED" visible="false" />
    </children>
 </AnchorPane>

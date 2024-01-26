@@ -10,8 +10,6 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -60,28 +58,15 @@ public class BookingDeleteFrame {
                 try {
                     Booking bookingSelected = bookings.get(referenceData.indexOf(referenceComboBox.getValue()));
                     Data.getInstance().getBookings().remove(bookingSelected);
-                }
-                catch (Exception e) {
-                    try {
-                        Alert alert = new Alert(AlertType.WARNING);
-        
-                        alert.setTitle("Erreur");
-                        alert.setHeaderText(null);
-                        alert.setContentText("Désolé, l’action n’a pas pu être effectuée. Veuillez réessayer.");
-                        alert.showAndWait();
-                    }
-                    catch (Exception error) {
-                        error.printStackTrace();
-                    }
-                }
-                try {
+
                     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/qualite_log/BookingListFrame.fxml"));
                     Parent root = (Parent) fxmlLoader.load();
                     anchorPane.getChildren().clear();
                     anchorPane.getChildren().add(root);
                 }
                 catch (Exception e) {
-                    e.printStackTrace();
+                    WarningFrame warning = new WarningFrame("Erreur", "Désolé, l’action n’a pas pu être effectuée. Veuillez réessayer.");
+                    warning.show();
                 }
             }
         });
