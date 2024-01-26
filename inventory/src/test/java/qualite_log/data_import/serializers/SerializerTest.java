@@ -46,7 +46,7 @@ public class SerializerTest {
     }
 
     @Test
-    public void EquipmentTypeSerializer() {
+    public void equipmentTypeSerializerTest() {
         Writer jsonWriter = new StringWriter();
         try {
             JsonGenerator jsonGenerator = new JsonFactory().createGenerator(jsonWriter);
@@ -64,7 +64,7 @@ public class SerializerTest {
     }
 
     @Test
-    public void EquipmentSerializer() {
+    public void equipmentSerializerTest() {
         Writer jsonWriter = new StringWriter();
         try {
             JsonGenerator jsonGenerator = new JsonFactory().createGenerator(jsonWriter);
@@ -84,7 +84,7 @@ public class SerializerTest {
     }
 
     @Test
-    public void PersonSerializer() {
+    public void personSerializerTest() {
         Writer jsonWriterAdministrator = new StringWriter();
         Writer jsonWriterUser = new StringWriter();
         try {
@@ -120,7 +120,7 @@ public class SerializerTest {
     }
     
     @Test
-    public void BookingSerializer() {
+    public void bookingSerializerTest() {
         Writer jsonWriter = new StringWriter();
         try {
             JsonGenerator jsonGenerator = new JsonFactory().createGenerator(jsonWriter);

@@ -71,11 +71,14 @@ public class Data {
     }
 
     private static void updateData() {
-        instance = DataReader.insert();
+        instance = DataReader.insert(instance);
     }
 
     private Data() {
-        //updateData();
+        administrators = new ArrayList<>();
+        users = new ArrayList<>();
+        equipmentTypes = new ArrayList<>();
+        bookings = new ArrayList<>();
     }
 
     /**
@@ -86,6 +89,8 @@ public class Data {
     public static Data getInstance() {
         if(instance == null) {
             instance = new Data();
+
+            updateData();
         }
 
         return instance;
