@@ -2,20 +2,20 @@
   "reference" : "AN001",
   "name" : "A32",
   "version" : "1.2",
-  "id_type" : 1
+  "id_type" : 4
 }, {
   "reference" : "AN002",
   "name" : "A33",
   "version" : "1.2",
-  "id_type" : 1
+  "id_type" : 4
 }, {
   "reference" : "AN004",
   "name" : "P45",
   "version" : "1.2",
-  "id_type" : 2
+  "id_type" : 5
 }, {
   "reference" : "AN003",
   "name" : "R17",
   "version" : "1.2",
-  "id_type" : 3
+  "id_type" : 6
 } ]

@@ -6,8 +6,6 @@ import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Label;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
@@ -66,17 +64,8 @@ public class BookingListFrame {
             tableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         }
         catch (Exception e) {
-            try {
-                Alert alert = new Alert(AlertType.WARNING);
-
-                alert.setTitle("Erreur");
-                alert.setHeaderText(null);
-                alert.setContentText("Désolé, l’action n’a pas pu être effectuée. Veuillez réessayer.");
-                alert.showAndWait();
-            }
-            catch (Exception error) {
-                error.printStackTrace();
-            }
+            WarningFrame warning = new WarningFrame("Erreur", "Désolé, l’action n’a pas pu être effectuée. Veuillez réessayer.");
+            warning.show();
         }
     }
 

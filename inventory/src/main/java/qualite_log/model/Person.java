@@ -6,7 +6,7 @@ import java.util.List;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import qualite_log.data_import.serializers.PersonSerializer;
 
-@JsonSerialize(using = PersonSerializer.class)
+@JsonSerialize(using = PersonSerializer.class) // Balise pour spécifié la serialisation personnalisée à utiliser
 public class Person {
     private static Integer nextId = 1;
     private Integer id;

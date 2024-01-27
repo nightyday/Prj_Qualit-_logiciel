@@ -37,10 +37,12 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="qualite_log.controller.user.UserCreateController">
    <children>
+      <Rectangle fx:id="warningRectangle" arcHeight="5.0" arcWidth="5.0" fill="RED" height="200.0" stroke="RED" strokeLineJoin="ROUND" strokeType="INSIDE" visible="false" width="200.0" />
       <TextField fx:id="nomTextField" layoutX="98.0" layoutY="137.0" promptText="Nom" />
       <TextField fx:id="prenomTextField" layoutX="353.0" layoutY="137.0" promptText="Prénom" />
       <TextField fx:id="mailTextField" layoutX="98.0" layoutY="210.0" promptText="Mail" />
@@ -55,5 +57,6 @@
       <Label layoutX="364.0" layoutY="108.0" text="Prénom de l'utilisateur :" />
       <Label layoutX="119.0" layoutY="182.0" text="Mail de l'utilisateur :" />
       <Label layoutX="373.0" layoutY="182.0" text="Rôle de l'utilisateur :" />
+      <Label fx:id="warningLabel" layoutX="155.0" layoutY="313.0" text="Format de la saisie non conforme." textFill="RED" visible="false" />
    </children>
 </AnchorPane>

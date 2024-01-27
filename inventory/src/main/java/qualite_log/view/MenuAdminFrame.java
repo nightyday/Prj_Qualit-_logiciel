@@ -173,8 +173,7 @@ public class MenuAdminFrame {
             deconnexionMenuItem.setOnAction(new EventHandler<ActionEvent>() {
                 public void handle(ActionEvent t) {
                     try {
-                        menuVBox.getChildren().remove(root);
-                        menuVBox.getChildren().remove(menuAdminMenuBar);
+                        menuVBox.getChildren().clear();
                         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/qualite_log/ConnexionFrame.fxml"));
                         root = (Parent) fxmlLoader.load();
                         menuVBox.getChildren().add(root);

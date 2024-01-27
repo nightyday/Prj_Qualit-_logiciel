@@ -1,65 +1,88 @@
 package qualite_log.tool;
 
-import java.io.UnsupportedEncodingException;
-import java.nio.charset.StandardCharsets;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
+import java.security.spec.KeySpec;
 import java.util.Base64;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
-import javax.crypto.spec.IvParameterSpec;
+import javax.crypto.SecretKey;
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.GCMParameterSpec;
+import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.spec.SecretKeySpec;
 
+/*
+ * @author arthur
+ * 
+ * Pour cette classe j'ai ré-utilisé le code à : 
+ * https://www.baeldung.com/java-aes-encryption-decryption
+ */
 public class Encryption {
-    private static final byte[] keyBytes = "WhY)/y$Z".getBytes();
-    private static final byte[] ivBytes = "3UR1;w);".getBytes();
+    private static SecretKey secretKey = generateKey();
+    private static GCMParameterSpec iv = generateIv();
 
-    public static String crypt(String str) {
+    public static String encrypt(String input) {
         try {
-            SecretKeySpec key = new SecretKeySpec(keyBytes, "DES");
-            IvParameterSpec ivSpec = new IvParameterSpec(ivBytes);
+            Cipher cipher = Cipher.getInstance("AES/GCM/NoPadding");
+            cipher.init(Cipher.ENCRYPT_MODE, secretKey, iv);
 
-            Cipher cipher = Cipher.getInstance("DES/CBC/PKCS5Padding");
-            cipher.init(Cipher.ENCRYPT_MODE, key, ivSpec);
+            byte[] cipherText = cipher.doFinal(input.getBytes());
 
-            byte[] strBytes = str.getBytes("UTF-8");
-            byte[] encrypted = cipher.doFinal(strBytes);
-
-            return Base64.getEncoder().encodeToString(encrypted);
-
-        } catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException | InvalidAlgorithmParameterException 
-        | IllegalBlockSizeException | BadPaddingException | UnsupportedEncodingException e) {
+            return Base64.getEncoder().encodeToString(cipherText);
+        } catch (NoSuchPaddingException | NoSuchAlgorithmException |
+                InvalidAlgorithmParameterException | InvalidKeyException |
+                BadPaddingException | IllegalBlockSizeException e) {
             e.printStackTrace();
-        }
 
-        return null;
+            return "";
+        }      
     }
 
-     public static String decrypt(String str) {
+    public static String decrypt(String cipherText)  {
         try {
-            SecretKeySpec key = new SecretKeySpec(keyBytes, "DES");
-            IvParameterSpec ivSpec = new IvParameterSpec(ivBytes);
+            Cipher cipher = Cipher.getInstance("AES/GCM/NoPadding"); 
+            cipher.init(Cipher.DECRYPT_MODE, secretKey, iv);
 
-            Cipher cipher = Cipher.getInstance("DES/CBC/PKCS5Padding");
-            cipher.init(Cipher.DECRYPT_MODE, key, ivSpec);
+            byte[] plainText = cipher.doFinal(Base64.getDecoder()
+                    .decode(cipherText));
 
-            byte[] decodedBytes = Base64.getDecoder().decode(str);
-            byte[] decrypted = cipher.doFinal(decodedBytes);
-
-            return new String(decrypted, StandardCharsets.UTF_8);
-
-        } catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException | InvalidAlgorithmParameterException | IllegalBlockSizeException | BadPaddingException e) {
+            return new String(plainText);
+        } catch (NoSuchPaddingException | NoSuchAlgorithmException |
+                InvalidAlgorithmParameterException | InvalidKeyException |
+                BadPaddingException | IllegalBlockSizeException e) {
             e.printStackTrace();
+
+            return "";
         }
-
-        return null;
     }
 
-    private Encryption () {   
+    private static SecretKey generateKey() {
+        String password = "nfg-G6bv?8PNta1t";
+        String salt = "AL$hTFrP*]fX3JP#";
+
+        try {
+            SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA256");
+            KeySpec spec = new PBEKeySpec(password.toCharArray(), salt.getBytes(), 65536, 256);
+
+            return new SecretKeySpec(factory.generateSecret(spec).getEncoded(), "AES");
+
+        } catch (InvalidKeySpecException | NoSuchAlgorithmException e) {
+            e.printStackTrace();
+
+            return null;
+        }
     }
-    
+
+    private static GCMParameterSpec generateIv() {
+        byte[] iv = "LTP.DA.Tj2pX$yx?".getBytes();
+        return new GCMParameterSpec(128, iv);
+    }
+
+    private Encryption() {}
 }

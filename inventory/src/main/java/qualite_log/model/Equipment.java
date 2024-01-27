@@ -8,8 +8,8 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import qualite_log.data_import.deserializers.EquipmentDeserializer;
 import qualite_log.data_import.serializers.EquipmentSerializer;
 
-@JsonSerialize(using = EquipmentSerializer.class)
-@JsonDeserialize(using = EquipmentDeserializer.class)
+@JsonSerialize(using = EquipmentSerializer.class) // Balise pour spécifié la serialisation personnalisée à utiliser
+@JsonDeserialize(using = EquipmentDeserializer.class) // Balise pour spécifié la déserialisation personnalisée à utiliser
 public class Equipment {
     private String reference;
 
