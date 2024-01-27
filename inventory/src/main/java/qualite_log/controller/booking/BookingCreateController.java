@@ -39,13 +39,6 @@ public class BookingCreateController {
 
     @FXML
     public void initialize() {
-
-        assert anchorPane != null : "fx:id=\"anchorPane\" was not injected: check your FXML file 'BookingCreateFrame.fxml'.";
-        assert createButton != null : "fx:id=\"createButton\" was not injected: check your FXML file 'BookingCreateFrame.fxml'.";
-        assert referenceComboBox != null : "fx:id=\"referenceComboBox\" was not injected: check your FXML file 'BookingCreateFrame.fxml'.";
-        assert createLabel != null : "fx:id=\"createLabel\" was not injected: check your FXML file 'BookingCreateFrame.fxml'.";
-
-
         equipments = Data.getInstance().getEquipments();
         referenceData = new ArrayList<>();
         for (Equipment equipment : equipments) {
@@ -78,10 +71,5 @@ public class BookingCreateController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    // Cette méthode lie le bouton de création à la méthode handleCreateAction.
-    public void bindCreateButton() {
-        createButton.setOnAction(this::handleCreateAction);
     }
 }
