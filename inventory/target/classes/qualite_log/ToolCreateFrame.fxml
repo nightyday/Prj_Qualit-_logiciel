@@ -37,10 +37,12 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="qualite_log.controller.tool.ToolCreateController">
    <children>
+      <Rectangle fx:id="warningRectangle" arcHeight="5.0" arcWidth="5.0" fill="RED" height="200.0" stroke="RED" strokeLineJoin="ROUND" strokeType="INSIDE" visible="false" width="200.0" />
       <TextField fx:id="nomTextField" layoutX="98.0" layoutY="137.0" promptText="Nom" />
       <TextField fx:id="versionTextField" layoutX="353.0" layoutY="137.0" promptText="Version" />
       <TextField fx:id="referenceTextField" layoutX="98.0" layoutY="241.0" promptText="Référence" />
@@ -55,5 +57,6 @@
       <Label layoutX="112.0" layoutY="213.0" text="Référence du matériel :" />
       <Label layoutX="380.0" layoutY="213.0" text="Type du matériel :" />
       <ComboBox fx:id="typeComboBox" layoutX="355.0" layoutY="241.0" prefWidth="150.0" promptText="Type" />
+      <Label fx:id="warningLabel" layoutX="155.0" layoutY="313.0" text="Format de la saisie non conforme." textFill="RED" visible="false" />
    </children>
 </AnchorPane>

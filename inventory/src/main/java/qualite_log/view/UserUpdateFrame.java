@@ -17,6 +17,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.StrokeLineJoin;
 import qualite_log.model.Administrator;
 import qualite_log.model.Person;
 import qualite_log.model.User;
@@ -54,6 +57,18 @@ public class UserUpdateFrame {
     private Button updateButton;
 
     @FXML
+<<<<<<< HEAD
+=======
+    private Label updateLabel;
+
+    @FXML
+    private Label warningLabel;
+
+    @FXML
+    private Rectangle warningRectangle;
+
+    @FXML
+>>>>>>> main
     void initialize() {
         assert anchorPane != null : "fx:id=\"anchorPane\" was not injected: check your FXML file 'UserUpdateFrame.fxml'.";
         assert mailComboBox != null : "fx:id=\"mailComboBox\" was not injected: check your FXML file 'UserUpdateFrame.fxml'.";
@@ -62,6 +77,12 @@ public class UserUpdateFrame {
         assert prenomTextField != null : "fx:id=\"prenomTextField\" was not injected: check your FXML file 'UserUpdateFrame.fxml'.";
         assert roleComboBox != null : "fx:id=\"roleComboBox\" was not injected: check your FXML file 'UserUpdateFrame.fxml'.";
         assert updateButton != null : "fx:id=\"updateButton\" was not injected: check your FXML file 'UserUpdateFrame.fxml'.";
+<<<<<<< HEAD
+=======
+        assert updateLabel != null : "fx:id=\"updateLabel\" was not injected: check your FXML file 'UserUpdateFrame.fxml'.";
+        assert warningLabel != null : "fx:id=\"warningLabel\" was not injected: check your FXML file 'UserUpdateFrame.fxml'.";
+        assert warningRectangle != null : "fx:id=\"warningRectangle\" was not injected: check your FXML file 'UserUpdateFrame.fxml'.";
+>>>>>>> main
         
         // Add elements in the comboBoxs
         List<Person> persons = new ArrayList<>();
