@@ -38,15 +38,15 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="qualite_log.view.UserDeleteFrame">
+<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="qualite_log.controller.user.UserDeleteController">
    <children>
-      <Label fx:id="deleteLabel" layoutX="128.0" layoutY="26.0" text="Suppression d'un utilisateur">
+      <Label layoutX="128.0" layoutY="26.0" text="Suppression d'un utilisateur">
          <font>
             <Font name="System Bold" size="26.0" />
          </font>
       </Label>
       <ComboBox fx:id="mailComboBox" layoutX="225.0" layoutY="174.0" prefWidth="150.0" promptText="Mail" />
-      <Button fx:id="deleteButton" layoutX="264.0" layoutY="311.0" mnemonicParsing="false" text="Supprimer" />
+      <Button fx:id="deleteButton" layoutX="264.0" layoutY="311.0" onAction="#handleDeleteAction" mnemonicParsing="false" text="Supprimer" />
       <Label layoutX="246.0" layoutY="148.0" text="Mail de l'utilisateur :" />
    </children>
 </AnchorPane>

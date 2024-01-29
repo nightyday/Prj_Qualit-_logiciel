@@ -6,9 +6,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="qualite_log.view.UserListFrame">
+<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="qualite_log.controller.user.UserListController">
    <children>
-      <Label fx:id="listLabel" layoutX="126.0" layoutY="26.0" text="Consultation des utilisateurs">
+      <Label layoutX="126.0" layoutY="26.0" text="Consultation des utilisateurs">
          <font>
             <Font name="System Bold" size="26.0" />
          </font>
