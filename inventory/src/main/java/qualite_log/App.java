@@ -32,7 +32,7 @@ public class App extends Application {
             stage.setTitle("Inventory");
             stage.setScene(scene);
             stage.show();
-            configureData();
+            
         } catch (Exception exception) {
             exception.printStackTrace();
         }
