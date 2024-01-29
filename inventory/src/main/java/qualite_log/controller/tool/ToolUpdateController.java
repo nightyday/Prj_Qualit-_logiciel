@@ -1,8 +1,8 @@
 package qualite_log.controller.tool;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import java.util.regex.Pattern;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -14,9 +14,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.util.Pair;
 import qualite_log.model.Data;
 import qualite_log.model.Equipment;
 import qualite_log.model.EquipmentType;
+import qualite_log.util.FxUtil;
+import qualite_log.util.ValidationConstants;
 
 public class ToolUpdateController {
 
@@ -48,6 +51,9 @@ public class ToolUpdateController {
     void initialize() {
         equipments = Data.getInstance().getEquipments();
         equipmentTypes = Data.getInstance().getEquipmentTypes();
+        FxUtil.addTextChangeListener(referenceTextField, ValidationConstants.REF_REGEX);
+        FxUtil.addTextChangeListener(nomTextField, ValidationConstants.NAME_REGEX);
+        FxUtil.addTextChangeListener(versionTextField, ValidationConstants.VERSION_REGEX);
         fillComboBoxes();
         
     }
@@ -93,15 +99,15 @@ public class ToolUpdateController {
             } catch (Exception e) {
                 showAlert("Erreur", "Désolé, l’action n’a pas pu être effectuée. Veuillez réessayer.");
             }
-        } else {
-            showAlert("Erreur", "Format de la saisie non conforme.");
         }
     }
 
     private boolean validateInput() {
-        return Pattern.matches("^(AN|AP|XX)[A-Z0-9]\\d{3}$", referenceTextField.getText()) &&
-               Pattern.matches("^[a-zA-Z0-9]{1,30}$", nomTextField.getText()) &&
-               Pattern.matches("^[a-zA-Z0-9]{1,15}$", versionTextField.getText());
+        List<Pair<TextField, String>> fieldRegexPairs = Arrays.asList(
+                new Pair<>(referenceTextField, ValidationConstants.REF_REGEX),
+                new Pair<>(nomTextField, ValidationConstants.NAME_REGEX),
+                new Pair<>(versionTextField, ValidationConstants.VERSION_REGEX));
+        return FxUtil.validateInputs(fieldRegexPairs);
     }
 
     private void updateEquipment(Equipment equipment) {

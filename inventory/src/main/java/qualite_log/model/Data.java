@@ -13,7 +13,7 @@ public class Data {
     private List<Booking> bookings;
 
     public List<Administrator> getAdministrators() {
-        return administrators;
+        return new ArrayList<>(administrators);
     }
 
     public void setAdministrators(List<Administrator> administrators) {
@@ -21,11 +21,11 @@ public class Data {
     }
 
     public void addAdministrator(Administrator administrator) {
-        administrators.add(administrator);
+        this.administrators.add(administrator);
     }
 
     public List<User> getUsers() {
-        return users;
+        return new ArrayList<>(users);
     }
 
     public void setUsers(List<User> users) {
@@ -33,7 +33,7 @@ public class Data {
     }
 
     public void addUsers(User user) {
-       users.add(user);
+       this.users.add(user);
     }
 
     public List<EquipmentType> getEquipmentTypes() {
@@ -49,7 +49,7 @@ public class Data {
     }
 
     public List<Booking> getBookings() {
-        return bookings;
+        return new ArrayList<>(bookings);
     }
 
     public void setBookings(List<Booking> bookings) {
@@ -69,6 +69,15 @@ public class Data {
 
         return equipments;
     }
+
+    public void removeUser(User user) {
+        this.users.remove(user);
+    }
+    
+    public void removeAdministrator(Administrator admin) {
+        this.administrators.remove(admin);
+    }
+    
 
     private static void updateData() {
         instance = DataReader.insert(instance);
