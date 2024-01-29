@@ -51,11 +51,13 @@ public class BookingCreateController {
     public void handleCreateAction(ActionEvent event) {
         if (referenceComboBox.getValue() != null) {
             Equipment equipmentSelected = equipments.get(referenceData.indexOf(referenceComboBox.getValue()));
-            Person person = new Person(Data.getInstance().getUsers().get(0).getLastName(), 
-                                       Data.getInstance().getUsers().get(0).getFirstName(), 
-                                       "user", 
-                                       Data.getInstance().getUsers().get(0).getEmail());
-            Data.getInstance().getBookings().add(new Booking(person, equipmentSelected));
+            Person person = new Person(Data.getInstance().getUsers().get(0).getLastName(),
+                    Data.getInstance().getUsers().get(0).getFirstName(),
+                    "user",
+                    Data.getInstance().getUsers().get(0).getEmail());
+            List<Booking> currentBookings = Data.getInstance().getBookings();
+            currentBookings.add(new Booking(person, equipmentSelected));
+            Data.getInstance().setBookings(currentBookings); // Mise à jour de la liste dans Data
             switchToBookingListView();
         } else {
             System.out.println("Error");

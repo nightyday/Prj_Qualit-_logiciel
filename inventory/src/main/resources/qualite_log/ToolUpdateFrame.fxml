@@ -40,7 +40,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="qualite_log.controller.tool.ToolUpdateController">
+<AnchorPane stylesheets="@style.css" fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="qualite_log.controller.tool.ToolUpdateController">
    <children>
       <Rectangle fx:id="warningRectangle" arcHeight="5.0" arcWidth="5.0" fill="RED" height="200.0" stroke="RED" strokeLineJoin="ROUND" strokeType="INSIDE" visible="false" width="200.0" />
       <Label layoutX="124.0" layoutY="26.0" text="Modification d'un matériel">

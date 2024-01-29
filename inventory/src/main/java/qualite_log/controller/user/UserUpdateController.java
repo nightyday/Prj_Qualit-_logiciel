@@ -1,8 +1,8 @@
 package qualite_log.controller.user;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import java.util.regex.Pattern;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -14,14 +14,17 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.util.Pair;
 import qualite_log.model.Administrator;
 import qualite_log.model.Data;
 import qualite_log.model.Person;
 import qualite_log.model.User;
+import qualite_log.util.FxUtil;
+import qualite_log.util.ValidationConstants;
 
 public class UserUpdateController {
 
-    private static final String ADMINISTRATEUR = "administrateur";
+    private static final String ADMINISTRATOR = "administrator";
     private static final String USER = "user";
 
     @FXML
@@ -52,7 +55,9 @@ public class UserUpdateController {
         persons = new ArrayList<>();
         persons.addAll(Data.getInstance().getUsers());
         persons.addAll(Data.getInstance().getAdministrators());
-
+        FxUtil.addTextChangeListener(mailTextField, ValidationConstants.EMAIL_REGEX);
+        FxUtil.addTextChangeListener(nomTextField, ValidationConstants.NAME_REGEX);
+        FxUtil.addTextChangeListener(prenomTextField, ValidationConstants.NAME_REGEX);
         fillComboBoxes();
     }
 
@@ -60,15 +65,16 @@ public class UserUpdateController {
         List<String> emailData = new ArrayList<>();
         persons.forEach(person -> emailData.add(person.getEmail()));
         mailComboBox.getItems().addAll(emailData);
-        roleComboBox.getItems().addAll(ADMINISTRATEUR, USER);
+        roleComboBox.getItems().addAll(ADMINISTRATOR, USER);
     }
+
     @FXML
     public void handleMailSelection(ActionEvent event) {
         String selectedMail = mailComboBox.getValue();
         Person personSelected = persons.stream()
-                                       .filter(p -> p.getEmail().equals(selectedMail))
-                                       .findFirst()
-                                       .orElse(null);
+                .filter(p -> p.getEmail().equals(selectedMail))
+                .findFirst()
+                .orElse(null);
         if (personSelected != null) {
             mailTextField.setText(personSelected.getEmail());
             nomTextField.setText(personSelected.getLastName());
@@ -81,10 +87,17 @@ public class UserUpdateController {
     public void handleUpdateAction(ActionEvent event) {
         if (validateInput()) {
             try {
-                updateUser();
-                switchToUserListView();
+                String selectedMail = mailComboBox.getValue();
+                Person personSelected = persons.stream()
+                        .filter(p -> p.getEmail().equals(selectedMail))
+                        .findFirst()
+                        .orElse(null);
+                if (personSelected != null) {
+                    updatePerson(personSelected);
+                    switchToUserListView();
+                }
             } catch (Exception e) {
-                showAlert("Erreur", "Impossible de modifier les informations de ce compte car celui-ci est actuellement utilisé.");
+                showAlert("Erreur", "Désolé, l’action n’a pas pu être effectuée. Veuillez réessayer.");
             }
         } else {
             showAlert("Erreur", "Format de la saisie non conforme.");
@@ -92,36 +105,53 @@ public class UserUpdateController {
     }
 
     private boolean validateInput() {
-        return Pattern.matches("^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$", mailTextField.getText()) &&
-               Pattern.matches("^[a-zA-Z0-9]{1,30}$", nomTextField.getText()) &&
-               Pattern.matches("^[a-zA-Z0-9]{1,30}$", prenomTextField.getText());
+        List<Pair<TextField, String>> fieldRegexPairs = Arrays.asList(
+                new Pair<>(mailTextField, ValidationConstants.EMAIL_REGEX),
+                new Pair<>(nomTextField, ValidationConstants.NAME_REGEX),
+                new Pair<>(prenomTextField, ValidationConstants.NAME_REGEX));
+        return FxUtil.validateInputs(fieldRegexPairs);
     }
 
-    private void updateUser() {
-        String selectedMail = mailComboBox.getValue();
-        Person personSelected = persons.stream()
-                                       .filter(p -> p.getEmail().equals(selectedMail))
-                                       .findFirst()
-                                       .orElse(null);
-        if (personSelected != null) {
-            personSelected.setEmail(mailTextField.getText());
-            personSelected.setLastName(nomTextField.getText());
-            personSelected.setFirstName(prenomTextField.getText());
-            switchRoleIfNecessary(personSelected);
-        }
+    private void updatePerson(Person person) {
+        person.setLastName(nomTextField.getText());
+        person.setFirstName(prenomTextField.getText());
+        person.setEmail(mailTextField.getText());
+        switchRoleIfNecessary(person);
+    
+        // Mettre à jour les listes dans Data et la liste persons
+        updatePersonsList();
     }
-
+    
     private void switchRoleIfNecessary(Person person) {
-        if (!person.getType().equals(roleComboBox.getValue())) {
-            if (roleComboBox.getValue().equals(ADMINISTRATEUR)) {
+        String selectedRole = roleComboBox.getValue();
+        if (!person.getType().equals(selectedRole)) {
+            if (person.getType().equals(USER)) {
+                System.out.println("User");
                 Data.getInstance().getUsers().remove(person);
-                Data.getInstance().getAdministrators().add(new Administrator(person.getLastName(), person.getFirstName(), person.getEmail()));
-            } else {
+                if (selectedRole.equals(ADMINISTRATOR)) {
+                    Data.getInstance().getAdministrators().add(new Administrator(person.getLastName(), person.getFirstName(), person.getEmail()));
+                    person.setType(ADMINISTRATOR);
+                    System.out.println("Admin added");
+                }
+            } else if (person.getType().equals(ADMINISTRATOR)) {
+                System.out.println("Admin");
                 Data.getInstance().getAdministrators().remove(person);
-                Data.getInstance().getUsers().add(new User(person.getLastName(), person.getFirstName(), person.getEmail()));
+                if (selectedRole.equals(USER)) {
+                    Data.getInstance().getUsers().add(new User(person.getLastName(), person.getFirstName(), person.getEmail()));
+                    person.setType(USER);
+                    System.out.println("User added");
+                }
             }
         }
     }
+    
+    private void updatePersonsList() {
+        persons.clear();
+        persons.addAll(Data.getInstance().getUsers());
+        persons.addAll(Data.getInstance().getAdministrators());
+        fillComboBoxes(); // Mettre à jour les données de la comboBox
+    }
+    
 
     private void switchToUserListView() {
         try {
@@ -141,5 +171,5 @@ public class UserUpdateController {
         alert.setContentText(content);
         alert.showAndWait();
     }
-}
 
+}

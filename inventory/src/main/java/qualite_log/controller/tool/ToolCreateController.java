@@ -1,9 +1,9 @@
 package qualite_log.controller.tool;
 
 import java.net.URL;
+import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import javafx.event.ActionEvent;
@@ -17,9 +17,12 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.util.Pair;
 import qualite_log.model.Data;
 import qualite_log.model.Equipment;
 import qualite_log.model.EquipmentType;
+import qualite_log.util.FxUtil;
+import qualite_log.util.ValidationConstants;
 
 
 public class ToolCreateController {
@@ -60,8 +63,9 @@ public class ToolCreateController {
                                               .map(EquipmentType::getType)
                                               .collect(Collectors.toList());
         typeComboBox.getItems().addAll(typeData);
-
-        createButton.setOnAction(this::handleCreateAction);
+        FxUtil.addTextChangeListener(referenceTextField, ValidationConstants.REF_REGEX);
+        FxUtil.addTextChangeListener(nomTextField, ValidationConstants.NAME_REGEX);
+        FxUtil.addTextChangeListener(versionTextField, ValidationConstants.NAME_REGEX);
     }
 
     @FXML
@@ -75,15 +79,16 @@ public class ToolCreateController {
             } catch (Exception e) {
                 showAlert("Erreur", "Désolé, l’action n’a pas pu être effectuée. Veuillez réessayer.");
             }
-        } else {
-            showAlert("Erreur", "Format de la saisie non conforme.");
         }
     }
 
     private boolean validateInput() {
-        return Pattern.matches("^(AN|AP|XX)[A-Z0-9]\\d{3}$", referenceTextField.getText()) &&
-               Pattern.matches("^[a-zA-Z0-9]{1,30}$", nomTextField.getText()) &&
-               Pattern.matches("^[a-zA-Z0-9]{1,15}$", versionTextField.getText());
+        List<Pair<TextField, String>> fieldRegexPairs = Arrays.asList(
+            new Pair<>(referenceTextField, ValidationConstants.NAME_REGEX),
+            new Pair<>(nomTextField, ValidationConstants.NAME_REGEX),
+            new Pair<>(versionTextField, ValidationConstants.VERSION_REGEX)
+        );
+        return FxUtil.validateInputs(fieldRegexPairs);
     }
 
     private void switchToToolListView() {
