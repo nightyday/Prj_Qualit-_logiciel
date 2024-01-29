@@ -38,7 +38,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="qualite_log.view.BookingCreateFrame">
+<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="qualite_log.controller.booking.BookingCreateController">
    <children>
       <Label fx:id="createLabel" layoutX="161.0" layoutY="28.0" text="Emprunt d'un matériel">
          <font>
@@ -46,7 +46,7 @@
          </font>
       </Label>
       <ComboBox fx:id="referenceComboBox" layoutX="225.0" layoutY="174.0" prefWidth="150.0" promptText="Référence" />
-      <Button fx:id="createButton" layoutX="264.0" layoutY="307.0" mnemonicParsing="false" text="Emprunter" />
+      <Button fx:id="createButton" layoutX="264.0" layoutY="307.0" onAction="#handleCreateAction" mnemonicParsing="false" text="Emprunter" />
       <Label layoutX="238.0" layoutY="149.0" text="Référence du matériel :" />
    </children>
 </AnchorPane>

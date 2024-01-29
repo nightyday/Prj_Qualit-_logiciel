@@ -1,3 +1,4 @@
-inventory/target/
-
+# Compiled class file
 *.class
+
+target\

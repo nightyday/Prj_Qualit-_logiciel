@@ -7,6 +7,21 @@ module qualite_log {
     opens qualite_log to javafx.fxml;
     exports qualite_log;
 
+    opens qualite_log.controller to javafx.fxml;
+    exports qualite_log.controller;
+
+    opens qualite_log.controller.booking to javafx.fxml;
+    exports qualite_log.controller.booking;
+
+    opens qualite_log.controller.tool to javafx.fxml;
+    exports qualite_log.controller.tool;
+
+    opens qualite_log.controller.tooltype to javafx.fxml;
+    exports qualite_log.controller.tooltype;
+
+    opens qualite_log.controller.user to javafx.fxml;
+    exports qualite_log.controller.user;
+
     opens qualite_log.view to javafx.fxml;
     exports qualite_log.view;
 

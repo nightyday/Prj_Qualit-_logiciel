@@ -6,13 +6,6 @@
     "configurations": [
         {
             "type": "java",
-            "name": "Main",
-            "request": "launch",
-            "mainClass": "qualite_log/qualite_log.Main",
-            "projectName": "inventory"
-        },
-        {
-            "type": "java",
             "name": "App",
             "request": "launch",
             "mainClass": "qualite_log/qualite_log.App",
