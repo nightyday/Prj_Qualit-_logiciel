@@ -54,5 +54,21 @@ public class ConnexionController {
             e.printStackTrace();
             // Gérer ici l'erreur 
         }
+
+        // String matricule = textFielMatricule.getText();
+        //         String password = passWordField.getText();
+        //         Administrator admin = Authentification.authenticateAdmin(matricule, password);
+        //         User user = Authentification.authenticateUser(matricule, password);
+        //         if (user != null) {
+        //             SessionManager.setCurrentUser(user);
+        //             // Chargez l interface User
+        //             loadUserMenu();
+        //         } else if (admin != null) {
+        //             SessionManager.setCurrentAdmin(admin);
+        //             // Chargez l interface Admin
+        //             loadAdminMenu();
+        //         } else {
+        //             label.setText("Matricule ou mot de passe incorrect");
+        //         }
     }
 }
