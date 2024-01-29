@@ -56,3 +56,38 @@ public class ConnexionController {
         }
     }
 }
+
+
+// private void loadUserMenu() {
+//     ////////// Visible invisible./////////////////////
+//     System.out.println("User authentifié : "+SessionManager.getCurrentUser().getFirstName());
+//     //changeView(pathView:"/qualite_log/MenuUserFrame.fxml");
+
+// }
+
+// private void loadAdminMenu() {
+//     System.out.println("Admin authentifié : "+SessionManager.getCurrentAdmin().getFirstName());
+//    // changeView(pathView:"/qualite_log/MenuAdminFrame.fxml");
+//     ////////// Visible invisible./////////////////////
+// }
+
+
+//  button.setOnAction(new EventHandler<ActionEvent>() {
+//             public void handle(ActionEvent t) {
+//                 String matricule = textFielMatricule.getText();
+//                 String password = passWordField.getText();
+//                 Administrator admin = Authentification.authenticateAdmin(matricule, password);
+//                 User user = Authentification.authenticateUser(matricule, password);
+//                 if (user != null) {
+//                     SessionManager.setCurrentUser(user);
+//                     // Chargez l interface User
+//                     loadUserMenu();
+//                 } else if (admin != null) {
+//                     SessionManager.setCurrentAdmin(admin);
+//                     // Chargez l interface Admin
+//                     loadAdminMenu();
+//                 } else {
+//                     System.out.println("Email ou mot de passe incorrect");
+//                 }
+//             }
+
