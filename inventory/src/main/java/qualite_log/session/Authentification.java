@@ -10,7 +10,7 @@ import java.util.List;
 public class Authentification {
 
     /**
-     * @param matricule
+     * @param matricule // reprsente l'email de l'utilisateur
      * @param password
      * @return l'administrateur s'il est authentifié, sinon null
      * 
@@ -29,9 +29,18 @@ public class Authentification {
                 // Vérifier si le mot de passe correspond
                 if (password.equals(storedPassword)) {
                     return admin; // Authentification réussie
+                } else {
+                    /////// ::::::::::::::::::::://////////////////////////////////////////////////
+                    // "Mot de passe incorrect",
+
+                    return null;
                 }
             }
         }
+
+        /////// ::::::::::::::::::::://////////////////////////////////////////////////
+        // Adresse email non trouvée", =
+
         return null;
     }
 
@@ -59,5 +68,4 @@ public class Authentification {
         }
         return null;
     }
-
 }

@@ -12,6 +12,7 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import qualite_log.session.SessionManager;
 
 public class MenuAdminFrame {
 
@@ -177,6 +178,7 @@ public class MenuAdminFrame {
                         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/qualite_log/ConnexionFrame.fxml"));
                         root = (Parent) fxmlLoader.load();
                         menuVBox.getChildren().add(root);
+                        SessionManager.clearSession();
                     }
                     catch (Exception e) {
                         e.printStackTrace();

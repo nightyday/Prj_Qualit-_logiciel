@@ -67,15 +67,20 @@ public class ConnexionFrame {
                     // Chargez l interface Admin
                     loadAdminMenu();
                 } else {
-                    label.setText("Matricule ou mot de passe incorrect");
+                    System.out.println("Email ou mot de passe incorrect");
                 }
             }
 
             private void loadUserMenu() {
                 ////////// Visible invisible./////////////////////
+                System.out.println("User authentifié : "+SessionManager.getCurrentUser().getFirstName());
+                //changeView(pathView:"/qualite_log/MenuUserFrame.fxml");
+
             }
 
             private void loadAdminMenu() {
+                System.out.println("Admin authentifié : "+SessionManager.getCurrentAdmin().getFirstName());
+               // changeView(pathView:"/qualite_log/MenuAdminFrame.fxml");
                 ////////// Visible invisible./////////////////////
             }
         });
