@@ -3,7 +3,6 @@ package qualite_log;
 import java.util.List;
 
 import qualite_log.data_import.DataReader;
-import qualite_log.model.Administrator;
 import qualite_log.model.Data;
 import qualite_log.model.User;
 

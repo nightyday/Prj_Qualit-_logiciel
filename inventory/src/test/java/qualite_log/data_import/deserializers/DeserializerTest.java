@@ -1,13 +1,13 @@
 package qualite_log.data_import.deserializers;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
@@ -21,7 +21,7 @@ public class DeserializerTest {
     ObjectMapper mapper;
     List<EquipmentType> typesByEquipmentsId;
 
-    @Before
+    @BeforeEach
     public void setup() {
         mapper = new ObjectMapper();
     }

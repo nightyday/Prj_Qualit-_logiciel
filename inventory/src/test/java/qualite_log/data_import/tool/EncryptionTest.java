@@ -1,6 +1,6 @@
 package qualite_log.data_import.tool;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
@@ -10,7 +10,7 @@ import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import qualite_log.tool.Encryption;
 

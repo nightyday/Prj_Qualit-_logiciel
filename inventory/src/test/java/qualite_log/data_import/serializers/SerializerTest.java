@@ -1,14 +1,14 @@
 package qualite_log.data_import.serializers;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.IOException;
 import java.io.StringWriter;
 import java.io.Writer;
 import java.time.LocalDate;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonGenerator;
@@ -30,7 +30,7 @@ public class SerializerTest {
     Equipment equip;
     Booking book;
 
-    @Before
+    @BeforeEach
     public void initData() {
         data = Data.getInstance();
 
