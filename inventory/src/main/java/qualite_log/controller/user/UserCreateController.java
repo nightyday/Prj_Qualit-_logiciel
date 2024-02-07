@@ -35,7 +35,7 @@ public class UserCreateController {
 
     @FXML
     private TextField mailTextField;
-
+    
     @FXML
     private TextField nomTextField;
 
@@ -65,13 +65,13 @@ public class UserCreateController {
         }
     }
 
-    private boolean validateInput() {
+    public boolean validateInput() {
         return Pattern.matches("^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$", mailTextField.getText()) &&
                Pattern.matches("^[a-zA-Z0-9]{1,30}$", nomTextField.getText()) &&
                Pattern.matches("^[a-zA-Z0-9]{1,30}$", prenomTextField.getText());
     }
 
-    private void createUser() {
+    public void createUser() {
         if (roleComboBox.getValue().equals("administrateur")) {
             Data.getInstance().getAdministrators().add(new Administrator(nomTextField.getText(), prenomTextField.getText(), mailTextField.getText()));
         } else {
@@ -79,7 +79,7 @@ public class UserCreateController {
         }
     }
 
-    private void switchToUserListView() {
+    public void switchToUserListView() {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/qualite_log/UserListFrame.fxml"));
             Parent root = fxmlLoader.load();

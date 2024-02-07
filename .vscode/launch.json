@@ -9,7 +9,7 @@
             "name": "App",
             "request": "launch",
             "mainClass": "qualite_log/qualite_log.App",
-            "projectName": "inventory"
+            "projectName": "inventory",
         }
     ]
 }
