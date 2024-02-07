@@ -15,8 +15,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import qualite_log.model.Administrator;
 import qualite_log.model.Data;
 import qualite_log.model.Person;
+import qualite_log.model.User;
 public class UserDeleteController {
 
     @FXML
@@ -51,7 +53,11 @@ public class UserDeleteController {
         }
         mailComboBox.getItems().addAll(emailData);
 
-        deleteButton.setOnAction(this::handleDeleteAction);
+        if (mailComboBox.getItems().size() > 0) {
+            mailComboBox.setValue(mailComboBox.getItems().get(0));
+        }
+
+        
     }
 
     @FXML
@@ -66,12 +72,25 @@ public class UserDeleteController {
     }
 
     private void deleteUser(Person person) {
-        if (person.getType().equals("administrateur")) {
-            Data.getInstance().getAdministrators().remove(person);
+        if (person.getType().equals("administrator")) {
+            Administrator toRemove = Data.getInstance().getAdministrators().stream()
+                .filter(admin -> admin.getEmail().equals(person.getEmail()))
+                .findFirst()
+                .orElse(null);
+            if (toRemove != null) {
+                Data.getInstance().removeAdministrator(toRemove);
+            }
         } else if (person.getType().equals("user")) {
-            Data.getInstance().getUsers().remove(person);
+            User toRemove = Data.getInstance().getUsers().stream()
+                .filter(user -> user.getEmail().equals(person.getEmail()))
+                .findFirst()
+                .orElse(null);
+            if (toRemove != null) {
+                Data.getInstance().removeUser(toRemove);
+            }
         }
     }
+
 
     private void switchToUserListView() {
         try {

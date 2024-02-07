@@ -37,15 +37,20 @@ public class Data {
     }
 
     public List<EquipmentType> getEquipmentTypes() {
-        return equipmentTypes;
+        return new ArrayList<>(equipmentTypes);
     }
+
+    public void removeEquipmentTypes(EquipmentType equipmentTypeSelected) {
+        this.equipmentTypes.remove(equipmentTypeSelected);
+    }
+
 
     public void setEquipmentTypes(List<EquipmentType> equipmentTypes) {
         this.equipmentTypes = equipmentTypes;
     }
 
     public void addEquipmentTypes(EquipmentType equipmentType) {
-        equipmentTypes.add(equipmentType);
+        this.equipmentTypes.add(equipmentType);
     }
 
     public List<Booking> getBookings() {
