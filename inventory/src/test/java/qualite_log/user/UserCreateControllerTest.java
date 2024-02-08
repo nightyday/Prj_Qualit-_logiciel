@@ -1,58 +1,168 @@
 package qualite_log.user;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.input.KeyCode;
-import javafx.stage.Stage;
-import qualite_log.controller.user.UserCreateController;
-
+import org.testfx.api.FxRobot;
 import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.framework.junit5.Start;
-import org.testfx.api.FxRobot;
+import javafx.scene.Scene;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.stage.Stage;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.input.KeyCode;
+import javafx.scene.text.Text;
+
+import static org.testfx.api.FxAssert.verifyThat;
+import static org.testfx.matcher.base.NodeMatchers.isVisible;
+
 
 @ExtendWith(ApplicationExtension.class)
-public class UserCreateControllerTest {
-
-    UserCreateController controller;
-    FxRobot robot = new FxRobot();
+public class UserCreateControllerTest extends FxRobot {
 
     @Start
     public void start(Stage stage) throws Exception {
-         // Charger le FXML de votre interface utilisateur
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/qualite_log/UserCreateFrame.fxml"));
         Parent root = loader.load();
-
-        // Récupérer le contrôleur associé au FXML
-        controller = loader.getController();
-
-        // Créer une scène et l'assigner au stage
         stage.setScene(new Scene(root));
         stage.show();
     }
 
+    /*** CAS PASSANT */
     @Test
-    void testValidateInputValid() {
-        // Simuler la saisie de l'utilisateur
-        robot.clickOn("#nomTextField").write("Doe");
-        robot.clickOn("#prenomTextField").write("John");
-        robot.clickOn("#mailTextField").write("test@example.com");
-        robot.clickOn("#roleComboBox");
-        robot.type(KeyCode.DOWN); // Sélectionner le premier élément
-        robot.type(KeyCode.ENTER); // "administrateur" ou "utilisateur", selon l'ordre dans le ComboBox
+    void testSuccessfulUserCreation() {
+        clickOn("#nomTextField").write("Barré");
+        clickOn("#prenomTextField").write("François");
+        clickOn("#mailTextField").write("test@example.com");
+        clickOn("#roleComboBox");
+        type(KeyCode.DOWN); // Déplace le curseur au premier choix
+        type(KeyCode.DOWN); // Déplace au deuxième choix
+        type(KeyCode.ENTER); // Sélectionne le choix
         
-        // Simuler un clic sur le bouton de création
-        robot.clickOn("#createButton");
+        clickOn("#createButton");
         
-        // Ici, vous devez définir le comportement attendu de votre application.
-        // Par exemple, si vous vous attendez à ce qu'une nouvelle vue soit chargée, vous devrez vérifier cela.
-        // Comme nous ne pouvons pas interagir directement avec Data.getInstance() depuis TestFX,
-        // vous pouvez vérifier si une vue spécifique est affichée ou non, ou utiliser un spy/mock de Data.getInstance()
-        // pour vérifier si les méthodes getAdministrators().add(...) ou getUsers().add(...) ont été appelées.
+        verifyThat("#tableView", isVisible()); // Vérifier que la liste des utilisateurs est visible
+    }
+
+    /*** TESTS AVEC UN CHAMP INCORRECT */
+    @Test
+    void testIncorrectLastName() {
+        clickOn("#nomTextField").write("Barré000");
+        clickOn("#prenomTextField").write("François");
+        clickOn("#mailTextField").write("test@example.com");
+        clickOn("#roleComboBox");
+        type(KeyCode.DOWN); // Déplace le curseur au premier choix
+        type(KeyCode.DOWN); // Déplace au deuxième choix
+        type(KeyCode.ENTER); // Sélectionne le choix
+        
+        clickOn("#createButton");
+        
+        // Vérification de l'affichage de l'alerte
+        Node dialogPane = lookup(".dialog-pane").query();
+        from(dialogPane).lookup((Text t) -> t.getText().startsWith("Format de la saisie non conforme."));
+        verifyThat(dialogPane, isVisible());
+    }
+
+    @Test
+    void testIncorrectFirstName() {
+        clickOn("#nomTextField").write("Barré");
+        clickOn("#prenomTextField").write("François000");
+        clickOn("#mailTextField").write("test@example.com");
+        clickOn("#roleComboBox");
+        type(KeyCode.DOWN); // Déplace le curseur au premier choix
+        type(KeyCode.DOWN); // Déplace au deuxième choix
+        type(KeyCode.ENTER); // Sélectionne le choix
+        
+        clickOn("#createButton");
+        
+        // Vérification de l'affichage de l'alerte
+        Node dialogPane = lookup(".dialog-pane").query();
+        from(dialogPane).lookup((Text t) -> t.getText().startsWith("Format de la saisie non conforme."));
+        verifyThat(dialogPane, isVisible());
+    }
+
+    @Test
+    void testIncorrectMail() {
+        clickOn("#nomTextField").write("Barré");
+        clickOn("#prenomTextField").write("François");
+        clickOn("#mailTextField").write("test@examplecom");
+        clickOn("#roleComboBox");
+        type(KeyCode.DOWN); // Déplace le curseur au premier choix
+        type(KeyCode.DOWN); // Déplace au deuxième choix
+        type(KeyCode.ENTER); // Sélectionne le choix
+        
+        clickOn("#createButton");
+        
+        // Vérification de l'affichage de l'alerte
+        Node dialogPane = lookup(".dialog-pane").query();
+        from(dialogPane).lookup((Text t) -> t.getText().startsWith("Format de la saisie non conforme."));
+        verifyThat(dialogPane, isVisible());
+    }
+
+    @Test
+    void testNoRoleSelection() {
+        clickOn("#nomTextField").write("Barré");
+        clickOn("#prenomTextField").write("François");
+        clickOn("#mailTextField").write("test@example.com");
+        
+        clickOn("#createButton");
+        
+        // Vérification de l'affichage de l'alerte
+        Node dialogPane = lookup(".dialog-pane").query();
+        from(dialogPane).lookup((Text t) -> t.getText().startsWith("Format de la saisie non conforme."));
+        verifyThat(dialogPane, isVisible());
+    }
+
+    /*** TESTS AVEC UN CHAMP VIDE */
+    @Test
+    void testEmptyLastName() {
+        clickOn("#prenomTextField").write("François");
+        clickOn("#mailTextField").write("test@example.com");
+        clickOn("#roleComboBox");
+        type(KeyCode.DOWN); // Déplace le curseur au premier choix
+        type(KeyCode.DOWN); // Déplace au deuxième choix
+        type(KeyCode.ENTER); // Sélectionne le choix
+        
+        clickOn("#createButton");
+        
+        // Vérification de l'affichage de l'alerte
+        Node dialogPane = lookup(".dialog-pane").query();
+        from(dialogPane).lookup((Text t) -> t.getText().startsWith("Format de la saisie non conforme."));
+        verifyThat(dialogPane, isVisible());
+    }
+
+    @Test
+    void testEmptyFirstName() {
+        clickOn("#nomTextField").write("Barré");
+        clickOn("#mailTextField").write("test@example.com");
+        clickOn("#roleComboBox");
+        type(KeyCode.DOWN); // Déplace le curseur au premier choix
+        type(KeyCode.DOWN); // Déplace au deuxième choix
+        type(KeyCode.ENTER); // Sélectionne le choix
+        
+        clickOn("#createButton");
+        
+        // Vérification de l'affichage de l'alerte
+        Node dialogPane = lookup(".dialog-pane").query();
+        from(dialogPane).lookup((Text t) -> t.getText().startsWith("Format de la saisie non conforme."));
+        verifyThat(dialogPane, isVisible());
+    }
+
+    @Test
+    void testEmptyMail() {
+        clickOn("#nomTextField").write("Barré");
+        clickOn("#prenomTextField").write("François");
+        clickOn("#mailTextField").write("test@examplecom");
+        clickOn("#roleComboBox");
+        type(KeyCode.DOWN); // Déplace le curseur au premier choix
+        type(KeyCode.DOWN); // Déplace au deuxième choix
+        type(KeyCode.ENTER); // Sélectionne le choix
+        
+        clickOn("#createButton");
+        
+        // Vérification de l'affichage de l'alerte
+        Node dialogPane = lookup(".dialog-pane").query();
+        from(dialogPane).lookup((Text t) -> t.getText().startsWith("Format de la saisie non conforme."));
+        verifyThat(dialogPane, isVisible());
     }
 }

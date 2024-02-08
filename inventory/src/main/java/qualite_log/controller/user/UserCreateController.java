@@ -35,7 +35,7 @@ public class UserCreateController {
 
     @FXML
     private TextField mailTextField;
-    
+
     @FXML
     private TextField nomTextField;
 
@@ -67,8 +67,8 @@ public class UserCreateController {
 
     public boolean validateInput() {
         return Pattern.matches("^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$", mailTextField.getText()) &&
-               Pattern.matches("^[a-zA-Z0-9]{1,30}$", nomTextField.getText()) &&
-               Pattern.matches("^[a-zA-Z0-9]{1,30}$", prenomTextField.getText());
+               Pattern.matches("^[a-zA-Z\\u00C0-\\u00FF]{1,30}$", nomTextField.getText()) &&
+               Pattern.matches("^[a-zA-Z\\u00C0-\\u00FF]{1,30}$", prenomTextField.getText());
     }
 
     public void createUser() {
