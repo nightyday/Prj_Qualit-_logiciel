@@ -42,7 +42,7 @@ public class ToolTypeCreateController {
     public void handleCreateAction(ActionEvent event) {
         if (validateInput(typeTextField.getText())) {
             try {
-                Data.getInstance().getEquipmentTypes().add(new EquipmentType(typeTextField.getText()));
+                Data.getInstance().addEquipmentTypes(new EquipmentType(typeTextField.getText()));
                 switchToToolTypeListView();
             } catch (Exception e) {
                 showAlert("Erreur", "Désolé, l’action n’a pas pu être effectuée. Veuillez réessayer.");
@@ -60,6 +60,13 @@ public class ToolTypeCreateController {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/qualite_log/ToolTypeListFrame.fxml"));
             Parent root = fxmlLoader.load();
+
+            // Obtention d'une référence au contrôleur de la vue ToolTypeListFrame
+            ToolTypeListController controller = fxmlLoader.getController();
+            
+            // Appel de la méthode refreshData pour s'assurer que les données sont à jour
+            controller.refreshData();
+
             anchorPane.getChildren().clear();
             anchorPane.getChildren().add(root);
         } catch (Exception e) {

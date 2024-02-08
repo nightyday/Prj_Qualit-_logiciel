@@ -2,6 +2,7 @@ package qualite_log.data_import;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -67,23 +68,21 @@ public class DataReader {
      * @return data
      */
     public static Data insertUsers(Data data) {
-
         try {
             ObjectMapper mapper = new ObjectMapper();
-            data.setUsers(Arrays.asList(mapper.readValue(new File(getPath("users.json")), User[].class)));
-            
+            User[] usersArray = mapper.readValue(new File(getPath("users.json")), User[].class);
+            List<User> modifiableList = new ArrayList<>(Arrays.asList(usersArray));
+            data.setUsers(modifiableList);
         } catch (StreamReadException e) {
             e.printStackTrace();
-            
         } catch (DatabindException e) {
             e.printStackTrace();
-
         } catch (IOException e) {
             e.printStackTrace();            
         } 
-
         return data;
     }
+    
 
     /*
      * Gère la mise à jour des objets Administrator dans data
@@ -92,23 +91,21 @@ public class DataReader {
      * @return data
      */
     public static Data insertAdministrators(Data data) {
-
-        try  {
+        try {
             ObjectMapper mapper = new ObjectMapper();
-            data.setAdministrators(Arrays.asList(mapper.readValue(new File(getPath("administrators.json")), Administrator[].class)));
-
+            Administrator[] adminsArray = mapper.readValue(new File(getPath("administrators.json")), Administrator[].class);
+            List<Administrator> modifiableList = new ArrayList<>(Arrays.asList(adminsArray));
+            data.setAdministrators(modifiableList);
         } catch (StreamReadException e) {
             e.printStackTrace();
-
         } catch (DatabindException e) {
             e.printStackTrace();
-
         } catch (IOException e) {
-            e.printStackTrace();
+            e.printStackTrace();            
         } 
-
         return data;
     }
+    
 
     /*
      * Gère la mise à jour des objets Equipment dans data
@@ -137,17 +134,17 @@ public class DataReader {
      * @return data
      */
     public static Data insertEquipmentTypes(Data data) {
-
-        try {
-            ObjectMapper mapper = new ObjectMapper();
-            data.setEquipmentTypes(Arrays.asList(mapper.readValue(new File(getPath("equipment_types.json")), EquipmentType[].class)));
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        } 
-
-        return data;
+    try {
+        ObjectMapper mapper = new ObjectMapper();
+        EquipmentType[] typesArray = mapper.readValue(new File(getPath("equipment_types.json")), EquipmentType[].class);
+        List<EquipmentType> modifiableList = new ArrayList<>(Arrays.asList(typesArray));
+        data.setEquipmentTypes(modifiableList);
+    } catch (IOException e) {
+        e.printStackTrace();
     }
+    return data;
+}
+
 
     /*
      * Gère la mise à jour des objets Booking dans data

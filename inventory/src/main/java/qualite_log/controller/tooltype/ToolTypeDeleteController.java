@@ -50,10 +50,11 @@ public class ToolTypeDeleteController {
     public void handleDeleteAction(ActionEvent event) {
         try {
             EquipmentType equipmentTypeSelected = equipmentTypes.get(typeComboBox.getItems().indexOf(typeComboBox.getValue()));
-            Data.getInstance().getEquipmentTypes().remove(equipmentTypeSelected);
+            Data.getInstance().removeEquipmentTypes(equipmentTypeSelected);
             switchToToolTypeListView();
         } catch (Exception e) {
             showAlert("Erreur", "Désolé, l’action n’a pas pu être effectuée. Veuillez réessayer.");
+            e.printStackTrace();
         }
     }
 
@@ -61,12 +62,21 @@ public class ToolTypeDeleteController {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/qualite_log/ToolTypeListFrame.fxml"));
             Parent root = fxmlLoader.load();
+            
+            // Obtention d'une référence au contrôleur de la vue ToolTypeListFrame
+            ToolTypeListController controller = fxmlLoader.getController();
+            
+            // Appel de la méthode refreshData pour s'assurer que les données sont à jour
+            controller.refreshData();
+            
+            // Affichage de la vue
             anchorPane.getChildren().clear();
             anchorPane.getChildren().add(root);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+    
 
     private void showAlert(String title, String content) {
         Alert alert = new Alert(AlertType.WARNING);

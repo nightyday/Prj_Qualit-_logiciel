@@ -55,5 +55,11 @@ public class ToolTypeListController {
         alert.setContentText(content);
         alert.showAndWait();
     }
+
+    public void refreshData() {
+        ObservableList<EquipmentType> data = FXCollections.observableArrayList(Data.getInstance().getEquipmentTypes());
+        tableView.setItems(data); // Rafraîchir les données
+    }
+    
 }
 

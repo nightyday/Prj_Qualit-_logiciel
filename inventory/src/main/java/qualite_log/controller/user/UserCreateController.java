@@ -73,9 +73,9 @@ public class UserCreateController {
 
     public void createUser() {
         if (roleComboBox.getValue().equals("administrateur")) {
-            Data.getInstance().getAdministrators().add(new Administrator(nomTextField.getText(), prenomTextField.getText(), mailTextField.getText()));
+            Data.getInstance().addAdministrator(new Administrator(nomTextField.getText(), prenomTextField.getText(), mailTextField.getText()));
         } else {
-            Data.getInstance().getUsers().add(new User(nomTextField.getText(), prenomTextField.getText(), mailTextField.getText()));
+            Data.getInstance().addUsers(new User(nomTextField.getText(), prenomTextField.getText(), mailTextField.getText()));
         }
     }
 
