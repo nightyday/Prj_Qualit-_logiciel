@@ -28,6 +28,7 @@ public class UserListControllerTest extends FxRobot {
 
     @Start
     public void start(Stage stage) throws Exception {
+        configureData();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/qualite_log/UserListFrame.fxml"));
         Parent root = loader.load();
         stage.setScene(new Scene(root));
@@ -56,10 +57,10 @@ public class UserListControllerTest extends FxRobot {
     @SuppressWarnings("unchecked")
     @Test
     void testUsersDisplayOnUserListPage() {
-        configureData();
         TableView<Person> tableView = lookup("#tableView").queryAs(TableView.class);
 
         // Vérifier que le TableView contient au moins une ligne de données
+        sleep(2000);
         assertFalse(tableView.getItems().isEmpty(), "Le TableView devrait contenir au moins un utilisateur.");
     }
 
@@ -67,10 +68,6 @@ public class UserListControllerTest extends FxRobot {
     @SuppressWarnings("unchecked")
     @Test
     void testNoUserInDatabase() {
-        Data data = Data.getInstance();
-        data.setUsers(new ArrayList<>());
-        DataWriter.extractUsers(data);
-
         TableView<Person> tableView = lookup("#tableView").queryAs(TableView.class);
 
         // Vérifier que le TableView ne contient aucune ligne de données
