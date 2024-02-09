@@ -5,7 +5,9 @@ import static org.testfx.api.FxAssert.verifyThat;
 import static org.testfx.matcher.base.NodeMatchers.isVisible;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.testfx.api.FxRobot;
+import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.framework.junit5.Start;
 
 import javafx.fxml.FXMLLoader;
@@ -13,15 +15,17 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TableView;
-import javafx.scene.input.KeyCode;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import qualite_log.model.Person;
+import qualite_log.model.EquipmentType;
 
+
+@ExtendWith(ApplicationExtension.class)
 public class ToolTypeCreateControllerTest extends FxRobot {
-@Start
+
+    @Start
     public void start(Stage stage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/qualite_log/UserCreateFrame.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/qualite_log/ToolTypeCreateFrame.fxml"));
         Parent root = loader.load();
         stage.setScene(new Scene(root));
         stage.show();
@@ -30,35 +34,35 @@ public class ToolTypeCreateControllerTest extends FxRobot {
     /*** CAS PASSANT */
     @SuppressWarnings("unchecked")
     @Test
-    void testSuccessfulUserCreation() {
-        clickOn("#nomTextField").write("Barré");
-        clickOn("#prenomTextField").write("François");
-        clickOn("#mailTextField").write("test@example.com");
-        clickOn("#roleComboBox");
-        type(KeyCode.DOWN, 2); // Déplace au deuxième choix
-        type(KeyCode.ENTER); // Sélectionne le choix
+    void testSuccessfulToolTypeCreation() {
+        clickOn("#typeTextField").write("Casque");
         clickOn("#createButton");
 
-        TableView<Person> tableView = lookup("#tableView").queryAs(TableView.class);
+        TableView<EquipmentType> tableView = lookup("#tableView").queryAs(TableView.class);
 
-        // Vérifier que l'email de l'utilisateur est listé
-        boolean emailExists = tableView.getItems().stream()
-            .anyMatch(person -> "test@example.com".equals(person.getEmail()));
+        // Vérifier que le type de matériel est listé
+        boolean equipmentTypeExists = tableView.getItems().stream()
+            .anyMatch(equipmentType -> "Casque".equals(equipmentType.getType()));
 
-        // L'email doit exister dans la liste
-        assertTrue(emailExists, "L'utilisateur devrait être listé dans le TableView.");
+        // Le type de matériel doit exister dans la liste
+        assertTrue(equipmentTypeExists, "Le type de matériel devrait être listé dans le TableView.");
     }
 
-    /*** TESTS AVEC UN CHAMP INCORRECT */
+    /*** TEST AVEC UN CHAMP INCORRECT */
     @Test
-    void testIncorrectLastName() {
-        clickOn("#nomTextField").write("Barré000");
-        clickOn("#prenomTextField").write("François");
-        clickOn("#mailTextField").write("test@example.com");
-        clickOn("#roleComboBox");
-        type(KeyCode.DOWN, 2); // Déplace au deuxième choix
-        type(KeyCode.ENTER); // Sélectionne le choix
+    void testIncorrectType() {
+        clickOn("#typeTextField").write("Casque-Audio");
+        clickOn("#createButton");
         
+        // Vérification de l'affichage de l'alerte
+        Node dialogPane = lookup(".dialog-pane").query();
+        from(dialogPane).lookup((Text t) -> t.getText().startsWith("Format de la saisie non conforme."));
+        verifyThat(dialogPane, isVisible());
+    }
+
+    /*** TEST AVEC UN CHAMP VIDE */
+    @Test
+    void testEmptyType() {
         clickOn("#createButton");
         
         // Vérification de l'affichage de l'alerte

@@ -76,7 +76,6 @@ public class ToolTypeDeleteController {
             e.printStackTrace();
         }
     }
-    
 
     private void showAlert(String title, String content) {
         Alert alert = new Alert(AlertType.WARNING);

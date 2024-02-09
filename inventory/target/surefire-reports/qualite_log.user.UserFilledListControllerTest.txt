@@ -1,0 +1,7 @@
+-------------------------------------------------------------------------------
+Test set: qualite_log.user.UserFilledListControllerTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.006 s <<< FAILURE! - in qualite_log.user.UserFilledListControllerTest
+qualite_log.user.UserFilledListControllerTest.testUsersDisplayOnUserListPage  Time elapsed: 0.001 s  <<< ERROR!
+java.lang.reflect.InaccessibleObjectException: Unable to make void qualite_log.user.UserFilledListControllerTest.testUsersDisplayOnUserListPage() accessible: module qualite_log does not "opens qualite_log.user" to unnamed module @4f6ee6e4
+

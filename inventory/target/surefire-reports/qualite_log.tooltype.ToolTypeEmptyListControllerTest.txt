@@ -1,0 +1,7 @@
+-------------------------------------------------------------------------------
+Test set: qualite_log.tooltype.ToolTypeEmptyListControllerTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.003 s <<< FAILURE! - in qualite_log.tooltype.ToolTypeEmptyListControllerTest
+qualite_log.tooltype.ToolTypeEmptyListControllerTest.testNoToolTypeInDatabase  Time elapsed: 0 s  <<< ERROR!
+java.lang.reflect.InaccessibleObjectException: Unable to make void qualite_log.tooltype.ToolTypeEmptyListControllerTest.testNoToolTypeInDatabase() accessible: module qualite_log does not "opens qualite_log.tooltype" to unnamed module @4f6ee6e4
+

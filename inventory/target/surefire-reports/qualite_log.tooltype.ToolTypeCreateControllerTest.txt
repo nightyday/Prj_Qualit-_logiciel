@@ -1,0 +1,13 @@
+-------------------------------------------------------------------------------
+Test set: qualite_log.tooltype.ToolTypeCreateControllerTest
+-------------------------------------------------------------------------------
+Tests run: 3, Failures: 0, Errors: 3, Skipped: 0, Time elapsed: 0.017 s <<< FAILURE! - in qualite_log.tooltype.ToolTypeCreateControllerTest
+qualite_log.tooltype.ToolTypeCreateControllerTest.testSuccessfulToolTypeCreation  Time elapsed: 0 s  <<< ERROR!
+java.lang.reflect.InaccessibleObjectException: Unable to make private static boolean qualite_log.tooltype.ToolTypeCreateControllerTest.lambda$2(javafx.scene.text.Text) accessible: module qualite_log does not "opens qualite_log.tooltype" to unnamed module @4f6ee6e4
+
+qualite_log.tooltype.ToolTypeCreateControllerTest.testEmptyType  Time elapsed: 0 s  <<< ERROR!
+java.lang.reflect.InaccessibleObjectException: Unable to make private static boolean qualite_log.tooltype.ToolTypeCreateControllerTest.lambda$2(javafx.scene.text.Text) accessible: module qualite_log does not "opens qualite_log.tooltype" to unnamed module @4f6ee6e4
+
+qualite_log.tooltype.ToolTypeCreateControllerTest.testIncorrectType  Time elapsed: 0 s  <<< ERROR!
+java.lang.reflect.InaccessibleObjectException: Unable to make private static boolean qualite_log.tooltype.ToolTypeCreateControllerTest.lambda$2(javafx.scene.text.Text) accessible: module qualite_log does not "opens qualite_log.tooltype" to unnamed module @4f6ee6e4
+

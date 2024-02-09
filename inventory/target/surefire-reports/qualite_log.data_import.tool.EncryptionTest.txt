@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: qualite_log.data_import.tool.EncryptionTest
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.383 s - in qualite_log.data_import.tool.EncryptionTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.316 s - in qualite_log.data_import.tool.EncryptionTest

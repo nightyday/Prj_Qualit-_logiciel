@@ -1,0 +1,25 @@
+-------------------------------------------------------------------------------
+Test set: qualite_log.user.UserUpdateControllerTest
+-------------------------------------------------------------------------------
+Tests run: 7, Failures: 0, Errors: 7, Skipped: 0, Time elapsed: 0.025 s <<< FAILURE! - in qualite_log.user.UserUpdateControllerTest
+qualite_log.user.UserUpdateControllerTest.testIncorrectFirstName  Time elapsed: 0 s  <<< ERROR!
+java.lang.reflect.InaccessibleObjectException: Unable to make private static boolean qualite_log.user.UserUpdateControllerTest.lambda$4(javafx.scene.text.Text) accessible: module qualite_log does not "opens qualite_log.user" to unnamed module @4f6ee6e4
+
+qualite_log.user.UserUpdateControllerTest.testEmptyMail  Time elapsed: 0.001 s  <<< ERROR!
+java.lang.reflect.InaccessibleObjectException: Unable to make private static boolean qualite_log.user.UserUpdateControllerTest.lambda$4(javafx.scene.text.Text) accessible: module qualite_log does not "opens qualite_log.user" to unnamed module @4f6ee6e4
+
+qualite_log.user.UserUpdateControllerTest.testIncorrectLastName  Time elapsed: 0.001 s  <<< ERROR!
+java.lang.reflect.InaccessibleObjectException: Unable to make private static boolean qualite_log.user.UserUpdateControllerTest.lambda$4(javafx.scene.text.Text) accessible: module qualite_log does not "opens qualite_log.user" to unnamed module @4f6ee6e4
+
+qualite_log.user.UserUpdateControllerTest.testIncorrectMail  Time elapsed: 0 s  <<< ERROR!
+java.lang.reflect.InaccessibleObjectException: Unable to make private static boolean qualite_log.user.UserUpdateControllerTest.lambda$4(javafx.scene.text.Text) accessible: module qualite_log does not "opens qualite_log.user" to unnamed module @4f6ee6e4
+
+qualite_log.user.UserUpdateControllerTest.testSuccessfulUserUpdate  Time elapsed: 0 s  <<< ERROR!
+java.lang.reflect.InaccessibleObjectException: Unable to make private static boolean qualite_log.user.UserUpdateControllerTest.lambda$4(javafx.scene.text.Text) accessible: module qualite_log does not "opens qualite_log.user" to unnamed module @4f6ee6e4
+
+qualite_log.user.UserUpdateControllerTest.testEmptyFirstName  Time elapsed: 0 s  <<< ERROR!
+java.lang.reflect.InaccessibleObjectException: Unable to make private static boolean qualite_log.user.UserUpdateControllerTest.lambda$4(javafx.scene.text.Text) accessible: module qualite_log does not "opens qualite_log.user" to unnamed module @4f6ee6e4
+
+qualite_log.user.UserUpdateControllerTest.testEmptyLastName  Time elapsed: 0.001 s  <<< ERROR!
+java.lang.reflect.InaccessibleObjectException: Unable to make private static boolean qualite_log.user.UserUpdateControllerTest.lambda$4(javafx.scene.text.Text) accessible: module qualite_log does not "opens qualite_log.user" to unnamed module @4f6ee6e4
+

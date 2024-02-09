@@ -72,7 +72,4 @@ public class UserDeleteControllerTest extends FxRobot {
         // L'email ne doit pas exister dans la liste
         assertFalse(emailExists, "L'utilisateur ne devrait plus être listé dans le TableView.");
     }
-
-    /*** TESTS D'ERREUR */
-    // TODO: Ajouter des tests pour les cas d'erreur
 }
