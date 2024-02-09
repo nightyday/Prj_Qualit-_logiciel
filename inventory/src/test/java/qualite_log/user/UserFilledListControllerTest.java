@@ -20,11 +20,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 @ExtendWith(ApplicationExtension.class)
-public class UserListControllerTest extends FxRobot {
+public class UserFilledListControllerTest extends FxRobot {
 
     @Start
     public void start(Stage stage) throws Exception {
@@ -60,17 +59,6 @@ public class UserListControllerTest extends FxRobot {
         TableView<Person> tableView = lookup("#tableView").queryAs(TableView.class);
 
         // Vérifier que le TableView contient au moins une ligne de données
-        sleep(2000);
         assertFalse(tableView.getItems().isEmpty(), "Le TableView devrait contenir au moins un utilisateur.");
-    }
-
-    /*** CAS D'ERREUR */
-    @SuppressWarnings("unchecked")
-    @Test
-    void testNoUserInDatabase() {
-        TableView<Person> tableView = lookup("#tableView").queryAs(TableView.class);
-
-        // Vérifier que le TableView ne contient aucune ligne de données
-        assertTrue(tableView.getItems().isEmpty(), "Le TableView ne devrait pas contenir d'utilisateur.");
     }
 }
