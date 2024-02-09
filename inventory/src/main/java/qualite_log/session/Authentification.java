@@ -3,6 +3,7 @@ package qualite_log.session;
 import qualite_log.model.Administrator;
 import qualite_log.model.Data;
 import qualite_log.model.User;
+import qualite_log.view.WarningFrame;
 import qualite_log.data_import.DataReader;
 
 import java.util.List;
@@ -30,17 +31,16 @@ public class Authentification {
                 if (password.equals(storedPassword)) {
                     return admin; // Authentification réussie
                 } else {
-                    /////// ::::::::::::::::::::://////////////////////////////////////////////////
-                    // "Mot de passe incorrect",
-
+                    WarningFrame warning = new WarningFrame("Erreur", "Mot de passe incorrect. Veuillez réessayer.");
+                    warning.show();
                     return null;
                 }
+            } else {
+                WarningFrame warning = new WarningFrame("Erreur", "Adresse email non trouvée");
+                warning.show();
+                return null;
             }
         }
-
-        /////// ::::::::::::::::::::://////////////////////////////////////////////////
-        // Adresse email non trouvée", =
-
         return null;
     }
 
@@ -63,7 +63,15 @@ public class Authentification {
                 // Vérifier si le mot de passe correspond
                 if (password.equals(storedPassword)) {
                     return user; // Authentification réussie
+                } else {
+                    WarningFrame warning = new WarningFrame("Erreur", "Mot de passe incorrect. Veuillez réessayer.");
+                    warning.show();
+                    return null;
                 }
+            } else {
+                WarningFrame warning = new WarningFrame("Erreur", "Adresse email non trouvée");
+                warning.show();
+                return null;
             }
         }
         return null;

@@ -12,7 +12,11 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-
+import qualite_log.model.Administrator;
+import qualite_log.model.User;
+import qualite_log.session.Authentification;
+import qualite_log.session.SessionManager;
+import qualite_log.view.WarningFrame;
 
 public class ConnexionController {
 
@@ -39,55 +43,67 @@ public class ConnexionController {
 
     @FXML
     void initialize() {
-        //Ajouter si besoin 
+        // Ajouter si besoin
     }
 
+    /*
+     * @FXML
+     * public void handleLoginAction(ActionEvent event) {
+     * try {
+     * // Pour l'instant, cela passe directement à la vue suivante
+     * FXMLLoader fxmlLoader = new
+     * FXMLLoader(getClass().getResource("/qualite_log/MenuAdminFrame.fxml"));
+     * Parent root = fxmlLoader.load();
+     * vBox.getChildren().clear();
+     * vBox.getChildren().add(root);
+     * } catch (Exception e) {
+     * e.printStackTrace();
+     * // Gérer ici l'erreur
+     * }
+     * }
+     */
     @FXML
     public void handleLoginAction(ActionEvent event) {
         try {
-            // Pour l'instant, cela passe directement à la vue suivante
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/qualite_log/MenuAdminFrame.fxml"));
-            Parent root = fxmlLoader.load();
-            vBox.getChildren().clear();
-            vBox.getChildren().add(root);
+            String matricule = textFielMatricule.getText();
+            String password = passWordField.getText();
+            Administrator admin = Authentification.authenticateAdmin(matricule, password);
+            User user = Authentification.authenticateUser(matricule, password);
+            if (user != null) {
+                 SessionManager.setCurrentUser(user);
+                 // Chargez l interface User
+                switchToMenuUserView();
+             } else if (admin != null) {
+                SessionManager.setCurrentAdmin(admin);
+                // Chargez l interface Admin
+                switchToMenuAdminView();
+             }
         } catch (Exception e) {
             e.printStackTrace();
-            // Gérer ici l'erreur 
+            WarningFrame warning = new WarningFrame("Erreur", "L'authentification a échoué. Veuillez réessayer.");
+                    warning.show();        }
+    }
+
+    private void switchToMenuAdminView() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/qualite_log/MenuAdminFrame.fxml"));
+            Parent root = fxmlLoader.load();
+            anchorPanel.getChildren().clear();
+            anchorPanel.getChildren().add(root);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void switchToMenuUserView() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/qualite_log/MenuUserFrame.fxml"));
+            Parent root = fxmlLoader.load();
+            anchorPanel.getChildren().clear();
+            anchorPanel.getChildren().add(root);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }
-
-
-// private void loadUserMenu() {
-//     ////////// Visible invisible./////////////////////
-//     System.out.println("User authentifié : "+SessionManager.getCurrentUser().getFirstName());
-//     //changeView(pathView:"/qualite_log/MenuUserFrame.fxml");
-
-// }
-
-// private void loadAdminMenu() {
-//     System.out.println("Admin authentifié : "+SessionManager.getCurrentAdmin().getFirstName());
-//    // changeView(pathView:"/qualite_log/MenuAdminFrame.fxml");
-//     ////////// Visible invisible./////////////////////
-// }
-
-
-//  button.setOnAction(new EventHandler<ActionEvent>() {
-//             public void handle(ActionEvent t) {
-//                 String matricule = textFielMatricule.getText();
-//                 String password = passWordField.getText();
-//                 Administrator admin = Authentification.authenticateAdmin(matricule, password);
-//                 User user = Authentification.authenticateUser(matricule, password);
-//                 if (user != null) {
-//                     SessionManager.setCurrentUser(user);
-//                     // Chargez l interface User
-//                     loadUserMenu();
-//                 } else if (admin != null) {
-//                     SessionManager.setCurrentAdmin(admin);
-//                     // Chargez l interface Admin
-//                     loadAdminMenu();
-//                 } else {
-//                     System.out.println("Email ou mot de passe incorrect");
-//                 }
-//             }
 
