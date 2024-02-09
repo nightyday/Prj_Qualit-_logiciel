@@ -9,6 +9,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import qualite_log.session.SessionManager;
 
 public class MenuAdminController {
 
@@ -88,15 +89,8 @@ public class MenuAdminController {
 
     @FXML
     public void handleDeconnexion(ActionEvent event) {
-        try {
-            menuVBox.getChildren().remove(root);
-            menuVBox.getChildren().remove(menuVBox);
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/qualite_log/ConnexionFrame.fxml"));
-            root = fxmlLoader.load();
-            menuVBox.getChildren().add(root);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        SessionManager.clearSession();
+        changeView("/qualite_log/ConnexionFrame.fxml");
     }
 
     //  deconnexionMenuItem.setOnAction(new EventHandler<ActionEvent>() {
