@@ -18,6 +18,7 @@ import javafx.scene.layout.AnchorPane;
 import qualite_log.model.Administrator;
 import qualite_log.model.Data;
 import qualite_log.model.User;
+import qualite_log.util.ValidationConstants;
 
 public class UserCreateController {
 
@@ -66,9 +67,9 @@ public class UserCreateController {
     }
 
     public boolean validateInput() {
-        return Pattern.matches("^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$", mailTextField.getText()) &&
-               Pattern.matches("^[a-zA-Z\\u00C0-\\u00FF]{1,30}$", nomTextField.getText()) &&
-               Pattern.matches("^[a-zA-Z\\u00C0-\\u00FF]{1,30}$", prenomTextField.getText());
+        return Pattern.matches(ValidationConstants.EMAIL_REGEX, mailTextField.getText()) &&
+               Pattern.matches(ValidationConstants.NAME_REGEX, nomTextField.getText()) &&
+               Pattern.matches(ValidationConstants.NAME_REGEX, prenomTextField.getText());
     }
 
     public void createUser() {
