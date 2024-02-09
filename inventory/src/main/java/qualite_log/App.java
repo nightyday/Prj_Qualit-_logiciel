@@ -39,6 +39,7 @@ public class App extends Application {
     }
 
     public static void main(String[] args) {
+        //configureData(); // à décomenter lors du 1er Run pour initialiser des données dans les fichiers.json
         Data data = Data.getInstance(); // Permet d'initialiser la 1ere instance de Data (à partir des fichiers .json)
 
         launch(args);
@@ -56,12 +57,22 @@ public class App extends Application {
         users.add(new User("Garcia", "Ana", "ana.garcia@email.com"));
         users.add(new User("Johnson", "Brian", "brian.johnson@email.com"));
         data.setUsers(users);
+
         DataWriter.extractUsers(data);
+
+        for(User user : users) {
+            DataWriter.extractPassword(user, "password" + "u" + user.getId());
+        }
 
         List<Administrator> admins = new ArrayList<>();
         admins.add(new Administrator("Admin", "admin", "admin.admin@email.com"));
         data.setAdministrators(admins);
+
         DataWriter.extractAdministrators(data);
+
+        for(Administrator admin : admins) {
+            DataWriter.extractPassword(admin, "password" + "a" + admin.getId());
+        }
 
         List<EquipmentType> equipmentTypes = new ArrayList<>();
         equipmentTypes.add(new EquipmentType("Téléphone"));
