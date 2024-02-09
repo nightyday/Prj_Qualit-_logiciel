@@ -1,71 +1,50 @@
 package qualite_log.session;
 
+import qualite_log.data_import.DataReader;
 import qualite_log.model.Administrator;
 import qualite_log.model.Data;
+import qualite_log.model.Person;
 import qualite_log.model.User;
-import qualite_log.data_import.DataReader;
-
-import java.util.List;
 
 public class Authentification {
 
     /**
-     * @param matricule // reprsente l'email de l'utilisateur
-     * @param password
-     * @return l'administrateur s'il est authentifié, sinon null
-     * 
+     * Tente d'authentifier un administrateur avec le matricule et le mot de passe fournis.
+     *
+     * @param matricule l'email de l'administrateur
+     * @param password le mot de passe de l'administrateur
+     * @return l'administrateur authentifié, sinon null
      */
     public static Administrator authenticateAdmin(String matricule, String password) {
-        // Charger les administrateurs depuis la classe Data
-        Data data = Data.getInstance();
-        List<Administrator> admins = data.getAdministrators();
-
-        // Rechercher l'administrateur avec le matricule donné
-        for (Administrator admin : admins) {
-            if (admin.getEmail().equals(matricule)) {
-                // Récupérer le mot de passe depuis le fichier passwords.json
-                String storedPassword = DataReader.getPassword(admin);
-
-                // Vérifier si le mot de passe correspond
-                if (password.equals(storedPassword)) {
-                    return admin; // Authentification réussie
-                } else {
-                    /////// ::::::::::::::::::::://////////////////////////////////////////////////
-                    // "Mot de passe incorrect",
-
-                    return null;
-                }
-            }
-        }
-
-        /////// ::::::::::::::::::::://////////////////////////////////////////////////
-        // Adresse email non trouvée", =
-
-        return null;
+        return Data.getInstance().getAdministrators().stream()
+                .filter(admin -> admin.getEmail().equals(matricule) && checkPassword(admin, password))
+                .findFirst()
+                .orElse(null);
     }
 
     /**
-     * @param matricule
-     * @param password
-     * @return l'utilisateur s'il est authentifié, sinon null
+     * Tente d'authentifier un utilisateur avec le matricule et le mot de passe fournis.
+     *
+     * @param matricule l'email de l'utilisateur
+     * @param password le mot de passe de l'utilisateur
+     * @return l'utilisateur authentifié, sinon null
      */
     public static User authenticateUser(String matricule, String password) {
+        return Data.getInstance().getUsers().stream()
+                .filter(user -> user.getEmail().equals(matricule) && checkPassword(user, password))
+                .findFirst()
+                .orElse(null);
+    }
 
-        // Charger les utilisateurs depuis la classe Data
-        Data data = Data.getInstance();
-        List<User> users = data.getUsers();
-
-        // Rechercher l'utilisateur avec le matricule donné
-        for (User user : users) {
-            if (user.getEmail().equals(matricule)) {
-                String storedPassword = DataReader.getPassword(user);
-
-                // Vérifier si le mot de passe correspond
-                if (password.equals(storedPassword)) {
-                    return user; // Authentification réussie
-                }
-            }
-        }
-        return null;
+    /**
+     * Vérifie si le mot de passe fourni correspond au mot de passe stocké pour l'utilisateur ou l'administrateur.
+     *
+     * @param person l'utilisateur ou l'administrateur dont il faut vérifier le mot de passe
+     * @param password le mot de passe à vérifier
+     * @return vrai si le mot de passe correspond, sinon faux
+     */
+    private static boolean checkPassword(Person person, String password) {
+        String storedPassword = DataReader.getPassword(person);
+        return password.equals(storedPassword);
     }
 }

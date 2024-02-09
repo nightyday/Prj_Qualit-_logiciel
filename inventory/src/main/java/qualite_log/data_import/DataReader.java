@@ -254,23 +254,30 @@ public class DataReader {
 
     public static String getPassword(Person person) {
         ObjectMapper mapper = new ObjectMapper();
-
+    
         try {
             Map<Integer, String> passwordMap = new HashMap<>();
             File passwordsFile = new File(getPath("passwords.json"));
-
+    
             if (passwordsFile.exists()) {
                 passwordMap = mapper.readValue(passwordsFile, new TypeReference<Map<Integer, String>>() {});
             }
-
+    
             String password = passwordMap.get(person.getId());
-
-            return Encryption.decrypt(password);
-
+            
+            // Vérifiez si le mot de passe est null avant de tenter de le décrypter
+            if (password != null) {
+                return Encryption.decrypt(password);
+            } else {
+                // Peut-être lancer une exception personnalisée ou retourner null
+                System.err.println("Mot de passe non trouvé pour l'ID : " + person.getId());
+            }
+    
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+    
         return null;
     }
+    
 }

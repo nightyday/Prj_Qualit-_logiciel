@@ -179,6 +179,7 @@ public class MenuAdminFrame {
                         root = (Parent) fxmlLoader.load();
                         menuVBox.getChildren().add(root);
                         SessionManager.clearSession();
+                        /// FERMER L'APPLICATION -> remettre à la page connexion /// 
                     }
                     catch (Exception e) {
                         e.printStackTrace();

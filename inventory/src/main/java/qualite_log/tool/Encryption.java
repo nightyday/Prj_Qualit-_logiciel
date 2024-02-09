@@ -18,9 +18,9 @@ import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.spec.SecretKeySpec;
 
 /*
- * @author arthur
+ * @author Arthur CROCHEMORE
  * 
- * Pour cette classe j'ai ré-utilisé le code à : 
+ * Pour cette classe j'ai ré-utilisé le code de : 
  * https://www.baeldung.com/java-aes-encryption-decryption
  */
 public class Encryption {
