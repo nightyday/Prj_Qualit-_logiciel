@@ -13,7 +13,6 @@ import javafx.scene.Parent;
 import javafx.stage.Stage;
 import qualite_log.model.Person;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.input.KeyCode;
 import javafx.scene.text.Text;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -39,9 +38,7 @@ public class UserCreateControllerTest extends FxRobot {
         clickOn("#nomTextField").write("Barré");
         clickOn("#prenomTextField").write("François");
         clickOn("#mailTextField").write("test@example.com");
-        clickOn("#roleComboBox");
-        type(KeyCode.DOWN, 2); // Déplace au deuxième choix
-        type(KeyCode.ENTER); // Sélectionne le choix
+        clickOn("#roleComboBox").clickOn("utilisateur");
         clickOn("#createButton");
 
         TableView<Person> tableView = lookup("#tableView").queryAs(TableView.class);
@@ -60,9 +57,7 @@ public class UserCreateControllerTest extends FxRobot {
         clickOn("#nomTextField").write("Barré000");
         clickOn("#prenomTextField").write("François");
         clickOn("#mailTextField").write("test@example.com");
-        clickOn("#roleComboBox");
-        type(KeyCode.DOWN, 2); // Déplace au deuxième choix
-        type(KeyCode.ENTER); // Sélectionne le choix
+        clickOn("#roleComboBox").clickOn("utilisateur");
         
         clickOn("#createButton");
         
@@ -77,9 +72,7 @@ public class UserCreateControllerTest extends FxRobot {
         clickOn("#nomTextField").write("Barré");
         clickOn("#prenomTextField").write("François000");
         clickOn("#mailTextField").write("test@example.com");
-        clickOn("#roleComboBox");
-        type(KeyCode.DOWN, 2); // Déplace au deuxième choix
-        type(KeyCode.ENTER); // Sélectionne le choix
+        clickOn("#roleComboBox").clickOn("utilisateur");
         
         clickOn("#createButton");
         
@@ -94,9 +87,7 @@ public class UserCreateControllerTest extends FxRobot {
         clickOn("#nomTextField").write("Barré");
         clickOn("#prenomTextField").write("François");
         clickOn("#mailTextField").write("test@examplecom");
-        clickOn("#roleComboBox");
-        type(KeyCode.DOWN, 2); // Déplace au deuxième choix
-        type(KeyCode.ENTER); // Sélectionne le choix
+        clickOn("#roleComboBox").clickOn("utilisateur");
         
         clickOn("#createButton");
         
@@ -125,9 +116,7 @@ public class UserCreateControllerTest extends FxRobot {
     void testEmptyLastName() {
         clickOn("#prenomTextField").write("François");
         clickOn("#mailTextField").write("test@example.com");
-        clickOn("#roleComboBox");
-        type(KeyCode.DOWN, 2); // Déplace le curseur au deuxième choix
-        type(KeyCode.ENTER); // Sélectionne le choix
+        clickOn("#roleComboBox").clickOn("utilisateur");
         
         clickOn("#createButton");
         
@@ -141,9 +130,7 @@ public class UserCreateControllerTest extends FxRobot {
     void testEmptyFirstName() {
         clickOn("#nomTextField").write("Barré");
         clickOn("#mailTextField").write("test@example.com");
-        clickOn("#roleComboBox");
-        type(KeyCode.DOWN, 2); // Déplace au deuxième choix
-        type(KeyCode.ENTER); // Sélectionne le choix
+        clickOn("#roleComboBox").clickOn("utilisateur");
         
         clickOn("#createButton");
         
@@ -158,9 +145,7 @@ public class UserCreateControllerTest extends FxRobot {
         clickOn("#nomTextField").write("Barré");
         clickOn("#prenomTextField").write("François");
         clickOn("#mailTextField").write("test@examplecom");
-        clickOn("#roleComboBox");
-        type(KeyCode.DOWN, 2); // Déplace au deuxième choix
-        type(KeyCode.ENTER); // Sélectionne le choix
+        clickOn("#roleComboBox").clickOn("utilisateur");
         
         clickOn("#createButton");
         

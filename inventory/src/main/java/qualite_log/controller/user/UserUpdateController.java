@@ -56,8 +56,8 @@ public class UserUpdateController {
         persons.addAll(Data.getInstance().getUsers());
         persons.addAll(Data.getInstance().getAdministrators());
         FxUtil.addTextChangeListener(mailTextField, ValidationConstants.EMAIL_REGEX);
-        FxUtil.addTextChangeListener(nomTextField, ValidationConstants.NAME_REGEX);
-        FxUtil.addTextChangeListener(prenomTextField, ValidationConstants.NAME_REGEX);
+        FxUtil.addTextChangeListener(nomTextField, ValidationConstants.USERNAME_REGEX);
+        FxUtil.addTextChangeListener(prenomTextField, ValidationConstants.USERNAME_REGEX);
         fillComboBoxes();
     }
 
@@ -107,8 +107,8 @@ public class UserUpdateController {
     private boolean validateInput() {
         List<Pair<TextField, String>> fieldRegexPairs = Arrays.asList(
                 new Pair<>(mailTextField, ValidationConstants.EMAIL_REGEX),
-                new Pair<>(nomTextField, ValidationConstants.NAME_REGEX),
-                new Pair<>(prenomTextField, ValidationConstants.NAME_REGEX));
+                new Pair<>(nomTextField, ValidationConstants.USERNAME_REGEX),
+                new Pair<>(prenomTextField, ValidationConstants.USERNAME_REGEX));
         return FxUtil.validateInputs(fieldRegexPairs);
     }
 

@@ -62,9 +62,7 @@ public class UserUpdateControllerTest extends FxRobot {
     @SuppressWarnings("unchecked")
     @Test
     void testSuccessfulUserUpdate() {
-        clickOn("#mailComboBox");
-        type(KeyCode.DOWN, 5); // Déplace à l'utilisateur souhaité
-        type(KeyCode.ENTER); // Sélectionne l'utilisateur
+        clickOn("#mailComboBox").clickOn("test@example.com");
 
         clickOn("#mailTextField");
         push(KeyCode.CONTROL, KeyCode.A); // Pour sélectionner tout le texte à effacer
@@ -73,9 +71,7 @@ public class UserUpdateControllerTest extends FxRobot {
 
         doubleClickOn("#nomTextField").eraseText(1).write("Mbappé");
         doubleClickOn("#prenomTextField").eraseText(1).write("Kylian");
-        clickOn("#roleComboBox");
-        type(KeyCode.UP, 1); // Déplace au premier choix
-        type(KeyCode.ENTER); // Sélectionne le choix
+        clickOn("#roleComboBox").clickOn("administrateur");
         clickOn("#updateButton");
 
         WaitForAsyncUtils.waitForAsyncFx(500, () -> {}); // Attendre que la fenêtre s'affiche
@@ -95,9 +91,7 @@ public class UserUpdateControllerTest extends FxRobot {
     /*** TESTS AVEC UN CHAMP INCORRECT */
     @Test
     void testIncorrectLastName() {
-        clickOn("#mailComboBox");
-        type(KeyCode.DOWN, 5); // Déplace à l'utilisateur souhaité
-        type(KeyCode.ENTER); // Sélectionne l'utilisateur
+        clickOn("#mailComboBox").clickOn("test@example.com");
 
         clickOn("#mailTextField");
         push(KeyCode.CONTROL, KeyCode.A); // Pour sélectionner tout le texte à effacer
@@ -106,9 +100,7 @@ public class UserUpdateControllerTest extends FxRobot {
 
         doubleClickOn("#nomTextField").eraseText(1).write("Mbappé000");
         doubleClickOn("#prenomTextField").eraseText(1).write("Kylian");
-        clickOn("#roleComboBox");
-        type(KeyCode.UP, 1); // Déplace au premier choix
-        type(KeyCode.ENTER); // Sélectionne le choix
+        clickOn("#roleComboBox").clickOn("administrateur");
         clickOn("#updateButton");
         
         // Vérification de l'affichage de l'alerte
@@ -119,9 +111,7 @@ public class UserUpdateControllerTest extends FxRobot {
 
     @Test
     void testIncorrectFirstName() {
-        clickOn("#mailComboBox");
-        type(KeyCode.DOWN, 5); // Déplace à l'utilisateur souhaité
-        type(KeyCode.ENTER); // Sélectionne l'utilisateur
+        clickOn("#mailComboBox").clickOn("test@example.com");
 
         clickOn("#mailTextField");
         push(KeyCode.CONTROL, KeyCode.A); // Pour sélectionner tout le texte à effacer
@@ -130,9 +120,7 @@ public class UserUpdateControllerTest extends FxRobot {
 
         doubleClickOn("#nomTextField").eraseText(1).write("Mbappé");
         doubleClickOn("#prenomTextField").eraseText(1).write("Kylian000");
-        clickOn("#roleComboBox");
-        type(KeyCode.UP, 1); // Déplace au premier choix
-        type(KeyCode.ENTER); // Sélectionne le choix
+        clickOn("#roleComboBox").clickOn("administrateur");
         clickOn("#updateButton");
         
         // Vérification de l'affichage de l'alerte
@@ -143,9 +131,7 @@ public class UserUpdateControllerTest extends FxRobot {
 
     @Test
     void testIncorrectMail() {
-        clickOn("#mailComboBox");
-        type(KeyCode.DOWN, 5); // Déplace à l'utilisateur souhaité
-        type(KeyCode.ENTER); // Sélectionne l'utilisateur
+        clickOn("#mailComboBox").clickOn("test@example.com");
 
         clickOn("#mailTextField");
         push(KeyCode.CONTROL, KeyCode.A); // Pour sélectionner tout le texte à effacer
@@ -154,9 +140,7 @@ public class UserUpdateControllerTest extends FxRobot {
 
         doubleClickOn("#nomTextField").eraseText(1).write("Mbappé");
         doubleClickOn("#prenomTextField").eraseText(1).write("Kylian");
-        clickOn("#roleComboBox");
-        type(KeyCode.UP, 1); // Déplace au premier choix
-        type(KeyCode.ENTER); // Sélectionne le choix
+        clickOn("#roleComboBox").clickOn("administrateur");
         clickOn("#updateButton");
         
         // Vérification de l'affichage de l'alerte
@@ -168,9 +152,7 @@ public class UserUpdateControllerTest extends FxRobot {
     /*** TESTS AVEC UN CHAMP VIDE */
     @Test
     void testEmptyLastName() {
-        clickOn("#mailComboBox");
-        type(KeyCode.DOWN, 5); // Déplace à l'utilisateur souhaité
-        type(KeyCode.ENTER); // Sélectionne l'utilisateur
+        clickOn("#mailComboBox").clickOn("test@example.com");
 
         clickOn("#mailTextField");
         push(KeyCode.CONTROL, KeyCode.A); // Pour sélectionner tout le texte à effacer
@@ -179,9 +161,7 @@ public class UserUpdateControllerTest extends FxRobot {
 
         doubleClickOn("#nomTextField").eraseText(1);
         doubleClickOn("#prenomTextField").eraseText(1).write("Kylian");
-        clickOn("#roleComboBox");
-        type(KeyCode.UP, 1); // Déplace au premier choix
-        type(KeyCode.ENTER); // Sélectionne le choix
+        clickOn("#roleComboBox").clickOn("administrateur");
         clickOn("#updateButton");
         
         // Vérification de l'affichage de l'alerte
@@ -192,9 +172,7 @@ public class UserUpdateControllerTest extends FxRobot {
 
     @Test
     void testEmptyFirstName() {
-        clickOn("#mailComboBox");
-        type(KeyCode.DOWN, 5); // Déplace à l'utilisateur souhaité
-        type(KeyCode.ENTER); // Sélectionne l'utilisateur
+        clickOn("#mailComboBox").clickOn("test@example.com");
 
         clickOn("#mailTextField");
         push(KeyCode.CONTROL, KeyCode.A); // Pour sélectionner tout le texte à effacer
@@ -203,9 +181,7 @@ public class UserUpdateControllerTest extends FxRobot {
 
         doubleClickOn("#nomTextField").eraseText(1).write("Mbappé");
         doubleClickOn("#prenomTextField").eraseText(1);
-        clickOn("#roleComboBox");
-        type(KeyCode.UP, 1); // Déplace au premier choix
-        type(KeyCode.ENTER); // Sélectionne le choix
+        clickOn("#roleComboBox").clickOn("administrateur");
         clickOn("#updateButton");
         
         // Vérification de l'affichage de l'alerte
@@ -216,9 +192,7 @@ public class UserUpdateControllerTest extends FxRobot {
 
     @Test
     void testEmptyMail() {
-        clickOn("#mailComboBox");
-        type(KeyCode.DOWN, 5); // Déplace à l'utilisateur souhaité
-        type(KeyCode.ENTER); // Sélectionne l'utilisateur
+        clickOn("#mailComboBox").clickOn("test@example.com");
 
         clickOn("#mailTextField");
         push(KeyCode.CONTROL, KeyCode.A); // Pour sélectionner tout le texte à effacer
@@ -226,9 +200,17 @@ public class UserUpdateControllerTest extends FxRobot {
 
         doubleClickOn("#nomTextField").eraseText(1).write("Mbappé");
         doubleClickOn("#prenomTextField").eraseText(1).write("Kylian");
-        clickOn("#roleComboBox");
-        type(KeyCode.UP, 1); // Déplace au premier choix
-        type(KeyCode.ENTER); // Sélectionne le choix
+        clickOn("#roleComboBox").clickOn("administrateur");
+        clickOn("#updateButton");
+        
+        // Vérification de l'affichage de l'alerte
+        Node dialogPane = lookup(".dialog-pane").query();
+        from(dialogPane).lookup((Text t) -> t.getText().startsWith("Format de la saisie non conforme."));
+        verifyThat(dialogPane, isVisible());
+    }
+
+    @Test
+    void testNoMailSelection() {
         clickOn("#updateButton");
         
         // Vérification de l'affichage de l'alerte

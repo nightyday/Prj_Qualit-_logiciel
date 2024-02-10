@@ -68,8 +68,8 @@ public class UserCreateController {
 
     public boolean validateInput() {
         return Pattern.matches(ValidationConstants.EMAIL_REGEX, mailTextField.getText()) &&
-               Pattern.matches(ValidationConstants.NAME_REGEX, nomTextField.getText()) &&
-               Pattern.matches(ValidationConstants.NAME_REGEX, prenomTextField.getText());
+               Pattern.matches(ValidationConstants.USERNAME_REGEX, nomTextField.getText()) &&
+               Pattern.matches(ValidationConstants.USERNAME_REGEX, prenomTextField.getText());
     }
 
     public void createUser() {

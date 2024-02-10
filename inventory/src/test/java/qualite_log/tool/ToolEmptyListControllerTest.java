@@ -1,10 +1,7 @@
-package qualite_log.tooltype;
+package qualite_log.tool;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.testfx.api.FxAssert.verifyThat;
-import static org.testfx.matcher.base.NodeMatchers.isVisible;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,11 +12,9 @@ import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.framework.junit5.Start;
 
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TableView;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import qualite_log.data_import.DataWriter;
 import qualite_log.model.Administrator;
@@ -31,12 +26,12 @@ import qualite_log.model.User;
 
 
 @ExtendWith(ApplicationExtension.class)
-public class ToolTypeDeleteControllerTest extends FxRobot {
+public class ToolEmptyListControllerTest extends FxRobot {
 
     @Start
     public void start(Stage stage) throws Exception {
         configureData();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/qualite_log/ToolTypeDeleteFrame.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/qualite_log/ToolListFrame.fxml"));
         Parent root = loader.load();
         stage.setScene(new Scene(root));
         stage.show();
@@ -75,18 +70,9 @@ public class ToolTypeDeleteControllerTest extends FxRobot {
         data.setEquipmentTypes(equipmentTypes);
         DataWriter.extractEquipmentTypes(data);
 
-        List<Equipment> equipments = new ArrayList<>();
-        equipments.add(new Equipment("AN001", "A32", "1.2", data.getEquipmentTypes().get(0)));
-        equipments.add(new Equipment("AN002", "A33", "1.2", data.getEquipmentTypes().get(0)));
-        equipments.add(new Equipment("AN003", "R17", "1.2", data.getEquipmentTypes().get(2)));
-        equipments.add(new Equipment("AN004", "P45", "1.2", data.getEquipmentTypes().get(1)));
         DataWriter.extractEquipments(data);
 
         List<Booking> bookings = new ArrayList<>();
-        bookings.add(new Booking(data.getUsers().get(3), data.getEquipments().get(1), LocalDate.of(2023, 12, 9),
-                LocalDate.of(2024, 01, 9)));
-        bookings.add(new Booking(data.getUsers().get(2), data.getEquipments().get(0), LocalDate.of(2023, 12, 9),
-                LocalDate.of(2024, 01, 9)));
         data.setBookings(bookings);
         DataWriter.extractBookings(data);
     }
@@ -94,28 +80,10 @@ public class ToolTypeDeleteControllerTest extends FxRobot {
     /*** CAS PASSANT */
     @SuppressWarnings("unchecked")
     @Test
-    void testSuccessfulToolTypeDeletion() {
-        clickOn("#typeComboBox").clickOn("Téléphone");
-        clickOn("#deleteButton");
+    void testNoToolInDatabase() {
+        TableView<Equipment> tableView = lookup("#tableView").queryAs(TableView.class);
 
-        TableView<EquipmentType> tableView = lookup("#tableView").queryAs(TableView.class);
-
-        // Vérifier que le type de matériel n'est plus listé
-        boolean equipmentTypeExists = tableView.getItems().stream()
-            .anyMatch(equipmentType -> "Téléphone".equals(equipmentType.getType()));
-
-        // Le type de matériel ne doit plus exister dans la liste
-        assertFalse(equipmentTypeExists, "Le type de matériel ne devrait pas être listé dans le TableView.");
-    }
-
-    /*** TEST D'ERREUR */
-    @Test
-    void testNoTypeSelection() {
-        clickOn("#deleteButton");
-        
-        // Vérification de l'affichage de l'alerte
-        Node dialogPane = lookup(".dialog-pane").query();
-        from(dialogPane).lookup((Text t) -> t.getText().startsWith("Désolé, l’action n’a pas pu être effectuée. Veuillez réessayer."));
-        verifyThat(dialogPane, isVisible());
+        // Vérifier que le TableView ne contient pas de ligne de données
+        assertTrue(tableView.getItems().isEmpty(), "Le TableView ne devrait pas contenir de matériel.");
     }
 }

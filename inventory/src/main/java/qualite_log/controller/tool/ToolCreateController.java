@@ -64,8 +64,8 @@ public class ToolCreateController {
                                               .collect(Collectors.toList());
         typeComboBox.getItems().addAll(typeData);
         FxUtil.addTextChangeListener(referenceTextField, ValidationConstants.REF_REGEX);
-        FxUtil.addTextChangeListener(nomTextField, ValidationConstants.NAME_REGEX);
-        FxUtil.addTextChangeListener(versionTextField, ValidationConstants.NAME_REGEX);
+        FxUtil.addTextChangeListener(nomTextField, ValidationConstants.TOOL_NAME_REGEX);
+        FxUtil.addTextChangeListener(versionTextField, ValidationConstants.VERSION_REGEX);
     }
 
     @FXML
@@ -84,8 +84,8 @@ public class ToolCreateController {
 
     private boolean validateInput() {
         List<Pair<TextField, String>> fieldRegexPairs = Arrays.asList(
-            new Pair<>(referenceTextField, ValidationConstants.NAME_REGEX),
-            new Pair<>(nomTextField, ValidationConstants.NAME_REGEX),
+            new Pair<>(referenceTextField, ValidationConstants.REF_REGEX),
+            new Pair<>(nomTextField, ValidationConstants.TOOL_NAME_REGEX),
             new Pair<>(versionTextField, ValidationConstants.VERSION_REGEX)
         );
         return FxUtil.validateInputs(fieldRegexPairs);

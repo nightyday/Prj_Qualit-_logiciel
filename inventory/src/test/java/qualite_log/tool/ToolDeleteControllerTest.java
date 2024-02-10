@@ -1,4 +1,4 @@
-package qualite_log.tooltype;
+package qualite_log.tool;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.testfx.api.FxAssert.verifyThat;
@@ -31,12 +31,12 @@ import qualite_log.model.User;
 
 
 @ExtendWith(ApplicationExtension.class)
-public class ToolTypeDeleteControllerTest extends FxRobot {
+public class ToolDeleteControllerTest extends FxRobot {
 
     @Start
     public void start(Stage stage) throws Exception {
         configureData();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/qualite_log/ToolTypeDeleteFrame.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/qualite_log/ToolDeleteFrame.fxml"));
         Parent root = loader.load();
         stage.setScene(new Scene(root));
         stage.show();
@@ -94,28 +94,28 @@ public class ToolTypeDeleteControllerTest extends FxRobot {
     /*** CAS PASSANT */
     @SuppressWarnings("unchecked")
     @Test
-    void testSuccessfulToolTypeDeletion() {
-        clickOn("#typeComboBox").clickOn("Téléphone");
-        clickOn("#deleteButton");
+    void testSuccessfulToolDeletion() {
+        clickOn("#referenceComboBox").clickOn("AN001");
+        clickOn("#returnButton");
 
-        TableView<EquipmentType> tableView = lookup("#tableView").queryAs(TableView.class);
+        TableView<Equipment> tableView = lookup("#tableView").queryAs(TableView.class);
 
-        // Vérifier que le type de matériel n'est plus listé
-        boolean equipmentTypeExists = tableView.getItems().stream()
-            .anyMatch(equipmentType -> "Téléphone".equals(equipmentType.getType()));
+        // Vérifier que la référence du matériel n'est plus listée
+        boolean equipmentRefExists = tableView.getItems().stream()
+            .anyMatch(equipment -> "AN001".equals(equipment.getReference()));
 
-        // Le type de matériel ne doit plus exister dans la liste
-        assertFalse(equipmentTypeExists, "Le type de matériel ne devrait pas être listé dans le TableView.");
+        // Le matériel ne doit plus exister dans la liste
+        assertFalse(equipmentRefExists, "Le matériel ne devrait pas être listé dans le TableView.");
     }
 
     /*** TEST D'ERREUR */
     @Test
-    void testNoTypeSelection() {
-        clickOn("#deleteButton");
+    void testNoReferenceSelection() {
+        clickOn("#returnButton");
         
         // Vérification de l'affichage de l'alerte
         Node dialogPane = lookup(".dialog-pane").query();
-        from(dialogPane).lookup((Text t) -> t.getText().startsWith("Désolé, l’action n’a pas pu être effectuée. Veuillez réessayer."));
+        from(dialogPane).lookup((Text t) -> t.getText().startsWith("Désolé"));
         verifyThat(dialogPane, isVisible());
     }
 }

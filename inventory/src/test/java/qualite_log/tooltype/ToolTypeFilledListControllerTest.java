@@ -44,13 +44,13 @@ public class ToolTypeFilledListControllerTest extends FxRobot {
         DataWriter.extractEquipmentTypes(data);
     }
 
-    /*** CAS D'ERREUR */
+    /*** CAS PASSANT */
     @SuppressWarnings("unchecked")
     @Test
-    void testNoToolTypeInDatabase() {
+    void testToolTypeDisplayOnList() {
         TableView<EquipmentType> tableView = lookup("#tableView").queryAs(TableView.class);
 
-        // Vérifier que le TableView ne contient aucune ligne de données
+        // Vérifier que le TableView contient au moins une ligne de données
         assertFalse(tableView.getItems().isEmpty(), "Le TableView devrait contenir au moins un type de matériel.");
     }
 }

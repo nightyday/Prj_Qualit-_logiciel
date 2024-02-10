@@ -13,7 +13,6 @@ import qualite_log.model.Data;
 import qualite_log.model.Person;
 import qualite_log.model.User;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.input.KeyCode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,9 +57,7 @@ public class UserDeleteControllerTest extends FxRobot {
     @SuppressWarnings("unchecked")
     @Test
     void testSuccessfulUserDeletion() {
-        clickOn("#mailComboBox");
-        type(KeyCode.DOWN, 4); // Déplace au choix de l'utilisateur à supprimer
-        type(KeyCode.ENTER); // Sélectionne le choix
+        clickOn("#mailComboBox").clickOn("test@example.com");
         clickOn("#deleteButton");
 
         TableView<Person> tableView = lookup("#tableView").queryAs(TableView.class);

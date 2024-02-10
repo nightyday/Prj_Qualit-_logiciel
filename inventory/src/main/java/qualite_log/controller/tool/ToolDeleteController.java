@@ -54,8 +54,15 @@ public class ToolDeleteController {
 
     @FXML
     public void handleDeleteAction(ActionEvent event) {
+        String selectedReference = referenceComboBox.getValue();
+        // Vérifier si une référence a été sélectionnée dans la ComboBox
+        if (selectedReference == null || selectedReference.trim().isEmpty()) {
+            // Si aucune référence n'est sélectionnée, afficher un message d'erreur et retourner
+            showAlert("Erreur", "Désolé, vous devez sélectionner une référence avant de supprimer.");
+            return;
+        }
+
         try {
-            String selectedReference = referenceComboBox.getValue();
             for (EquipmentType type : Data.getInstance().getEquipmentTypes()) {
                 Equipment equipmentFound = type.getEquipments().stream()
                         .filter(e -> e.getReference().equals(selectedReference))
@@ -63,10 +70,10 @@ public class ToolDeleteController {
                         .orElse(null);
                 if (equipmentFound != null) {
                     type.getEquipments().remove(equipmentFound);
-                    break; // Stop the loop once the equipment is found and removed
+                    switchToToolListView(); // Actualiser la vue après la suppression
+                    return; // Quitter la méthode après la suppression réussie
                 }
             }
-            switchToToolListView(); // Refresh the view
         } catch (Exception e) {
             showAlert("Erreur", "Désolé, l’action n’a pas pu être effectuée. Veuillez réessayer.");
         }

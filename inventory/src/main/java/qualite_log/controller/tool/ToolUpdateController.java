@@ -52,7 +52,7 @@ public class ToolUpdateController {
         equipments = Data.getInstance().getEquipments();
         equipmentTypes = Data.getInstance().getEquipmentTypes();
         FxUtil.addTextChangeListener(referenceTextField, ValidationConstants.REF_REGEX);
-        FxUtil.addTextChangeListener(nomTextField, ValidationConstants.NAME_REGEX);
+        FxUtil.addTextChangeListener(nomTextField, ValidationConstants.TOOL_NAME_REGEX);
         FxUtil.addTextChangeListener(versionTextField, ValidationConstants.VERSION_REGEX);
         fillComboBoxes();
         
@@ -85,9 +85,15 @@ public class ToolUpdateController {
 
     @FXML
     public void handleUpdateAction(ActionEvent event) {
+        // Assurez-vous qu'une référence a été sélectionnée
+        String selectedReference = referenceComboBox.getValue();
+        if (selectedReference == null || selectedReference.trim().isEmpty()) {
+            showAlert("Erreur", "Désolé, vous devez sélectionner une référence pour effectuer une mise à jour.");
+            return;
+        }
+
         if (validateInput()) {
             try {
-                String selectedReference = referenceComboBox.getValue();
                 Equipment equipmentSelected = equipments.stream()
                                                         .filter(e -> e.getReference().equals(selectedReference))
                                                         .findFirst()
@@ -95,6 +101,9 @@ public class ToolUpdateController {
                 if (equipmentSelected != null) {
                     updateEquipment(equipmentSelected);
                     switchToToolListView();
+                } else {
+                    // Si aucun équipement correspondant à la référence sélectionnée n'est trouvé, affichez un message d'erreur.
+                    showAlert("Erreur", "Aucun équipement trouvé avec la référence sélectionnée. Veuillez réessayer.");
                 }
             } catch (Exception e) {
                 showAlert("Erreur", "Désolé, l’action n’a pas pu être effectuée. Veuillez réessayer.");
@@ -105,7 +114,7 @@ public class ToolUpdateController {
     private boolean validateInput() {
         List<Pair<TextField, String>> fieldRegexPairs = Arrays.asList(
                 new Pair<>(referenceTextField, ValidationConstants.REF_REGEX),
-                new Pair<>(nomTextField, ValidationConstants.NAME_REGEX),
+                new Pair<>(nomTextField, ValidationConstants.TOOL_NAME_REGEX),
                 new Pair<>(versionTextField, ValidationConstants.VERSION_REGEX));
         return FxUtil.validateInputs(fieldRegexPairs);
     }
