@@ -6,9 +6,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import qualite_log.session.SessionManager;
 
 public class MenuAdminController {
@@ -86,27 +88,23 @@ public class MenuAdminController {
             }
         }
     }
-
-    @FXML
+@FXML
     public void handleDeconnexion(ActionEvent event) {
         SessionManager.clearSession();
-        changeView("/qualite_log/ConnexionFrame.fxml");
+       try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/qualite_log/ConnexionFrame.fxml"));
+            Parent parent = (Parent) fxmlLoader.load();
+            Scene loginScene = new Scene(parent);
+
+            // Get the current stage
+            Stage currentStage = (Stage) menuVBox.getScene().getWindow();
+
+            // Set the login scene in the current stage
+            currentStage.setScene(loginScene);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
-
-    //  deconnexionMenuItem.setOnAction(new EventHandler<ActionEvent>() {
-    //             public void handle(ActionEvent t) {
-    //                 try {
-    //                     menuVBox.getChildren().clear();
-    //                     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/qualite_log/ConnexionFrame.fxml"));
-    //                     root = (Parent) fxmlLoader.load();
-    //                     menuVBox.getChildren().add(root);
-    //                     SessionManager.clearSession();
-    //                 }
-    //                 catch (Exception e) {
-    //                     e.printStackTrace();
-    //                 }
-    //             }
-    //         });
-
 }
 
