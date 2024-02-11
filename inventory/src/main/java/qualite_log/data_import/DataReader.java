@@ -26,7 +26,7 @@ import qualite_log.tool.Encryption;
 
 public class DataReader {
     /*
-     * Constructeur pour résoudre la recomendation suivante : 
+     * Constructeur pour résoudre la recommendation suivante : 
      * 
      * Add a private constructor to hide the implicit public one.
      * 

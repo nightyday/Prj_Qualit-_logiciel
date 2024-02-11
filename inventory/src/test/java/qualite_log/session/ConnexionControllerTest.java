@@ -1,6 +1,5 @@
 package qualite_log.session;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -24,9 +23,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuBar;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import qualite_log.data_import.DataWriter;
@@ -102,8 +98,8 @@ public class ConnexionControllerTest extends FxRobot {
     /*** CAS PASSANTS */
     @Test
     void testSuccessfulUserConnection() {
-        clickOn("#mailTextField").write("claire.martin@email.com");
-        clickOn("#passwordField").write("passwordu0");
+        clickOn("#mailTextField").write(Data.getInstance().getUsers().get(0).getEmail());
+        clickOn("#passwordField").write("passwordu6");
         clickOn("#button");
 
         // Vérifie que la connexion est réussie
@@ -118,6 +114,7 @@ public class ConnexionControllerTest extends FxRobot {
         assertFalse(menuExists, "Le menu 'Utilisateurs' ne devrait pas être présent pour un utilisateur.");
     }
 
+    @Test
     void testSuccessfulAdminConnection() {
         clickOn("#mailTextField").write("admin.admin@email.com");
         clickOn("#passwordField").write("passworda10");
@@ -137,32 +134,49 @@ public class ConnexionControllerTest extends FxRobot {
 
     /*** TEST AVEC UN CHAMP INCORRECT */
     @Test
-    void testNoToolTypeSelection() {
-        clickOn("#nomTextField").write("S10");
-        clickOn("#versionTextField").write("3.4");
-        clickOn("#referenceTextField").write("AN005");
-        clickOn("#createButton");
+    void testIncorrectMail() {
+        clickOn("#mailTextField").write("claire.martin@email.com");
+        clickOn("#passwordField").write("passworda10");
+        clickOn("#button");
 
         // Vérification de l'affichage de l'alerte
         Node dialogPane = lookup(".dialog-pane").query();
-        from(dialogPane).lookup((Text t) -> t.getText().startsWith("Désolé, l’action n’a pas pu être effectuée. Veuillez réessayer."));
+        from(dialogPane).lookup((Text t) -> t.getText().startsWith("L'authentification a échoué. Veuillez vérifier vos identifiants et réessayer."));
+        verifyThat(dialogPane, isVisible());
+    }
+
+    @Test
+    void testIncorrectPassword() {
+        clickOn("#mailTextField").write("admin.admin@email.com");
+        clickOn("#passwordField").write("password");
+        clickOn("#button");
+
+        // Vérification de l'affichage de l'alerte
+        Node dialogPane = lookup(".dialog-pane").query();
+        from(dialogPane).lookup((Text t) -> t.getText().startsWith("L'authentification a échoué. Veuillez vérifier vos identifiants et réessayer."));
         verifyThat(dialogPane, isVisible());
     }
 
     /*** TEST AVEC UN CHAMP VIDE */
     @Test
-    void testEmptyName() {
-        clickOn("#versionTextField").write("3.4");
-        clickOn("#referenceTextField").write("AN005");
-        clickOn("#typeComboBox").clickOn("Téléphone");
-        clickOn("#createButton");
-        
-        // Localiser le Rectangle
-        Rectangle warningRectangle = lookup("#warningRectangle").queryAs(Rectangle.class);
+    void testEmptyMail() {
+        clickOn("#passwordField").write("password");
+        clickOn("#button");
 
-        // Vérifier la couleur
-        Paint fillPaint = warningRectangle.getFill();
-        Color fillColor = (Color) fillPaint;
-        assertEquals(Color.RED, fillColor, "Le Rectangle devrait être rouge pour indiquer une erreur");
+        // Vérification de l'affichage de l'alerte
+        Node dialogPane = lookup(".dialog-pane").query();
+        from(dialogPane).lookup((Text t) -> t.getText().startsWith("L'authentification a échoué. Veuillez vérifier vos identifiants et réessayer."));
+        verifyThat(dialogPane, isVisible());
+    }
+
+    @Test
+    void testEmptyPassword() {
+        clickOn("#mailTextField").write("admin.admin@email.com");
+        clickOn("#button");
+
+        // Vérification de l'affichage de l'alerte
+        Node dialogPane = lookup(".dialog-pane").query();
+        from(dialogPane).lookup((Text t) -> t.getText().startsWith("L'authentification a échoué. Veuillez vérifier vos identifiants et réessayer."));
+        verifyThat(dialogPane, isVisible());
     }
 }

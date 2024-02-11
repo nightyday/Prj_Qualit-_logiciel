@@ -8,6 +8,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -71,10 +73,10 @@ public class BookingCreateController {
                 
                 switchToBookingListView();
             } else {
-                System.out.println("Erreur: Aucune session active trouvée.");
+                showAlert("Erreur", "Aucune session active trouvée.");
             }
         } else {
-            System.out.println("Erreur: Aucun équipement sélectionné.");
+            showAlert("Erreur", "Aucun équipement sélectionné.");
         }
     }
 
@@ -87,5 +89,13 @@ public class BookingCreateController {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private void showAlert(String title, String content) {
+        Alert alert = new Alert(AlertType.WARNING);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(content);
+        alert.showAndWait();
     }
 }

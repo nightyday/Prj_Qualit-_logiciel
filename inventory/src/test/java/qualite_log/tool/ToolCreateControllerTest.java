@@ -152,7 +152,7 @@ public class ToolCreateControllerTest extends FxRobot {
 
     @Test
     void testIncorrectReference() {
-        clickOn("#nomTextField").write("S10/S20");
+        clickOn("#nomTextField").write("S10");
         clickOn("#versionTextField").write("3.4");
         clickOn("#referenceTextField").write("an005");
         clickOn("#typeComboBox").clickOn("Téléphone");

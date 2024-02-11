@@ -69,11 +69,13 @@ public class BookingDeleteController {
                 if (bookingSelected != null) {
                     List<Booking> bookings = Data.getInstance().getBookings();
                     bookings.remove(bookingSelected);
-                    Data.getInstance().setBookings(bookings);
-                    //switchToBookingListView();
-                    
+                    Data.getInstance().setBookings(bookings);                    
                     DataWriter.extractBookings(Data.getInstance()); // On met à jour les fichiers .json
+                    switchToBookingListView();
                 }
+            }
+            else {
+                showAlert("Erreur", "Veuillez sélectionner un matériel à rendre.");
             }
         } catch (Exception e) {
             showAlert("Erreur", "Désolé, l’action n’a pas pu être effectuée. Veuillez réessayer.");
