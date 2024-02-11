@@ -10,6 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import qualite_log.data_import.DataReader;
 import qualite_log.data_import.DataWriter;
 import qualite_log.model.Administrator;
 import qualite_log.model.Booking;
@@ -43,6 +44,8 @@ public class App extends Application {
         Data data = Data.getInstance(); // Permet d'initialiser la 1ere instance de Data (à partir des fichiers .json)
 
         launch(args);
+
+        DataWriter.extract(data);
     }
 
     /*
