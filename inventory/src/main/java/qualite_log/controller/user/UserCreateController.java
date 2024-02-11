@@ -15,14 +15,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import qualite_log.data_import.DataReader;
 import qualite_log.data_import.DataWriter;
 import qualite_log.model.Administrator;
 import qualite_log.model.Data;
 import qualite_log.model.User;
 import qualite_log.util.ValidationConstants;
 
-public class UserCreateController {
+public class UserCreateController { 
 
     @FXML
     private ResourceBundle resources;

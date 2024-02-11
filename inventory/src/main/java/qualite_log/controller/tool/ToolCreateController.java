@@ -77,7 +77,7 @@ public class ToolCreateController {
             try {
                 EquipmentType equipmentTypeSelected = equipmentTypes.get(typeComboBox.getItems().indexOf(typeComboBox.getValue()));
                 Equipment newEquipment = new Equipment(referenceTextField.getText(), nomTextField.getText(), versionTextField.getText(), equipmentTypeSelected);
-                //equipmentTypeSelected.getEquipments().add(newEquipment);
+                equipmentTypeSelected.addEquipments(newEquipment);
                 
                 DataWriter.extractEquipments(Data.getInstance()); // On met à jour les fichiers .json
 

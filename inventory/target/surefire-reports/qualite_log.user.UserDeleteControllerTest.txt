@@ -1,7 +1,0 @@
--------------------------------------------------------------------------------
-Test set: qualite_log.user.UserDeleteControllerTest
--------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.002 s <<< FAILURE! - in qualite_log.user.UserDeleteControllerTest
-qualite_log.user.UserDeleteControllerTest.testSuccessfulUserDeletion  Time elapsed: 0 s  <<< ERROR!
-java.lang.reflect.InaccessibleObjectException: Unable to make private static void qualite_log.user.UserDeleteControllerTest.configureData() accessible: module qualite_log does not "opens qualite_log.user" to unnamed module @30c15d8b
-
