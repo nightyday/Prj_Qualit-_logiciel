@@ -15,6 +15,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Pair;
+import qualite_log.data_import.DataReader;
 import qualite_log.data_import.DataWriter;
 import qualite_log.model.Administrator;
 import qualite_log.model.Data;
@@ -145,6 +146,8 @@ public class UserUpdateController {
                         booking.setEmprunter(newAdmin);
                     }
                 }
+                DataWriter.extractPassword(newAdmin, DataReader.getPassword(person));
+
                 users.remove(person);
                 admins.add(newAdmin);
                 data.setAdministrators(admins);
@@ -164,6 +167,8 @@ public class UserUpdateController {
                         booking.setEmprunter(newUser);
                     }
                 }
+                DataWriter.extractPassword(newUser, DataReader.getPassword(person));
+
                 users.add(newUser);
                 admins.remove(person);
                 data.setAdministrators(admins);

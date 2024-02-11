@@ -78,12 +78,16 @@ public class UserCreateController {
 
     public void createUser() {
         if (roleComboBox.getValue().equals("administrateur")) {
-            Data.getInstance().addAdministrator(new Administrator(nomTextField.getText(), prenomTextField.getText(), mailTextField.getText()));
+            Administrator newAdmin = new Administrator(nomTextField.getText(), prenomTextField.getText(), mailTextField.getText());
+            Data.getInstance().addAdministrator(newAdmin);
 
+            DataWriter.extractPassword(newAdmin, "password" + "a" + newAdmin.getId());
             DataWriter.extractAdministrators(Data.getInstance()); // On met à jour les fichiers .json
         } else {
-            Data.getInstance().addUsers(new User(nomTextField.getText(), prenomTextField.getText(), mailTextField.getText()));
+            User newUser = new User(nomTextField.getText(), prenomTextField.getText(), mailTextField.getText());
+            Data.getInstance().addUsers(newUser);
             
+            DataWriter.extractPassword(newUser, "password" + "u" + newUser.getId());
             DataWriter.extractUsers(Data.getInstance()); // On met à jour les fichiers .json
         }
     }
