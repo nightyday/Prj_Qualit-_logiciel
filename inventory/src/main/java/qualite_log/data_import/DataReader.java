@@ -67,7 +67,7 @@ public class DataReader {
      * @param data
      * @return data
      */
-    public static Data insertUsers(Data data) {
+    private static Data insertUsers(Data data) {
         try {
             ObjectMapper mapper = new ObjectMapper();
             User[] usersArray = mapper.readValue(new File(getPath("users.json")), User[].class);
@@ -90,7 +90,7 @@ public class DataReader {
      * @param data
      * @return data
      */
-    public static Data insertAdministrators(Data data) {
+    private static Data insertAdministrators(Data data) {
         try {
             ObjectMapper mapper = new ObjectMapper();
             Administrator[] adminsArray = mapper.readValue(new File(getPath("administrators.json")), Administrator[].class);
@@ -113,7 +113,7 @@ public class DataReader {
      * @param data
      * @return equipments
      */
-    public static List<Equipment> insertEquipments(Data data) {
+    private static List<Equipment> insertEquipments(Data data) {
         try {
             ObjectMapper mapper = new ObjectMapper();
             List<Equipment> equipments = Arrays.asList(mapper.readValue(new File(getPath("equipments.json")), Equipment[].class));
@@ -133,7 +133,7 @@ public class DataReader {
      * @param data
      * @return data
      */
-    public static Data insertEquipmentTypes(Data data) {
+    private static Data insertEquipmentTypes(Data data) {
     try {
         ObjectMapper mapper = new ObjectMapper();
         EquipmentType[] typesArray = mapper.readValue(new File(getPath("equipment_types.json")), EquipmentType[].class);
@@ -152,7 +152,7 @@ public class DataReader {
      * @param data
      * @return data
      */
-    public static Data insertBookings(Data data) {
+    private static Data insertBookings(Data data) {
 
         try {
             ObjectMapper mapper = new ObjectMapper();
