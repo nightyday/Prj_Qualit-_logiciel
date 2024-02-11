@@ -15,6 +15,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import qualite_log.data_import.DataWriter;
 import qualite_log.model.Data;
 import qualite_log.model.Equipment;
 import qualite_log.model.EquipmentType;
@@ -69,7 +70,11 @@ public class ToolDeleteController {
                         .findFirst()
                         .orElse(null);
                 if (equipmentFound != null) {
+                    equipmentFound.delete(); // On supprime toutes les réservations liés à l'équipement
                     type.getEquipments().remove(equipmentFound);
+                    
+                    DataWriter.extractEquipments(Data.getInstance()); // On met à jour les fichiers .json
+
                     switchToToolListView(); // Actualiser la vue après la suppression
                     return; // Quitter la méthode après la suppression réussie
                 }

@@ -40,7 +40,7 @@ public class App extends Application {
     }
 
     public static void main(String[] args) {
-        //configureData(); // à décomenter lors du 1er Run pour initialiser des données dans les fichiers.json
+        configureData(); // à décomenter lors du 1er Run pour initialiser des données dans les fichiers.json
         Data data = Data.getInstance(); // Permet d'initialiser la 1ere instance de Data (à partir des fichiers .json)
 
         launch(args);

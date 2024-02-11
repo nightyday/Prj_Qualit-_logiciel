@@ -13,6 +13,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import qualite_log.data_import.DataWriter;
 import qualite_log.model.Data;
 import qualite_log.model.EquipmentType;
 
@@ -43,6 +44,9 @@ public class ToolTypeCreateController {
         if (validateInput(typeTextField.getText())) {
             try {
                 Data.getInstance().addEquipmentTypes(new EquipmentType(typeTextField.getText()));
+                
+                DataWriter.extractEquipmentTypes(Data.getInstance()); // On met à jour les fichiers .json
+
                 switchToToolTypeListView();
             } catch (Exception e) {
                 showAlert("Erreur", "Désolé, l’action n’a pas pu être effectuée. Veuillez réessayer.");

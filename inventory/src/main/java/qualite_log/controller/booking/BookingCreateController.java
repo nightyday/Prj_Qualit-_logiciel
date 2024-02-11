@@ -12,10 +12,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import qualite_log.data_import.DataWriter;
 import qualite_log.model.Booking;
 import qualite_log.model.Data;
 import qualite_log.model.Equipment;
 import qualite_log.model.Person;
+import qualite_log.session.SessionManager;
 
 public class BookingCreateController {
 
@@ -51,16 +53,26 @@ public class BookingCreateController {
     public void handleCreateAction(ActionEvent event) {
         if (referenceComboBox.getValue() != null) {
             Equipment equipmentSelected = equipments.get(referenceData.indexOf(referenceComboBox.getValue()));
-            Person person = new Person(Data.getInstance().getUsers().get(0).getLastName(),
-                    Data.getInstance().getUsers().get(0).getFirstName(),
-                    "user",
-                    Data.getInstance().getUsers().get(0).getEmail());
-            List<Booking> currentBookings = Data.getInstance().getBookings();
-            currentBookings.add(new Booking(person, equipmentSelected));
-            Data.getInstance().setBookings(currentBookings); // Mise à jour de la liste dans Data
-            switchToBookingListView();
+
+            // Récupère l'utilisateur ou l'administrateur actuellement connecté
+            Person person = SessionManager.getCurrentUser();
+            if (person == null) {
+                person = SessionManager.getCurrentAdmin();
+            }
+
+            if (person != null) {
+                List<Booking> currentBookings = Data.getInstance().getBookings();
+                currentBookings.add(new Booking(person, equipmentSelected));
+                Data.getInstance().setBookings(currentBookings); // Mise à jour de la liste dans Data
+
+                DataWriter.extractBookings(Data.getInstance()); // On met à jour les fichiers .json
+                
+                switchToBookingListView();
+            } else {
+                System.out.println("Erreur: Aucune session active trouvée.");
+            }
         } else {
-            System.out.println("Error");
+            System.out.println("Erreur: Aucun équipement sélectionné.");
         }
     }
 

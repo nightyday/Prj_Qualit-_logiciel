@@ -15,6 +15,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import qualite_log.data_import.DataWriter;
 import qualite_log.model.Administrator;
 import qualite_log.model.Data;
 import qualite_log.model.User;
@@ -75,8 +76,12 @@ public class UserCreateController {
     public void createUser() {
         if (roleComboBox.getValue().equals("administrateur")) {
             Data.getInstance().addAdministrator(new Administrator(nomTextField.getText(), prenomTextField.getText(), mailTextField.getText()));
+
+            DataWriter.extractAdministrators(Data.getInstance()); // On met à jour les fichiers .json
         } else {
             Data.getInstance().addUsers(new User(nomTextField.getText(), prenomTextField.getText(), mailTextField.getText()));
+            
+            DataWriter.extractUsers(Data.getInstance()); // On met à jour les fichiers .json
         }
     }
 

@@ -18,6 +18,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Pair;
+import qualite_log.data_import.DataWriter;
 import qualite_log.model.Data;
 import qualite_log.model.Equipment;
 import qualite_log.model.EquipmentType;
@@ -74,7 +75,10 @@ public class ToolCreateController {
             try {
                 EquipmentType equipmentTypeSelected = equipmentTypes.get(typeComboBox.getItems().indexOf(typeComboBox.getValue()));
                 Equipment newEquipment = new Equipment(referenceTextField.getText(), nomTextField.getText(), versionTextField.getText(), equipmentTypeSelected);
-                Data.getInstance().getEquipments().add(newEquipment);
+                //equipmentTypeSelected.getEquipments().add(newEquipment);
+                
+                DataWriter.extractEquipments(Data.getInstance()); // On met à jour les fichiers .json
+
                 switchToToolListView();
             } catch (Exception e) {
                 showAlert("Erreur", "Désolé, l’action n’a pas pu être effectuée. Veuillez réessayer.");
