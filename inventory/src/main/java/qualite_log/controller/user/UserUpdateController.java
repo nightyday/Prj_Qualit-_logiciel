@@ -54,6 +54,8 @@ public class UserUpdateController {
 
     @FXML
     void initialize() {
+        Data.updateData();
+
         persons = new ArrayList<>();
         persons.addAll(Data.getInstance().getUsers());
         persons.addAll(Data.getInstance().getAdministrators());

@@ -41,6 +41,8 @@ public class BookingCreateController {
 
     @FXML
     public void initialize() {
+        Data.updateData();
+        
         equipments = Data.getInstance().getEquipments();
         referenceData = new ArrayList<>();
         for (Equipment equipment : equipments) {

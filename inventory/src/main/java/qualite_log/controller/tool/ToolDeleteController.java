@@ -44,6 +44,8 @@ public class ToolDeleteController {
 
     @FXML
     void initialize() {
+        Data.updateData();
+        
         equipments = Data.getInstance().getEquipments();
         List<String> referenceData = new ArrayList<>();
         for (Equipment equipment : equipments) {

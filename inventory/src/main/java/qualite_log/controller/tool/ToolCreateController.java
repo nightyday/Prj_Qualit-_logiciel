@@ -59,6 +59,8 @@ public class ToolCreateController {
 
     @FXML
     void initialize() {
+        Data.updateData();
+        
         equipmentTypes = Data.getInstance().getEquipmentTypes();
         List<String> typeData = equipmentTypes.stream()
                                               .map(EquipmentType::getType)

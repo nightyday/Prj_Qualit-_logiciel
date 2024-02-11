@@ -50,6 +50,8 @@ public class ToolUpdateController {
 
     @FXML
     void initialize() {
+        Data.updateData();
+        
         equipments = Data.getInstance().getEquipments();
         equipmentTypes = Data.getInstance().getEquipmentTypes();
         FxUtil.addTextChangeListener(referenceTextField, ValidationConstants.REF_REGEX);

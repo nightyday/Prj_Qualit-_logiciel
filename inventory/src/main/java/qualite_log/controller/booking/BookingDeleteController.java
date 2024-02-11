@@ -42,6 +42,8 @@ public class BookingDeleteController {
 
     @FXML
     void initialize() {
+        Data.updateData();
+        
         bookings = Data.getInstance().getBookings();
         List<String> referenceData = bookings.stream()
                                              .map(booking -> booking.getEquipment().getReference())
