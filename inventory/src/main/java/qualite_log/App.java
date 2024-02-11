@@ -1,5 +1,6 @@
 package qualite_log;
 
+import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -40,13 +41,25 @@ public class App extends Application {
     }
 
     public static void main(String[] args) {
-        configureData(); // à décomenter lors du 1er Run pour initialiser des données dans les fichiers.json
-        Data data = Data.getInstance(); // Permet d'initialiser la 1ere instance de Data (à partir des fichiers .json)
-
+        if (needsInitialization()) {
+            configureData(); // Initialise des données si nécessaire
+        }
+        Data data = Data.getInstance(); // Initialise la première instance de Data
+    
         launch(args);
-
+    
         DataWriter.extract(data);
     }
+    
+    private static boolean needsInitialization() {
+    File file = new File(DataReader.getPath("administrators.json"));
+    if (!file.exists() || file.length() == 0) {
+        return true;
+    }
+    // Ajout ici d'autres vérifications si nécessaire
+    return false;
+}
+
 
     /*
      * Méthode permettant l'initialisation de données dans Data et dans les fichiers .json (à utiliser si ces derniers sont vides)

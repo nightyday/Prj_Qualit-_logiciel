@@ -39,7 +39,7 @@ public class DataReader {
      * @param fileName
      * @return le chemin vers fileName
      */
-    private static String getPath(String fileName) {
+    public static String getPath(String fileName) {
         String currentDirectory = System.getProperty("user.dir");
 
         return currentDirectory + "/inventory/data/" + fileName;
