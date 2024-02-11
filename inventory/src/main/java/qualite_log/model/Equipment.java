@@ -1,7 +1,6 @@
 package qualite_log.model;
 
 import java.util.Objects;
-import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -76,6 +75,7 @@ public class Equipment {
     /**
      * Constructeur à ne pas utiliser
      */
+    @SuppressWarnings("unused")
     private Equipment() {
     }
 
