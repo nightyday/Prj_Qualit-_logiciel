@@ -34,10 +34,10 @@ public class ConnexionController {
     private Button button;
 
     @FXML
-    private PasswordField passWordField;
+    private PasswordField passwordField;
 
     @FXML
-    private TextField textFielMatricule;
+    private TextField mailTextField;
 
     @FXML
     private VBox vBox;
@@ -50,17 +50,17 @@ public class ConnexionController {
    
     @FXML
     public void handleLoginAction(ActionEvent event) {
-        String matricule = textFielMatricule.getText();
-        String password = passWordField.getText();
+        String mail = mailTextField.getText();
+        String password = passwordField.getText();
         
-        Administrator admin = Authentification.authenticateAdmin(matricule, password);
+        Administrator admin = Authentification.authenticateAdmin(mail, password);
         if (admin != null) {
             SessionManager.setCurrentAdmin(admin);
             switchToMenuAdminView();
             return; // Arrête l'exécution si un admin est authentifié
         }
         
-        User user = Authentification.authenticateUser(matricule, password);
+        User user = Authentification.authenticateUser(mail, password);
         if (user != null) {
             SessionManager.setCurrentUser(user);
             switchToMenuUserView();

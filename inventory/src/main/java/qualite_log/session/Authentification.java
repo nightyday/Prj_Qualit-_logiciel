@@ -11,13 +11,13 @@ public class Authentification {
     /**
      * Tente d'authentifier un administrateur avec le matricule et le mot de passe fournis.
      *
-     * @param matricule l'email de l'administrateur
+     * @param mail l'email de l'administrateur
      * @param password le mot de passe de l'administrateur
      * @return l'administrateur authentifié, sinon null
      */
-    public static Administrator authenticateAdmin(String matricule, String password) {
+    public static Administrator authenticateAdmin(String mail, String password) {
         return Data.getInstance().getAdministrators().stream()
-                .filter(admin -> admin.getEmail().equals(matricule) && checkPassword(admin, password))
+                .filter(admin -> admin.getEmail().equals(mail) && checkPassword(admin, password))
                 .findFirst()
                 .orElse(null);
     }
@@ -25,13 +25,13 @@ public class Authentification {
     /**
      * Tente d'authentifier un utilisateur avec le matricule et le mot de passe fournis.
      *
-     * @param matricule l'email de l'utilisateur
+     * @param mail l'email de l'utilisateur
      * @param password le mot de passe de l'utilisateur
      * @return l'utilisateur authentifié, sinon null
      */
-    public static User authenticateUser(String matricule, String password) {
+    public static User authenticateUser(String mail, String password) {
         return Data.getInstance().getUsers().stream()
-                .filter(user -> user.getEmail().equals(matricule) && checkPassword(user, password))
+                .filter(user -> user.getEmail().equals(mail) && checkPassword(user, password))
                 .findFirst()
                 .orElse(null);
     }
