@@ -1,7 +1,0 @@
--------------------------------------------------------------------------------
-Test set: qualite_log.tool.ToolEmptyListControllerTest
--------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.002 s <<< FAILURE! - in qualite_log.tool.ToolEmptyListControllerTest
-qualite_log.tool.ToolEmptyListControllerTest.testNoToolInDatabase  Time elapsed: 0 s  <<< ERROR!
-java.lang.reflect.InaccessibleObjectException: Unable to make private static void qualite_log.tool.ToolEmptyListControllerTest.configureData() accessible: module qualite_log does not "opens qualite_log.tool" to unnamed module @30c15d8b
-

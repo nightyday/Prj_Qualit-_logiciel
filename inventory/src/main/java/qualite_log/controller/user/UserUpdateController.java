@@ -98,11 +98,10 @@ public class UserUpdateController {
                         .findFirst()
                         .orElse(null);
                 if (personSelected != null) {
-                    updatePerson(personSelected);
-                    switchToUserListView();
-                    
+                    updatePerson(personSelected);                    
                     DataWriter.extractAdministrators(Data.getInstance()); // On met à jour les fichiers .json
                     DataWriter.extractUsers(Data.getInstance()); // On met à jour les fichiers .json
+                    switchToUserListView();
                 }
             } catch (Exception e) {
                 showAlert("Erreur", "Désolé, l’action n’a pas pu être effectuée. Veuillez réessayer.");

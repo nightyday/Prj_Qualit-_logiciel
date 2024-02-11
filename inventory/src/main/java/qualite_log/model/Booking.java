@@ -95,6 +95,7 @@ public class Booking {
     /**
      * Constructeur à ne pas utiliser
      */
+    @SuppressWarnings("unused")
     private Booking() {}
 
     public Booking(Person emprunter, Equipment equipment) {

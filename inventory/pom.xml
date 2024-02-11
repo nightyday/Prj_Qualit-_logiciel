@@ -84,6 +84,7 @@
                     <argLine>
                     --add-exports javafx.graphics/com.sun.javafx.application=ALL-UNNAMED
                     </argLine>
+                    <useModulePath>false</useModulePath>
                 </configuration>
             </plugin>
 

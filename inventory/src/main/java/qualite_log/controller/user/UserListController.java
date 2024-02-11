@@ -15,7 +15,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
-import qualite_log.data_import.DataReader;
 import qualite_log.model.Data;
 import qualite_log.model.Person;
 
