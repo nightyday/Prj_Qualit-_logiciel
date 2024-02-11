@@ -1,0 +1,28 @@
+-------------------------------------------------------------------------------
+Test set: qualite_log.tool.ToolUpdateControllerTest
+-------------------------------------------------------------------------------
+Tests run: 8, Failures: 0, Errors: 8, Skipped: 0, Time elapsed: 0.01 s <<< FAILURE! - in qualite_log.tool.ToolUpdateControllerTest
+qualite_log.tool.ToolUpdateControllerTest.testIncorrectVersion  Time elapsed: 0 s  <<< ERROR!
+java.lang.reflect.InaccessibleObjectException: Unable to make private static void qualite_log.tool.ToolUpdateControllerTest.configureData() accessible: module qualite_log does not "opens qualite_log.tool" to unnamed module @30c15d8b
+
+qualite_log.tool.ToolUpdateControllerTest.testEmptyName  Time elapsed: 0 s  <<< ERROR!
+java.lang.reflect.InaccessibleObjectException: Unable to make private static void qualite_log.tool.ToolUpdateControllerTest.configureData() accessible: module qualite_log does not "opens qualite_log.tool" to unnamed module @30c15d8b
+
+qualite_log.tool.ToolUpdateControllerTest.testIncorrectName  Time elapsed: 0 s  <<< ERROR!
+java.lang.reflect.InaccessibleObjectException: Unable to make private static void qualite_log.tool.ToolUpdateControllerTest.configureData() accessible: module qualite_log does not "opens qualite_log.tool" to unnamed module @30c15d8b
+
+qualite_log.tool.ToolUpdateControllerTest.testEmptyReference  Time elapsed: 0 s  <<< ERROR!
+java.lang.reflect.InaccessibleObjectException: Unable to make private static void qualite_log.tool.ToolUpdateControllerTest.configureData() accessible: module qualite_log does not "opens qualite_log.tool" to unnamed module @30c15d8b
+
+qualite_log.tool.ToolUpdateControllerTest.testEmptyVersion  Time elapsed: 0 s  <<< ERROR!
+java.lang.reflect.InaccessibleObjectException: Unable to make private static void qualite_log.tool.ToolUpdateControllerTest.configureData() accessible: module qualite_log does not "opens qualite_log.tool" to unnamed module @30c15d8b
+
+qualite_log.tool.ToolUpdateControllerTest.testIncorrectReference  Time elapsed: 0 s  <<< ERROR!
+java.lang.reflect.InaccessibleObjectException: Unable to make private static void qualite_log.tool.ToolUpdateControllerTest.configureData() accessible: module qualite_log does not "opens qualite_log.tool" to unnamed module @30c15d8b
+
+qualite_log.tool.ToolUpdateControllerTest.testNoReferenceSelection  Time elapsed: 0 s  <<< ERROR!
+java.lang.reflect.InaccessibleObjectException: Unable to make private static void qualite_log.tool.ToolUpdateControllerTest.configureData() accessible: module qualite_log does not "opens qualite_log.tool" to unnamed module @30c15d8b
+
+qualite_log.tool.ToolUpdateControllerTest.testSuccessfulToolUpdate  Time elapsed: 0.001 s  <<< ERROR!
+java.lang.reflect.InaccessibleObjectException: Unable to make private static void qualite_log.tool.ToolUpdateControllerTest.configureData() accessible: module qualite_log does not "opens qualite_log.tool" to unnamed module @30c15d8b
+

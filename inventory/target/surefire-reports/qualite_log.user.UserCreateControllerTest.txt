@@ -2,27 +2,27 @@
 Test set: qualite_log.user.UserCreateControllerTest
 -------------------------------------------------------------------------------
 Tests run: 8, Failures: 0, Errors: 8, Skipped: 0, Time elapsed: 0.012 s <<< FAILURE! - in qualite_log.user.UserCreateControllerTest
-qualite_log.user.UserCreateControllerTest.testIncorrectFirstName  Time elapsed: 0 s  <<< ERROR!
-java.lang.reflect.InaccessibleObjectException: Unable to make private static boolean qualite_log.user.UserCreateControllerTest.lambda$4(javafx.scene.text.Text) accessible: module qualite_log does not "opens qualite_log.user" to unnamed module @4f6ee6e4
+qualite_log.user.UserCreateControllerTest.testIncorrectFirstName  Time elapsed: 0.001 s  <<< ERROR!
+java.lang.reflect.InaccessibleObjectException: Unable to make void qualite_log.user.UserCreateControllerTest.testIncorrectFirstName() accessible: module qualite_log does not "opens qualite_log.user" to unnamed module @30c15d8b
 
-qualite_log.user.UserCreateControllerTest.testEmptyMail  Time elapsed: 0 s  <<< ERROR!
-java.lang.reflect.InaccessibleObjectException: Unable to make private static boolean qualite_log.user.UserCreateControllerTest.lambda$4(javafx.scene.text.Text) accessible: module qualite_log does not "opens qualite_log.user" to unnamed module @4f6ee6e4
+qualite_log.user.UserCreateControllerTest.testEmptyMail  Time elapsed: 0.001 s  <<< ERROR!
+java.lang.reflect.InaccessibleObjectException: Unable to make void qualite_log.user.UserCreateControllerTest.testIncorrectFirstName() accessible: module qualite_log does not "opens qualite_log.user" to unnamed module @30c15d8b
 
-qualite_log.user.UserCreateControllerTest.testIncorrectLastName  Time elapsed: 0.001 s  <<< ERROR!
-java.lang.reflect.InaccessibleObjectException: Unable to make private static boolean qualite_log.user.UserCreateControllerTest.lambda$4(javafx.scene.text.Text) accessible: module qualite_log does not "opens qualite_log.user" to unnamed module @4f6ee6e4
+qualite_log.user.UserCreateControllerTest.testIncorrectLastName  Time elapsed: 0 s  <<< ERROR!
+java.lang.reflect.InaccessibleObjectException: Unable to make void qualite_log.user.UserCreateControllerTest.testIncorrectFirstName() accessible: module qualite_log does not "opens qualite_log.user" to unnamed module @30c15d8b
 
 qualite_log.user.UserCreateControllerTest.testIncorrectMail  Time elapsed: 0 s  <<< ERROR!
-java.lang.reflect.InaccessibleObjectException: Unable to make private static boolean qualite_log.user.UserCreateControllerTest.lambda$4(javafx.scene.text.Text) accessible: module qualite_log does not "opens qualite_log.user" to unnamed module @4f6ee6e4
+java.lang.reflect.InaccessibleObjectException: Unable to make void qualite_log.user.UserCreateControllerTest.testIncorrectFirstName() accessible: module qualite_log does not "opens qualite_log.user" to unnamed module @30c15d8b
 
-qualite_log.user.UserCreateControllerTest.testEmptyFirstName  Time elapsed: 0.001 s  <<< ERROR!
-java.lang.reflect.InaccessibleObjectException: Unable to make private static boolean qualite_log.user.UserCreateControllerTest.lambda$4(javafx.scene.text.Text) accessible: module qualite_log does not "opens qualite_log.user" to unnamed module @4f6ee6e4
+qualite_log.user.UserCreateControllerTest.testEmptyFirstName  Time elapsed: 0 s  <<< ERROR!
+java.lang.reflect.InaccessibleObjectException: Unable to make void qualite_log.user.UserCreateControllerTest.testIncorrectFirstName() accessible: module qualite_log does not "opens qualite_log.user" to unnamed module @30c15d8b
 
-qualite_log.user.UserCreateControllerTest.testSuccessfulUserCreation  Time elapsed: 0 s  <<< ERROR!
-java.lang.reflect.InaccessibleObjectException: Unable to make private static boolean qualite_log.user.UserCreateControllerTest.lambda$4(javafx.scene.text.Text) accessible: module qualite_log does not "opens qualite_log.user" to unnamed module @4f6ee6e4
+qualite_log.user.UserCreateControllerTest.testSuccessfulUserCreation  Time elapsed: 0.001 s  <<< ERROR!
+java.lang.reflect.InaccessibleObjectException: Unable to make void qualite_log.user.UserCreateControllerTest.testIncorrectFirstName() accessible: module qualite_log does not "opens qualite_log.user" to unnamed module @30c15d8b
 
 qualite_log.user.UserCreateControllerTest.testEmptyLastName  Time elapsed: 0 s  <<< ERROR!
-java.lang.reflect.InaccessibleObjectException: Unable to make private static boolean qualite_log.user.UserCreateControllerTest.lambda$4(javafx.scene.text.Text) accessible: module qualite_log does not "opens qualite_log.user" to unnamed module @4f6ee6e4
+java.lang.reflect.InaccessibleObjectException: Unable to make void qualite_log.user.UserCreateControllerTest.testIncorrectFirstName() accessible: module qualite_log does not "opens qualite_log.user" to unnamed module @30c15d8b
 
 qualite_log.user.UserCreateControllerTest.testNoRoleSelection  Time elapsed: 0 s  <<< ERROR!
-java.lang.reflect.InaccessibleObjectException: Unable to make private static boolean qualite_log.user.UserCreateControllerTest.lambda$4(javafx.scene.text.Text) accessible: module qualite_log does not "opens qualite_log.user" to unnamed module @4f6ee6e4
+java.lang.reflect.InaccessibleObjectException: Unable to make void qualite_log.user.UserCreateControllerTest.testIncorrectFirstName() accessible: module qualite_log does not "opens qualite_log.user" to unnamed module @30c15d8b
 

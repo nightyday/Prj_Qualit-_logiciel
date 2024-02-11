@@ -1,7 +1,7 @@
 -------------------------------------------------------------------------------
 Test set: qualite_log.tooltype.ToolTypeFilledListControllerTest
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.002 s <<< FAILURE! - in qualite_log.tooltype.ToolTypeFilledListControllerTest
-qualite_log.tooltype.ToolTypeFilledListControllerTest.testNoToolTypeInDatabase  Time elapsed: 0 s  <<< ERROR!
-java.lang.reflect.InaccessibleObjectException: Unable to make void qualite_log.tooltype.ToolTypeFilledListControllerTest.testNoToolTypeInDatabase() accessible: module qualite_log does not "opens qualite_log.tooltype" to unnamed module @4f6ee6e4
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.001 s <<< FAILURE! - in qualite_log.tooltype.ToolTypeFilledListControllerTest
+qualite_log.tooltype.ToolTypeFilledListControllerTest.testToolTypeDisplayOnList  Time elapsed: 0.001 s  <<< ERROR!
+java.lang.reflect.InaccessibleObjectException: Unable to make private static void qualite_log.tooltype.ToolTypeFilledListControllerTest.configureData() accessible: module qualite_log does not "opens qualite_log.tooltype" to unnamed module @30c15d8b
 

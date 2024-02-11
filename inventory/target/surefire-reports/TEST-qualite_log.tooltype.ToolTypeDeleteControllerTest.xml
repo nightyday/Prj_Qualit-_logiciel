@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="qualite_log.tooltype.ToolTypeDeleteControllerTest" time="0.006" tests="2" errors="2" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="qualite_log.tooltype.ToolTypeDeleteControllerTest" time="0.004" tests="2" errors="2" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="21"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -15,7 +15,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="FR"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Microsoft\jdk-21.0.0.35-hotspot\bin"/>
-    <property name="sun.java.command" value="org.apache.maven.surefire.booter.ForkedBooter C:\Users\valen\AppData\Local\Temp\surefire1531905794253866468 2024-02-09T16-54-22_180-jvmRun1 surefire12541556065967323099tmp surefire_097069132751092036tmp"/>
+    <property name="sun.java.command" value="org.apache.maven.surefire.booter.ForkedBooter C:\Users\valen\AppData\Local\Temp\surefire3593912603486171575 2024-02-10T14-41-11_631-jvmRun1 surefire4439798301249805872tmp surefire_05081108164998920775tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="C:\Users\valen\Desktop\Projet_Locamat\Prj_Qualit-_logiciel\inventory\target\test-classes;C:\Users\valen\.m2\repository\org\openjfx\javafx-controls\13\javafx-controls-13.jar;C:\Users\valen\.m2\repository\org\openjfx\javafx-graphics\13\javafx-graphics-13.jar;C:\Users\valen\.m2\repository\org\openjfx\javafx-base\13\javafx-base-13.jar;C:\Users\valen\.m2\repository\org\openjfx\javafx-fxml\13\javafx-fxml-13.jar;C:\Users\valen\.m2\repository\org\testfx\testfx-core\4.0.17\testfx-core-4.0.17.jar;C:\Users\valen\.m2\repository\org\hamcrest\hamcrest\2.1\hamcrest-2.1.jar;C:\Users\valen\.m2\repository\org\osgi\org.osgi.core\6.0.0\org.osgi.core-6.0.0.jar;C:\Users\valen\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.5.1\junit-jupiter-api-5.5.1.jar;C:\Users\valen\.m2\repository\org\apiguardian\apiguardian-api\1.1.0\apiguardian-api-1.1.0.jar;C:\Users\valen\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.jar;C:\Users\valen\.m2\repository\org\junit\platform\junit-platform-commons\1.5.1\junit-platform-commons-1.5.1.jar;C:\Users\valen\.m2\repository\org\testfx\testfx-junit5\4.0.17\testfx-junit5-4.0.17.jar;C:\Users\valen\.m2\repository\org\assertj\assertj-core\3.13.2\assertj-core-3.13.2.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -60,12 +60,12 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="65.0"/>
   </properties>
-  <testcase name="testSuccessfulToolTypeDeletion" classname="qualite_log.tooltype.ToolTypeDeleteControllerTest" time="0.001">
-    <error type="java.lang.reflect.InaccessibleObjectException"><![CDATA[java.lang.reflect.InaccessibleObjectException: Unable to make void qualite_log.tooltype.ToolTypeDeleteControllerTest.testSuccessfulToolTypeDeletion() accessible: module qualite_log does not "opens qualite_log.tooltype" to unnamed module @4f6ee6e4
+  <testcase name="testSuccessfulToolTypeDeletion" classname="qualite_log.tooltype.ToolTypeDeleteControllerTest" time="0">
+    <error type="java.lang.reflect.InaccessibleObjectException"><![CDATA[java.lang.reflect.InaccessibleObjectException: Unable to make private static boolean qualite_log.tooltype.ToolTypeDeleteControllerTest.lambda$testNoTypeSelection$1(javafx.scene.text.Text) accessible: module qualite_log does not "opens qualite_log.tooltype" to unnamed module @30c15d8b
 ]]></error>
   </testcase>
-  <testcase name="testNoTypeSelection" classname="qualite_log.tooltype.ToolTypeDeleteControllerTest" time="0.001">
-    <error type="java.lang.reflect.InaccessibleObjectException"><![CDATA[java.lang.reflect.InaccessibleObjectException: Unable to make void qualite_log.tooltype.ToolTypeDeleteControllerTest.testSuccessfulToolTypeDeletion() accessible: module qualite_log does not "opens qualite_log.tooltype" to unnamed module @4f6ee6e4
+  <testcase name="testNoTypeSelection" classname="qualite_log.tooltype.ToolTypeDeleteControllerTest" time="0">
+    <error type="java.lang.reflect.InaccessibleObjectException"><![CDATA[java.lang.reflect.InaccessibleObjectException: Unable to make private static boolean qualite_log.tooltype.ToolTypeDeleteControllerTest.lambda$testNoTypeSelection$1(javafx.scene.text.Text) accessible: module qualite_log does not "opens qualite_log.tooltype" to unnamed module @30c15d8b
 ]]></error>
   </testcase>
 </testsuite>
