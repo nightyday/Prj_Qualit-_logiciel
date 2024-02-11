@@ -60,7 +60,7 @@ public class UserListController {
             mailColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
             roleColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
             tableView.setItems(data);
-            tableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+            tableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE); 
         } catch (Exception e) {
             showAlert("Erreur", "Désolé, l’action n’a pas pu être effectuée. Veuillez réessayer.");
         }

@@ -21,7 +21,7 @@ import qualite_log.model.Data;
 import qualite_log.model.User;
 import qualite_log.util.ValidationConstants;
 
-public class UserCreateController {
+public class UserCreateController { 
 
     @FXML
     private ResourceBundle resources;

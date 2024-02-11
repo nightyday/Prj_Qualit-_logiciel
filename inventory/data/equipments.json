@@ -9,6 +9,16 @@
   "version" : "1.2",
   "id_type" : 4
 }, {
+  "reference" : "AN123",
+  "name" : "ToolExemple",
+  "version" : "1.05",
+  "id_type" : 4
+}, {
+  "reference" : "AN123",
+  "name" : "ToolExemple",
+  "version" : "1.05",
+  "id_type" : 4
+}, {
   "reference" : "AN004",
   "name" : "P45",
   "version" : "1.2",

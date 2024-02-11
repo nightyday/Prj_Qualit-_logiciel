@@ -58,7 +58,7 @@ public class UserDeleteController {
 
         if (mailComboBox.getItems().size() > 0) {
             mailComboBox.setValue(mailComboBox.getItems().get(0));
-        }
+        } 
 
         
     }
