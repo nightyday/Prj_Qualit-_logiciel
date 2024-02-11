@@ -84,7 +84,7 @@ public class Data {
     }
     
 
-    private static void updateData() {
+    public static void updateData() {
         instance = DataReader.insert(instance);
     }
 

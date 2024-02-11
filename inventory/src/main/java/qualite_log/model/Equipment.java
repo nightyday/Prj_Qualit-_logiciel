@@ -1,6 +1,8 @@
 package qualite_log.model;
 
 import java.util.Objects;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -50,6 +52,25 @@ public class Equipment {
 
     public void setVersion(String version) {
         this.version = version;
+    }
+
+    public void delete() {
+        Data data = Data.getInstance();
+        List<Booking> bookings = data.getBookings();
+        int idx = 0;
+        int length = bookings.size();
+        while(idx < length) {
+            Booking booking = bookings.get(idx);
+
+            if(booking.getEquipment().getReference().equals(reference)) {
+                bookings.remove(idx);
+
+                length --;
+            } else {
+                idx ++;
+            }
+        }
+        data.setBookings(bookings);
     }
 
     /**

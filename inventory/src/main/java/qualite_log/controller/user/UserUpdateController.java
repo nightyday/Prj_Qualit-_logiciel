@@ -15,10 +15,12 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Pair;
+import qualite_log.data_import.DataWriter;
 import qualite_log.model.Administrator;
 import qualite_log.model.Data;
 import qualite_log.model.Person;
 import qualite_log.model.User;
+import qualite_log.model.Booking;
 import qualite_log.util.FxUtil;
 import qualite_log.util.ValidationConstants;
 
@@ -52,6 +54,8 @@ public class UserUpdateController {
 
     @FXML
     void initialize() {
+        Data.updateData();
+
         persons = new ArrayList<>();
         persons.addAll(Data.getInstance().getUsers());
         persons.addAll(Data.getInstance().getAdministrators());
@@ -95,6 +99,9 @@ public class UserUpdateController {
                 if (personSelected != null) {
                     updatePerson(personSelected);
                     switchToUserListView();
+                    
+                    DataWriter.extractAdministrators(Data.getInstance()); // On met à jour les fichiers .json
+                    DataWriter.extractUsers(Data.getInstance()); // On met à jour les fichiers .json
                 }
             } catch (Exception e) {
                 showAlert("Erreur", "Désolé, l’action n’a pas pu être effectuée. Veuillez réessayer.");
@@ -125,23 +132,48 @@ public class UserUpdateController {
     private void switchRoleIfNecessary(Person person) {
         String selectedRole = roleComboBox.getValue();
         if (!person.getType().equals(selectedRole)) {
+            List<User> users = Data.getInstance().getUsers();
+            List<Administrator> admins = Data.getInstance().getAdministrators();
+            Data data = Data.getInstance();
+
             if (person.getType().equals(USER)) {
                 System.out.println("User");
-                Data.getInstance().getUsers().remove(person);
-                if (selectedRole.equals(ADMINISTRATOR)) {
-                    Data.getInstance().getAdministrators().add(new Administrator(person.getLastName(), person.getFirstName(), person.getEmail()));
-                    person.setType(ADMINISTRATOR);
-                    System.out.println("Admin added");
+
+                Administrator newAdmin = new Administrator(person.getLastName(), person.getFirstName(), person.getEmail());
+                for (Booking booking : data.getBookings()) {
+                    if(booking.getEmprunter().getId().equals(person.getId())) {
+                        booking.setEmprunter(newAdmin);
+                    }
                 }
-            } else if (person.getType().equals(ADMINISTRATOR)) {
-                System.out.println("Admin");
-                Data.getInstance().getAdministrators().remove(person);
-                if (selectedRole.equals(USER)) {
-                    Data.getInstance().getUsers().add(new User(person.getLastName(), person.getFirstName(), person.getEmail()));
-                    person.setType(USER);
-                    System.out.println("User added");
-                }
+                users.remove(person);
+                admins.add(newAdmin);
+                data.setAdministrators(admins);
+                data.setUsers(users);
+                
+                DataWriter.extractBookings(Data.getInstance()); // On met à jour les fichiers .json
+
+                System.out.println("User added");
             }
+
+            if (person.getType().equals(ADMINISTRATOR)) {
+                System.out.println("Admin");
+
+                User newUser = new User(person.getLastName(), person.getFirstName(), person.getEmail());
+                for (Booking booking : data.getBookings()) {
+                    if(booking.getEmprunter().getId().equals(person.getId())) {
+                        booking.setEmprunter(newUser);
+                    }
+                }
+                users.add(newUser);
+                admins.remove(person);
+                data.setAdministrators(admins);
+                data.setUsers(users);
+                
+                DataWriter.extractBookings(Data.getInstance()); // On met à jour les fichiers .json
+
+                System.out.println("Admin added");
+            }
+            
         }
     }
     

@@ -14,6 +14,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import qualite_log.data_import.DataWriter;
 import qualite_log.model.Booking;
 import qualite_log.model.Data;
 
@@ -41,6 +42,8 @@ public class BookingDeleteController {
 
     @FXML
     void initialize() {
+        Data.updateData();
+        
         bookings = Data.getInstance().getBookings();
         List<String> referenceData = bookings.stream()
                                              .map(booking -> booking.getEquipment().getReference())
@@ -55,13 +58,21 @@ public class BookingDeleteController {
         try {
             String selectedReference = referenceComboBox.getValue();
             if (selectedReference != null) {
-                Booking bookingSelected = bookings.stream()
-                                                  .filter(b -> b.getEquipment().getReference().equals(selectedReference))
-                                                  .findFirst()
-                                                  .orElse(null);
+                Booking bookingSelected = null;
+
+                for (Booking booking : Data.getInstance().getBookings()) {
+                    if(booking.getEquipment().getReference().equals(selectedReference)) {
+                        bookingSelected = booking;
+                    }
+                }
+
                 if (bookingSelected != null) {
-                    Data.getInstance().getBookings().remove(bookingSelected);
-                    switchToBookingListView();
+                    List<Booking> bookings = Data.getInstance().getBookings();
+                    bookings.remove(bookingSelected);
+                    Data.getInstance().setBookings(bookings);
+                    //switchToBookingListView();
+                    
+                    DataWriter.extractBookings(Data.getInstance()); // On met à jour les fichiers .json
                 }
             }
         } catch (Exception e) {

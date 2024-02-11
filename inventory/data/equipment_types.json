@@ -1,10 +1,10 @@
 [ {
-  "id" : 4,
+  "id" : 3,
   "type" : "Téléphone"
 }, {
-  "id" : 5,
+  "id" : 4,
   "type" : "Ordinateur"
 }, {
-  "id" : 6,
+  "id" : 5,
   "type" : "Tablette"
 } ]

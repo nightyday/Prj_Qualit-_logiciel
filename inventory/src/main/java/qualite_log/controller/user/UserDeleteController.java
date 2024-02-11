@@ -15,6 +15,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import qualite_log.data_import.DataReader;
+import qualite_log.data_import.DataWriter;
 import qualite_log.model.Administrator;
 import qualite_log.model.Data;
 import qualite_log.model.Person;
@@ -43,6 +45,8 @@ public class UserDeleteController {
 
     @FXML
     void initialize() {
+        Data.updateData();
+        
         persons = new ArrayList<>();
         persons.addAll(Data.getInstance().getUsers());
         persons.addAll(Data.getInstance().getAdministrators());
@@ -78,7 +82,10 @@ public class UserDeleteController {
                 .findFirst()
                 .orElse(null);
             if (toRemove != null) {
+                toRemove.delete(); // On supprime toutes les réservations liés à l'admin
                 Data.getInstance().removeAdministrator(toRemove);
+
+                DataWriter.extractAdministrators(Data.getInstance()); // On met à jour les fichiers .json
             }
         } else if (person.getType().equals("user")) {
             User toRemove = Data.getInstance().getUsers().stream()
@@ -86,7 +93,10 @@ public class UserDeleteController {
                 .findFirst()
                 .orElse(null);
             if (toRemove != null) {
+                toRemove.delete(); // On supprime toutes les réservations liés à l'utilisateur
                 Data.getInstance().removeUser(toRemove);
+
+                DataWriter.extractUsers(Data.getInstance()); // On met à jour les fichiers .json
             }
         }
     }

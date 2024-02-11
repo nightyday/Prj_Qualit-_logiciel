@@ -48,6 +48,8 @@ public class ToolListController {
 
     @FXML
     void initialize() {
+        Data.updateData();      
+        
         try {
             ObservableList<Equipment> data = FXCollections.observableArrayList(Data.getInstance().getEquipments());
             nomColumn.setCellValueFactory(new PropertyValueFactory<>("name"));

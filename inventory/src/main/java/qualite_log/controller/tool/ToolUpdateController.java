@@ -15,6 +15,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Pair;
+import qualite_log.data_import.DataWriter;
 import qualite_log.model.Data;
 import qualite_log.model.Equipment;
 import qualite_log.model.EquipmentType;
@@ -49,6 +50,8 @@ public class ToolUpdateController {
 
     @FXML
     void initialize() {
+        Data.updateData();
+        
         equipments = Data.getInstance().getEquipments();
         equipmentTypes = Data.getInstance().getEquipmentTypes();
         FxUtil.addTextChangeListener(referenceTextField, ValidationConstants.REF_REGEX);
@@ -100,6 +103,8 @@ public class ToolUpdateController {
                                                         .orElse(null);
                 if (equipmentSelected != null) {
                     updateEquipment(equipmentSelected);
+                    
+                    DataWriter.extractEquipments(Data.getInstance()); // On met à jour les fichiers .json
                     switchToToolListView();
                 } else {
                     // Si aucun équipement correspondant à la référence sélectionnée n'est trouvé, affichez un message d'erreur.

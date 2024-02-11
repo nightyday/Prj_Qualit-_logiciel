@@ -14,6 +14,8 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.AnchorPane;
+import qualite_log.data_import.DataReader;
+import qualite_log.data_import.DataWriter;
 import qualite_log.model.Data;
 import qualite_log.model.EquipmentType;
 public class ToolTypeDeleteController {
@@ -37,6 +39,8 @@ public class ToolTypeDeleteController {
 
     @FXML
     void initialize() {
+        Data.updateData();
+
         equipmentTypes = Data.getInstance().getEquipmentTypes();
         List<String> typeData = new ArrayList<>();
         for (EquipmentType type : equipmentTypes) {
@@ -51,6 +55,9 @@ public class ToolTypeDeleteController {
         try {
             EquipmentType equipmentTypeSelected = equipmentTypes.get(typeComboBox.getItems().indexOf(typeComboBox.getValue()));
             Data.getInstance().removeEquipmentTypes(equipmentTypeSelected);
+            
+            DataWriter.extract(Data.getInstance()); // On met à jour les fichiers .json
+
             switchToToolTypeListView();
         } catch (Exception e) {
             showAlert("Erreur", "Désolé, l’action n’a pas pu être effectuée. Veuillez réessayer.");

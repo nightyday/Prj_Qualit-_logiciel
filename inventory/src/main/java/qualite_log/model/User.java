@@ -1,5 +1,7 @@
 package qualite_log.model;
 
+import java.util.List;
+
 public class User extends Person {
     public User() {
         super();

@@ -79,6 +79,25 @@ public class Person {
         this.email = email;
     }
 
+    public void delete() {
+        Data data = Data.getInstance();
+        List<Booking> bookings = data.getBookings();
+        int idx = 0;
+        int length = bookings.size();
+        while(idx < length) {
+            Booking booking = bookings.get(idx);
+
+            if(booking.getEmprunter().getId().equals(getId())) {
+                bookings.remove(idx);
+
+                length --;
+            } else {
+                idx ++;
+            }
+        }
+        data.setBookings(bookings);
+    }
+
     public Person() {
         setId();
         bookings = new ArrayList<>();

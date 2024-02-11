@@ -48,6 +48,8 @@ public class BookingListController {
 
     @FXML
     void initialize() {
+        Data.updateData();
+        
         try {
             ObservableList<Booking> data = FXCollections.observableArrayList(Data.getInstance().getBookings());
             

@@ -14,6 +14,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import qualite_log.data_import.DataReader;
 import qualite_log.model.Data;
 import qualite_log.model.EquipmentType;
 public class ToolTypeListController {
@@ -38,6 +39,8 @@ public class ToolTypeListController {
 
     @FXML
     void initialize() {
+        Data.updateData();
+        
         try {
             ObservableList<EquipmentType> data = FXCollections.observableArrayList(Data.getInstance().getEquipmentTypes());
             typeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
